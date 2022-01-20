@@ -1,15 +1,87 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="style.css">
-
 		<title>GitHub Pages</title>
 	</head>
 	<body>
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 		<script src="script.js"></script>
+
+
+
 		<div id="home">
 			<h2>Projects</h2>
-			<input type="button" value="project name (c++)" onclick="displayCPP();"/>
+			<input type="button" value="project name (c++)" onclick="display('projectNameCPP');"/>
+			<input type="button" value="Backup Script (Bash)" onclick="display('backupScriptBash');"/>
+		<div>
+			</div>
+			<div id="projectNameCPP" style="visibility: hidden; position: absolute">
+				<br>
+				<h4>Vector.h</h4>
+				<pre>
+					<code class="prettyprint">
+#ifndef VECTOR_H
+#define VECTOR_H
+
+class Vector {
+public:
+	Vector(double posX, double posY);
+	Vector getThis() { return *this; }
+	double setPosX(double newPosX);
+	double setPosY(double newPosY);
+	double getPosX() const;
+	double getPosY() const;
+private:
+	double posX;
+	double posY;
+};
+
+#endif
+					</code>
+				</pre>
+				<h4>Vector.cpp</h4>
+				<pre>
+					<code class="prettyprint">
+#include "Vector.h"
+
+Vector::Vector(double posX, double posY): posX(posX), posY(posY) {}
+double Vector::setPosX(double newPosX) { return posX = newPosX; }
+double Vector::setPosY(double newPosY) { return posY = newPosY; }
+double Vector::getPosX() const { return posX; }
+double Vector::getPosY() const { return posY; }
+					</code>
+				</pre>
+			</div>
+
+			<div id="backupScriptBash" style="visibility: hidden; position: absolute;">
+				<br>
+				<h4>BackupScript.sh</h4>
+				<pre>
+				<code class="prettyprint">
+home=/home/discusser
+documents=$home/Documents
+backup_location=$documents/Backups
+allBackups=($documents/School $documents/Scripts)
+
+lsusb | grep -q "Western Digital Technologies, Inc. Elements Portable"
+if [ $? == 0 ]
+then
+	for i in ${allBackups[@]}
+	do
+		cp -r $i /media/discusser/External Hard Drive/Backups
+	done
+else
+	for i in ${allBackups[@]}
+	do
+		cp -r $i $backup_location
+		chmod -R 774 $backup_location/$(echo $i | sed "s/.*\///")
+		chown -R discusser:root $backup_location/$(echo $i | sed "s/.*\///")
+	done
+fi
+				</code>
+			</pre>
+			</div>
 		</div>
 	</body>
 </html>
