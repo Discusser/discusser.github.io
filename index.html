@@ -22,6 +22,7 @@
 		<div class="line-numbers">
 			<div id="projectNameCPP" class="language-cpp" style="visibility: hidden; position: absolute">
 				<br>
+				<p>This is the <code>Vector.h</code> file which contains variable and function declarations.</p>
 				<h4>Vector.h</h4>
 				<pre><code>
 #ifndef VECTOR_H
@@ -42,6 +43,8 @@ private:
 
 #endif
 				</code></pre>
+				<p>This is the <code>Vector.cpp</code> file which contains initialized functions (variables are usually initialized through the constructor or through other
+					functions).</p>
 				<h4>Vector.cpp</h4>
 				<pre><code>
 #include "Vector.h"
@@ -56,8 +59,13 @@ double Vector::getPosY() const { return posY; }
 
 			<div class="language-bash" id="backupScriptBash" style="visibility: hidden; position: absolute;">
 				<br>
+				<p>This is a script made with bash to automatically backup certain folders to a backup folder and to an external hard drive if it is plugged in.</p>
 				<h4>BackupScript.sh</h4>
 				<pre><code>
+#!/bin/bash
+
+# Schedule with anacron
+
 home=/home/discusser
 documents=$home/Documents
 backup_location=$documents/Backups
@@ -79,10 +87,30 @@ else
 	done
 fi
 				</code></pre>
+				<br>
+				<h3>How to use:</h3>
+				<p>First of all, I want to point out a few things. File paths will not be the same for everyone, this is just my version of the script on Debian 11. The following can be
+					personalised: <code>home</code>, <code>documents</code>, <code>backup_location</code>, <code>allBackups</code>, the external hard drive name, the external hard
+					drive path, and discusser:root at the <code>chown</code> command (I recommend that you only change discusser to your own username)</p>
+				<div>
+					<p>1. <u>Optional</u>: if you don't have an external hard drive, you can remove line 11 to 18 and line 25.</p>
+					<p>2. Configure file paths so that the script works with your setup (don't forget to change the external hard drive name).</p>
+					<p>3. Change discusser:root next to <code>chown</code> to your_username:root (type <code>man chown</code> in your terminal for more information).</p>
+					<p>4. Open /etc/anacrontab with a text editor.</p>
+					<p>5. Add an entry on a new line, the format is period (how frequently should the job run, in days), delay (how much time should there be between the anacron
+						program starting and the job being run, job identifier (a unique name for your job), and command (what command it should run). If you wanted to run your
+						command each day, 5 minutes after the anacron program starts (it starts when the computer boots up), the entry would look something like this:
+						<code>1 5 backup-script /path/to/script.sh</code></p>
+					<p>6. Save the file and exit your text editor.</p>
+					<p>If you did everything correctly, your files should be scheduled to backup in a day.</p>
+					<p>Note: anacron is made for devices that aren't always turned on, so it counts even when the computer is turned off by comparing current time to whenever you
+						turned off the computer.</p>
+				</div>
 			</div>
 
 			<div id="catPictures" style="visibility: hidden; position: absolute">
 				<br>
+				<p>meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow</p>
 				<img style="width: 512px; height: auto" src="/images/cats/cat_biting.jpg"/>
 				<img style="width: 512px; height: auto" src="/images/cats/cat_lying_down.jpg"/>
 				<img style="width: 512px; height: auto" src="/images/cats/house_cat.jpg"/>
