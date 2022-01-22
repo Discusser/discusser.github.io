@@ -28,3 +28,7 @@ function toggleDarkMode() {
        }
     })
 }
+
+function cat() {
+    console.log("meow")
+}
