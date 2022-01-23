@@ -1,11 +1,17 @@
-let lastOpenedProject = null;
-
-function display(project) {
+let lastElementInteraction = [];
+function display(element) {
     try {
-        document.getElementById(lastOpenedProject).style.display = "none";
+        if (!document.getElementById(getArrayEnd(lastElementInteraction)).classList.contains("mainCategory")) {
+            document.getElementById(getArrayEnd(lastElementInteraction)).style.display = "none";
+        }
     } catch (e) {}
-    document.getElementById(project).style.display = "initial";
-    lastOpenedProject = project;
+    document.getElementById(element).style.display = "initial";
+    lastElementInteraction = lastElementInteraction.concat(element);
+}
+
+function _return() {
+    document.getElementById(getArrayEnd(lastElementInteraction)).style.display = "none";
+    lastElementInteraction = lastElementInteraction.splice(0, 1);
 }
 
 function toggleDarkMode() {
@@ -15,7 +21,6 @@ function toggleDarkMode() {
         document.body.style.backgroundColor = "#131417";
     }
     document.querySelectorAll("h1, h2, h3, h4, h5, h6, p").forEach(value => {
-        console.log(value.style.color);
        if (value.style.color === "rgb(19, 20, 23)") {
            value.style.color = "#FFFFFF";
        } else {
