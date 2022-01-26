@@ -1,4 +1,5 @@
 let lastElementInteraction = [];
+
 function display(element) {
     try {
         if (!document.getElementById(getArrayEnd(lastElementInteraction)).classList.contains("mainCategory")) {

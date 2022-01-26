@@ -6,10 +6,6 @@
 		<title>GitHub Pages</title>
 	</head>
 	<body>
-		<script src="prism/prism.js"></script>
-		<script src="script.js" type="text/javascript"></script>
-		<script src="utils.js" type="text/javascript"></script>
-
 		<h1 style="display: inline-block;">Discusser's blog</h1>
 		<input type="button" value="Toggle dark mode" style="display: inline-block; margin-left: 16px;" onclick="toggleDarkMode();"/>
 		<input type="button" value="Return" style="display: inline-block;" onclick="_return()"/>
@@ -18,112 +14,52 @@
 			<br>
 			<input type="button" value="Programming" onclick="display('projects');"/>
 			<input type="button" value="Video Games" onclick="display('');"/>
-
 		</div>
+
 		<div id="projects" class="mainCategory" style="display: none;">
 			<div>
 				<h2>Projects</h2>
 			</div>
+
 			<input type="button" value="project name (c++)" onclick="display('projectNameCPP');"/>
 			<input type="button" value="Backup Script (Bash)" onclick="display('backupScriptBash');"/>
 			<input type="button" value="cat pictures (CAT)" onclick="display('catPictures');"/>
+
 			<div class="line-numbers">
 				<div id="projectNameCPP" class="language-cpp" style="display: none; position: absolute">
 					<br>
-					<p>This is the <code>Vector.h</code> file which contains variable and function declarations.</p>
+					<p id="projectNameCPP-p1"> </p>
 					<h4>Vector.h</h4>
-					<pre><code>
-#ifndef VECTOR_H
-#define VECTOR_H
-
-class Vector {
-public:
-	Vector(double posX, double posY);
-	Vector getThis() { return *this; }
-	double setPosX(double newPosX);
-	double setPosY(double newPosY);
-	double getPosX() const;
-	double getPosY() const;
-private:
-	double posX;
-	double posY;
-};
-
-#endif
-				</code></pre>
-					<p>This is the <code>Vector.cpp</code> file which contains initialized functions (variables are usually initialized through the constructor or through other
-						functions).</p>
+					<pre><code id="projectNameCPP-code1"></code></pre>
+					<p id="projectNameCPP-p2"></p>
 					<h4>Vector.cpp</h4>
-					<pre><code>
-#include "Vector.h"
-
-Vector::Vector(double posX, double posY): posX(posX), posY(posY) {}
-double Vector::setPosX(double newPosX) { return posX = newPosX; }
-double Vector::setPosY(double newPosY) { return posY = newPosY; }
-double Vector::getPosX() const { return posX; }
-double Vector::getPosY() const { return posY; }
-				</code></pre>
+					<pre><code id="projectNameCPP-code2"></code></pre>
 				</div>
 
 				<div class="language-bash" id="backupScriptBash" style="display: none; position: absolute;">
 					<br>
-					<p>This is a script made with bash to automatically backup certain folders to a backup folder and to an external hard drive if it is plugged in.</p>
+					<p id="backupScriptBash-p1"></p>
 					<h4>BackupScript.sh</h4>
-					<pre><code>
-#!/bin/bash
-
-# Schedule with anacron
-
-home=/home/discusser
-documents=$home/Documents
-backup_location=$documents/Backups
-allBackups=($documents/School $documents/Scripts)
-
-lsusb | grep -q "Western Digital Technologies, Inc. Elements Portable"
-if [ $? == 0 ]
-then
-	for i in ${allBackups[@]}
-	do
-		cp -r $i /media/discusser/External Hard Drive/Backups
-	done
-else
-	for i in ${allBackups[@]}
-	do
-		cp -r $i $backup_location
-		chmod -R 774 $backup_location/$(echo $i | sed "s/.*\///")
-		chown -R discusser:root $backup_location/$(echo $i | sed "s/.*\///")
-	done
-fi
-				</code></pre>
+					<pre><code id="backupScriptBash-code1"></code></pre>
 					<br>
 					<h3>How to use:</h3>
-					<p>First of all, I want to point out a few things. File paths will not be the same for everyone, this is just my version of the script on Debian 11. The following can be
-						personalised: <code>home</code>, <code>documents</code>, <code>backup_location</code>, <code>allBackups</code>, the external hard drive name, the external hard
-						drive path, and discusser:root at the <code>chown</code> command (I recommend that you only change discusser to your own username)</p>
-					<div>
-						<p>1. <u>Optional</u>: if you don't have an external hard drive, you can remove line 11 to 18 and line 25.</p>
-						<p>2. Configure file paths so that the script works with your setup (don't forget to change the external hard drive name).</p>
-						<p>3. Change discusser:root next to <code>chown</code> to your_username:root (type <code>man chown</code> in your terminal for more information).</p>
-						<p>4. Open /etc/anacrontab with a text editor.</p>
-						<p>5. Add an entry on a new line, the format is period (how frequently should the job run, in days), delay (how much time should there be between the anacron
-							program starting and the job being run, job identifier (a unique name for your job), and command (what command it should run). If you wanted to run your
-							command each day, 5 minutes after the anacron program starts (it starts when the computer boots up), the entry would look something like this:
-							<code>1 5 backup-script /path/to/script.sh</code></p>
-						<p>6. Save the file and exit your text editor.</p>
-						<p>If you did everything correctly, your files should be scheduled to backup in a day.</p>
-						<p>Note: anacron is made for devices that aren't always turned on, so it counts even when the computer is turned off by comparing current time to whenever you
-							turned off the computer.</p>
-					</div>
+					<p id="backupScriptBash-p2"></p>
+					<div id="backupScriptBash-div1"></div>
 				</div>
 
 				<div id="catPictures" style="display: none; position: absolute">
 					<br>
-					<p>meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow</p>
+					<p id="catPictures-p1"></p>
 					<img style="width: 512px; height: auto" src="/images/cats/cat_biting.jpg"/>
 					<img style="width: 512px; height: auto" src="/images/cats/cat_lying_down.jpg"/>
 					<img style="width: 512px; height: auto" src="/images/cats/house_cat.jpg"/>
 				</div>
 			</div>
 		</div>
+
+		<script src="prism/prism.js"></script>
+		<script src="script.js" type="text/javascript"></script>
+		<script src="utils.js" type="text/javascript"></script>
+		<script src="text.js" type="text/javascript"></script>
 	</body>
 </html>
