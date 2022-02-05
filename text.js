@@ -74,5 +74,6 @@ document.getElementById("backupScriptBash-div1").innerHTML =
     "<p>If you did everything correctly, your files should be scheduled to backup in a day.</p>\n" +
     "<p>Note: anacron is made for devices that aren't always turned on, so it counts even when the computer is turned off by comparing current time to whenever you\n" +
     "turned off the computer.</p>"
+
 document.getElementById("catPictures-p1").innerHTML = "meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow " +
     "meow meow meow";
