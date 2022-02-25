@@ -66,3 +66,7 @@ function toggleDarkMode() {
 function cat() {
     console.log("meow");
 }
+function displayClock() {
+    // window.location.href = "https://discusser.github.io/jsClock/index.html";
+    window.location.href = "http://localhost:63342/discusser.github.io/jsClock/index.html?_ijt=61dggqtfntmukmdcs876fubdif&_ij_reload=RELOAD_ON_SAVE";
+}
