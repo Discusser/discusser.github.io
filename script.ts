@@ -67,5 +67,5 @@ function cat() {
 }
 
 function displayClock() {
-    window.location.href = "https://discusser.github.io/jsClock/index.html";
+    window.location.href = "https://discusser.github.io/jsClock/";
 }

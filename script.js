@@ -67,5 +67,5 @@ function cat() {
     console.log("meow");
 }
 function displayClock() {
-    window.location.href = "https://discusser.github.io/jsClock/index.html";
+    window.location.href = "https://discusser.github.io/jsClock/";
 }
