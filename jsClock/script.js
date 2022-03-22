@@ -31,7 +31,7 @@ setInterval(function () {
             month = "February"
             break
         case 3:
-            month = "Mars"
+            month = "March"
             break
         case 4:
             month = "April"
