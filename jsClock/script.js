@@ -8,13 +8,13 @@ setInterval(function () {
         suffix = "th"
     } else {
         switch (date[date.length - 1]) {
-            case 1:
+            case '1':
                 suffix = "st"
                 break
-            case 2:
+            case '2':
                 suffix = "nd"
                 break
-            case 3:
+            case '3':
                 suffix = "rd"
                 break
             default:

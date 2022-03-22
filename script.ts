@@ -69,3 +69,7 @@ function cat() {
 function displayClock() {
     window.location.href = "https://discusser.github.io/jsClock/";
 }
+
+function displayFileUpload() {
+    window.location.href = "https://discusser.github.io/files"
+}
