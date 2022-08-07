@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<link href="prism/prism.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="style.css"/>
+		<title>GitHub Pages</title>
+	</head>
+	<body>
+		<h1 style="display: inline-block;">Discusser's blog</h1>
+		<input type="button" value="Toggle dark mode" style="display: inline-block; margin-left: 16px;" onclick="toggleDarkMode();"/>
+		<input type="button" value="Return" style="display: inline-block;" onclick="_return()"/>
+		<input type="button" value="Clock" style="display: inline-block" onclick="displayClock()"/>
+		<input type="button" value="Upload file (password restricted)" style="display: inline-block" onclick="displayFileUpload()"/>
+		<hr>
+		<div id="home">
+			<br>
+			<input type="button" value="Programming" onclick="display('programming');"/>
+			<input type="button" value="Video Games" onclick="display('video-games');"/>
+		</div>
+
+		<div id="programming" class="main-category hideable" style="display: none;">
+			<h2>Programming</h2>
+
+			<input type="button" value="project name (c++)" onclick="display('projectNameCPP');"/>
+			<input type="button" value="Backup Script (Bash)" onclick="display('backupScriptBash');"/>
+			<input type="button" value="cat pictures (CAT)" onclick="display('catPictures');"/>
+
+			<div class="line-numbers">
+				<div id="projectNameCPP" class="language-cpp page hideable" style="display: none; position: absolute">
+					<br>
+					<p id="projectNameCPP-p1"> </p>
+					<h4>Vector.h</h4>
+					<pre><code id="projectNameCPP-code1"></code></pre>
+					<p id="projectNameCPP-p2"></p>
+					<h4>Vector.cpp</h4>
+					<pre><code id="projectNameCPP-code2"></code></pre>
+				</div>
+
+				<div id="backupScriptBash" class="language-bash page hideable" style="display: none; position: absolute;">
+					<br>
+					<p id="backupScriptBash-p1"></p>
+					<h4>BackupScript.sh</h4>
+					<pre><code id="backupScriptBash-code1"></code></pre>
+					<br>
+					<h3>How to use:</h3>
+					<p id="backupScriptBash-p2"></p>
+					<div id="backupScriptBash-div1"></div>
+				</div>
+
+				<div id="catPictures" class="page hideable" style="display: none; position: absolute">
+					<br>
+					<p id="catPictures-p1"></p>
+					<img style="width: 512px; height: auto" src="/images/cats/cat_biting.jpg"/>
+					<img style="width: 512px; height: auto" src="/images/cats/cat_lying_down.jpg"/>
+					<img style="width: 512px; height: auto" src="/images/cats/house_cat.jpg"/>
+				</div>
+			</div>
+		</div>
+
+		<div id="video-games" class="main-category hideable" style="display: none;">
+			<h2>Video Games</h2>
+
+			<input type="button" value="Warframe" onclick="display('warframe');"/>
+
+			<div id="warframe" class="category hideable" style="display: none;">
+				<h3>Warframe</h3>
+
+				<input type="button" value="Affinity farm" onclick="display('affinity-farm');"/>
+				<input type="button" value="Credit farm" onclick="display('credit-farm');"/>
+
+				<div id="affinity-farm" class="page hideable" style="display: none;">
+					<br>
+					<h4>Method 1:</h4>
+					<p>The easiest way to farm affinity as a beginner is by doing <u>Sanctuary Onslaught</u>. This game mode can be found in the Syndicate section of the star chart.
+						This game mode is very good for new players because you can do it at any warframe level and the enemies are at a relatively low level.</p>
+					<img style="width: 50%; height: 50%" src="/images/warframe/sanctuary_onslaught.png"/>
+					<br>
+					<p>Alternatively, you could try doing <u>Elite Sanctuary Onslaught</u> (right under Sanctuary Onslaught) which is a higher level version of Sanctuary Onslaught.
+						The enemies have a much higher level, but you get a lot more affinity. Unfortunately you cannot do it without a level 30 warframe unless your mastery rank
+						is 30.</p>
+					<hr>
+					<h4>Method 2:</h4>
+					<p>Steel path missions</p>
+					<hr>
+					<h4>Method 3:</h4>
+					<p>Helene or hydron</p>
+
+<!-- TODO: add support for sub-sub-categories and so on (idk how) -->
+
+<!--					<h4>Affinity Farm</h4>-->
+<!--					<input type="button" value="Beginner farm" onclick="display('beginner-affinity-farm');"/>-->
+<!--					<input type="button" value="Intermediate farm" onclick="display('intermediate-affinity-farm');"/>-->
+<!--					<input type="button" value="Advanced farm" onclick="display('advanced-affinity-farm');"/>-->
+
+<!--					<div id="beginner-affinity-farm" class="page hideable" style="display: none;">-->
+<!--						<br>-->
+<!--						<p>beginner</p>-->
+<!--					</div>-->
+
+<!--					<div id="intermediate-affinity-farm" class="page hideable" style="display: none;">-->
+<!--						<br>-->
+<!--						<p>intermediate</p>-->
+<!--					</div>-->
+
+<!--					<div id="advanced-affinity-farm" class="page hideable" style="display: none;">-->
+<!--						<br>-->
+<!--						<p>advanced</p>-->
+<!--					</div>-->
+				</div>
+
+				<div id="credit-farm" class="page hideable" style="display: none;">
+					<br>
+					<h4>Method 1:</h4>
+					<p>doing the index</p>
+				</div>
+			</div>
+		</div>
+
+		<script src="prism/prism.js"></script>
+		<script src="script.js"></script>
+		<script src="text.js"></script>
+	</body>
+</html>
