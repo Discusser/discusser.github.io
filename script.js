@@ -1,8 +1,8 @@
-let lastElement;
-let lastCategory;
+var lastElement;
+var lastCategory;
 // dont touch, weird code
 function display(element) {
-    let elem = document.getElementById(element);
+    var elem = document.getElementById(element);
     try {
         if (lastElement.classList.contains("page"))
             lastElement.style.display = "none";
@@ -11,8 +11,8 @@ function display(element) {
     if (elem.classList.contains("main-category")) {
         try {
             lastCategory.style.display = "none";
-            let children = lastCategory.querySelectorAll("*");
-            for (let i = 0; i < children.length; i++) {
+            var children = lastCategory.querySelectorAll("*");
+            for (var i = 0; i < children.length; i++) {
                 if (children[i].classList.contains("category")) {
                     children[i].style.display = "none";
                 }
@@ -29,7 +29,7 @@ function display(element) {
 function _return() {
     if (lastElement != null) {
         if (lastElement != document.body) {
-            let elem = lastElement;
+            var elem = lastElement;
             elem.style.display = "none";
             if (elem.parentElement.classList.contains("hideable")) {
                 lastElement = elem.parentElement;
@@ -53,8 +53,8 @@ function toggleDarkMode() {
     else {
         document.body.style.backgroundColor = "#131417";
     }
-    document.querySelectorAll("h1, h2, h3, h4, h5, h6, p").forEach(value => {
-        let v = value;
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6, p").forEach(function (value) {
+        var v = value;
         if (v.style.color === "rgb(19, 20, 23)") {
             v.style.color = "#FFFFFF";
         }
@@ -67,8 +67,8 @@ function cat() {
     console.log("meow");
 }
 function displayClock() {
-    window.location.href = "https://discusser.github.io/jsClock/";
+    window.location.href = "../jsClock/";
 }
-function displayFileUpload() {
-    window.location.href = "https://discusser.github.io/files";
+function displayFileStorage() {
+    window.location.href = "../files";
 }
