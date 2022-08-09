@@ -94,7 +94,6 @@ async function changePath(path) {
         document.body.append(parentDir, br);
     }
     if (response.data.name !== undefined) {
-        console.log(response.data.download_url)
         let rawFile = document.createElement("a")
         rawFile.href = response.data.html_url;
         rawFile.innerText = "View file on github";
