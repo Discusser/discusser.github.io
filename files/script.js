@@ -27,6 +27,9 @@ let sizeSort = null;
  **/
 let typeSort = null;
 
+let imgExtensions = [".png", ".gif", ".jpg", ".jpeg", "jpe", "jfif", ".svg"];
+let vidExtensions = [".mp4", ".webm", ".ogg"];
+
 /**
  * @see https://stackoverflow.com/a/18650828
  */
@@ -60,13 +63,14 @@ function resetFileView(table) {
 }
 
 async function changePath(path) {
-    nameSort = true;
-    sizeSort = null;
-    typeSort = null;
     currentPath = path
     response = await request(path);
     let index = document.getElementById("index");
-    index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/blob/main/" + path + "\">/" + path + "</a>"
+    if (path === "") {
+        index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/\">/" + "</a>"
+    } else {
+        index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/blob/main/" + path + "\">/" + path + "</a>"
+    }
     try {
         Array.from(document.getElementsByClassName("remove")).forEach(value => value.remove());
     } catch (TypeError) {}
@@ -84,7 +88,7 @@ async function changePath(path) {
         parentDir.append(img, a)
         let br = document.createElement("br");
         br.classList.add("remove");
-        a.addEventListener("mouseup", () => {
+        a.addEventListener("click", () => {
             try {
                 changePath(/.*(?=\/)/gm.exec(path)[0])
             } catch (TypeError) {
@@ -93,42 +97,51 @@ async function changePath(path) {
         })
         document.body.append(parentDir, br);
     }
-    if (response.data.name !== undefined) {
-        let rawFile = document.createElement("a")
-        rawFile.href = response.data.html_url;
-        rawFile.innerText = "View file on github";
-        rawFile.classList.add("remove");
-        let imgExtensions = [".png", ".gif", ".jpg", ".jpeg", "jpe", "jfif", ".svg"];
-        let vidExtensions = [".mp4", ".webm", ".ogg"];
+    let data = response.data;
+    let name = data.name;
+    if (name !== undefined) { // If the user is viewing a file
+        let download_url = data.download_url;
+        let htmlUrl = document.createElement("a");
+        htmlUrl.href = data.html_url;
+        htmlUrl.innerText = "View file on github";
+        htmlUrl.classList.add("remove");
+        let downloadUrl = document.createElement("a");
+        downloadUrl.href = "#"
+        downloadUrl.style.marginLeft = "16px";
+        downloadUrl.innerText = "Copy link to clipboard";
+        downloadUrl.addEventListener('click', () => {
+            navigator.clipboard.writeText(download_url)
+        });
+        downloadUrl.classList.add("remove");
         let fileContents = null;
         for (let i = 0; i < imgExtensions.length; i++) {
-            if (response.data.name.endsWith(imgExtensions[i])) {
+            if (name.endsWith(imgExtensions[i])) {
                 fileContents = document.createElement("img");
-                fileContents.src = response.data.download_url;
+                fileContents.src = download_url;
                 fileContents.style.display = "block";
             }
         }
         for (let i = 0; i < vidExtensions.length; i++) {
-            if (response.data.name.endsWith(vidExtensions[i])) {
+            if (name.endsWith(vidExtensions[i])) {
                 fileContents = document.createElement("video");
                 fileContents.toggleAttribute("controls", true)
                 fileContents.style.display = "block";
                 let src = document.createElement("source");
-                src.src = response.data.download_url;
+                src.src = download_url;
                 src.type = "video/" + vidExtensions[i].replace(".", "");
                 fileContents.appendChild(src);
             }
         }
         if (fileContents == null) {
             fileContents = document.createElement("pre");
-            if (response.data.encoding === "base64") {
-                fileContents.innerText = atob(response.data.content);
+            if (data.encoding === "base64") {
+                fileContents.innerText = atob(data.content);
             }
         }
         fileContents.classList.add("remove");
         let br = document.createElement("br");
         br.classList.add("remove")
-        document.body.append(rawFile, fileContents, br);
+        document.body.append(htmlUrl, downloadUrl, fileContents, br);
     } else {
         createTable()
     }
@@ -136,9 +149,11 @@ async function changePath(path) {
 
 function addRow(table, values) {
     let row = document.createElement("tr");
+    let thumbnailArea;
+    let text;
     for (let i = 0; i < values.length; i++) {
         let v = document.createElement("td");
-        let text = document.createElement("a");
+        if (i !== 3) text = document.createElement("a");
         if (i === 0) {
             let src = values[2] === "File" ? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABnRSTlMAAAAAAABupgeRAAABEElEQVR42nRRx3HDMBC846AHZ7sP54BmWAyrsP588qnwlhqw/k4v5ZwWxM1hzmGRgV1cYqrRarXoH2w2m6qqiqKIR6cPtzc3xMSML2Te7XZZlnW7Pe/91/dX47WRBHuA9oyGmRknzGDjab1ePzw8bLfb6WRalmW4ip9FDVpYSWZgOp12Oh3nXJ7nxoJSGEciteP9y+fH52q1euv38WosqA6T2gGOT44vry7BEQtJkMAMMpa6JagAMcUfWYa4hkkzAc7fFlSjwqCoOUYAF5RjHZPVCFBOtSBGfgUDji3c3jpibeEMQhIMh8NwshqyRsBJgvF4jMs/YlVR5KhgNpuBLzk0OcUiR3CMhcPaOzsZiAAA/AjmaB3WZIkAAAAASUVORK5CYII="
                 : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABt0lEQVR42oxStZoWQRCs2cXdHTLcHZ6EjAwnQWIkJyQlRt4Cd3d3d1n5d7q7ju1zv/q+mh6taQsk8fn29kPDRo87SDMQcNAUJgIQkBjdAoRKdXjm2mOH0AqS+PlkP8sfp0h93iu/PDji9s2FzSSJVg5ykZqWgfGRr9rAAAQiDFoB1OfyESZEB7iAI0lHwLREQBcQQKqo8p+gNUCguwCNAAUQAcFOb0NNGjT+BbUC2YsHZpWLhC6/m0chqIoM1LKbQIIBwlTQE1xAo9QDGDPYf6rkTpPc92gCUYVJAZjhyZltJ95f3zuvLYRGWWCUNkDL2333McBh4kaLlxg+aTmyL7c2xTjkN4Bt7oE3DBP/3SRz65R/bkmBRPGzcRNHYuzMjaj+fdnaFoJUEdTSXfaHbe7XNnMPyqryPcmfY+zURaAB7SHk9cXSH4fQ5rojgCAVIuqCNWgRhLYLhJB4k3iZfIPtnQiCpjAzeBIRXMA6emAqoEbQSoDdGxFUrxS1AYcpaNbBgyQBGJEOnYOeENKR/iAd1npusI4C75/c3539+nbUjOgZV5CkAU27df40lH+agUdIuA/EAgDmZnwZlhDc0wAAAABJRU5ErkJggg=="
@@ -147,15 +162,34 @@ function addRow(table, values) {
             img.style.float = "left";
             v.appendChild(img);
             text.href = "#";
-            text.addEventListener("mouseup", () => {
+            text.addEventListener("click", () => {
                 if (currentPath === "") { changePath(values[i]) }
                 else changePath(currentPath + "/" + values[i])
             })
+        } else if (i === 3) {
+            for (let j = 0; j < imgExtensions.length; j++) {
+                if (values[0].endsWith(imgExtensions[j])) {
+                    thumbnailArea = document.createElement("div");
+                    thumbnailArea.style.width = "128px";
+                    thumbnailArea.style.height = "128px";
+                    let thumbnail = document.createElement("img");
+                    thumbnail.src = values[i];
+                    thumbnail.style.height = "100%";
+                    thumbnailArea.appendChild(thumbnail);
+                }
+            }
         }
-        text.innerText = values[i];
-        text.style.float = "left";
-        text.style.paddingLeft = "8px";
-        v.appendChild(text);
+
+        if (i !== 3) {
+            text.innerText = values[i];
+            text.style.float = "left";
+            text.style.paddingLeft = "8px";
+            v.appendChild(text);
+        } else {
+            try {
+                v.appendChild(thumbnailArea)
+            } catch (e) {}
+        }
         row.appendChild(v);
     }
     table.appendChild(row)
@@ -169,19 +203,19 @@ function addHeaders(table, headers) {
         h.innerHTML = header;
         row.appendChild(h);
         if (header === "Name") {
-            h.addEventListener('mouseup', () => {
+            h.addEventListener('click', () => {
                 nameSort = toggleSort(nameSort);
                 sortByName(files, nameSort);
                 refreshTable(table);
             })
         } else if (header === "Size") {
-            h.addEventListener('mouseup', () => {
+            h.addEventListener('click', () => {
                 sizeSort = toggleSort(sizeSort);
                 sortBySize(files, sizeSort);
                 refreshTable(table);
             })
         } else if (header === "Type") {
-            h.addEventListener('mouseup', () => {
+            h.addEventListener('click', () => {
                 typeSort = toggleSort(typeSort);
                 sortByType(files, typeSort);
                 refreshTable(table);
@@ -196,7 +230,6 @@ function refreshTable(table) {
     resetFileView(table);
     displayHeaders(table);
     displayFiles(files);
-
 }
 
 function toggleSort(sort) {
@@ -248,7 +281,8 @@ function sortBySize(files, sort) {
 function sortByType(files, sort) {
     files.sort((file1) => {
         let type1 = file1.type;
-        return type1[0] === "d" ? -1 : 1
+        return type1[0] === "f" ? -1 : 1
+        // File comes before Folder in alphabetical sort, but interally types are stored as file and dir
     })
 
     if (!sort) {
@@ -260,31 +294,45 @@ let table = document.createElement("table")
 let files = []; // File array
 
 function displayHeaders(table) {
-    addHeaders(table, ["Name", "Size", "Type"])
-    document.body.appendChild(table)
+    let headers = ["Name", "Size", "Type"];
+    if (document.getElementById("thumbnails").checked) {
+        headers.push("Thumbnail");
+    }
+    addHeaders(table, headers);
+    document.body.appendChild(table);
 }
 
 function displayFiles(files) {
     files.forEach(file => {
-        addRow(table, [file.name, file.type === "dir" ? "" : formatBytes(file.size), file.type === "file" ? "File" : "Folder"]);
+        let values = [file.name, file.type === "dir" ? "" : formatBytes(file.size), file.type === "file" ? "File" : "Folder"];
+        if (document.getElementById("thumbnails").checked) {
+            values.push(file.thumbnail);
+        }
+        addRow(table, values);
     })
+
 }
 
 function createTable() {
     displayHeaders(table)
+
     for (let i = 0; i < response.data.length; i++) {
-        files.push(new File(response.data[i].name, response.data[i].size, response.data[i].type));
+        files.push(new File(response.data[i].name, response.data[i].size, response.data[i].type, response.data[i].download_url));
     }
 
     displayFiles(files)
 }
 
 class File {
-    constructor(name, size, type) {
+    constructor(name, size, type, thumbnail) {
         this.name = name; // Duplicate files are impossible: therefore names can be used as identifiers
         this.size = size;
         this.type = type;
+        this.thumbnail = thumbnail;
     }
 }
 
+document.getElementById("thumbnails").addEventListener('click', () => {
+    refreshTable(table)
+})
 createTable()
