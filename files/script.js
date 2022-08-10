@@ -333,6 +333,6 @@ class File {
 }
 
 document.getElementById("thumbnails").addEventListener('click', () => {
-    refreshTable(table)
+    if (response.data.name === undefined) refreshTable(table)
 })
 createTable()
