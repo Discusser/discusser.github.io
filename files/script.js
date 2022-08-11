@@ -121,6 +121,17 @@ async function changePath(path) {
                 fileContents.style.display = "block";
             }
         }
+        for (let i = 0; i < vidExtensions.length; i++) {
+            if (name.endsWith(vidExtensions[i])) {
+                fileContents = document.createElement("video");
+                fileContents.toggleAttribute("controls", true)
+                fileContents.style.display = "block";
+                let src = document.createElement("source");
+                src.src = download_url;
+                src.type = "video/" + vidExtensions[i].replace(".", "");
+                fileContents.appendChild(src);
+            }
+        }
         if (fileContents == null) {
             fileContents = document.createElement("pre");
             if (data.encoding === "base64") {
