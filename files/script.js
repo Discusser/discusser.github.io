@@ -121,17 +121,6 @@ async function changePath(path) {
                 fileContents.style.display = "block";
             }
         }
-        for (let i = 0; i < vidExtensions.length; i++) {
-            if (name.endsWith(vidExtensions[i])) {
-                fileContents = document.createElement("video");
-                fileContents.toggleAttribute("controls", true)
-                fileContents.style.display = "block";
-                let src = document.createElement("source");
-                src.src = download_url;
-                src.type = "video/" + vidExtensions[i].replace(".", "");
-                fileContents.appendChild(src);
-            }
-        }
         if (fileContents == null) {
             fileContents = document.createElement("pre");
             if (data.encoding === "base64") {
@@ -173,6 +162,17 @@ function addRow(table, values) {
                     thumbnailArea.style.width = "128px";
                     thumbnailArea.style.height = "128px";
                     let thumbnail = document.createElement("img");
+                    thumbnail.src = values[i];
+                    thumbnail.style.height = "100%";
+                    thumbnailArea.appendChild(thumbnail);
+                }
+            }
+            for (let j = 0; j < vidExtensions.length; j++) {
+                if (values[0].endsWith(vidExtensions[j])) {
+                    thumbnailArea = document.createElement("div");
+                    thumbnailArea.style.width = "128px";
+                    thumbnailArea.style.height = "128px";
+                    let thumbnail = document.createElement("video");
                     thumbnail.src = values[i];
                     thumbnail.style.height = "100%";
                     thumbnailArea.appendChild(thumbnail);
