@@ -1,6 +1,7 @@
 let lastElement: HTMLElement;
 let lastCategory: HTMLElement;
 
+// todo: Change display and _return functions to use XPath for easier navigation https://librarycarpentry.org/lc-webscraping/02-xpath/index.html
 // dont touch, weird code
 function display(element: string) {
     let elem = document.getElementById(element);
