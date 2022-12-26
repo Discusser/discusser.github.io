@@ -1,3 +1,14 @@
+// do not look at this file
+// thank you
+
+
+
+
+
+
+
+
+
 import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
 
 const octokit = new Octokit({
@@ -149,7 +160,7 @@ async function changePath(path) {
 
 function addRow(table, values) {
     let row = document.createElement("tr");
-    let thumbnailArea;
+    let thumbnailArea = null;
     let text;
     for (let i = 0; i < values.length; i++) {
         let v = document.createElement("td");
@@ -191,7 +202,7 @@ function addRow(table, values) {
             }
         }
 
-        if (i !== 3) {
+        if (i !== 3) { // magic number
             text.innerText = values[i];
             text.style.float = "left";
             text.style.paddingLeft = "8px";
