@@ -1,0 +1,28 @@
+body {
+    background-color: #121212;
+}
+
+p, label, h1, h2, h3, h4, h5, h6, th, td, pre {
+    color: #ffffff;
+}
+
+tr > * + * {
+    padding-left: 10em;
+}
+
+td {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+th {
+    font: 16px "Times New Roman";
+    padding: 1px;
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+}

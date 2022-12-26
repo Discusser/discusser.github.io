@@ -1,0 +1,39 @@
+.inline {
+    display: inline-block;
+}
+
+.fl-r {
+    float: right;
+}
+
+.fl-l {
+    float: left;
+}
+
+.al-v {
+    vertical-align: middle;
+}
+
+#titleHeader {
+    width: 33%;
+}
+
+#buttonsHeader {
+    vertical-align: top;
+    width: 33%;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 8px;
+}
+
+/*#buttonsHeader > * {*/
+/*    grid-column-end: 1;*/
+/*    grid-row-end: 1;*/
+/*}*/
+
+body {
+    background-color: #131417;
+    margin: 8px 8px 8px 8px;
+    color: #FFFFFF;
+    font-family: Arial, serif;
+}
