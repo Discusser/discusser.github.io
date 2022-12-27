@@ -10,3 +10,9 @@ function toggleDebugMode() {
         }
     }
 }
+
+function updateTime() {
+    document.getElementById("timeH1").textContent = getTime();
+}
+
+updateTime(); setInterval(updateTime, 1000);

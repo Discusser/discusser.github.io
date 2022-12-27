@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Turbo boost</title>
+        <link rel="stylesheet" href="/global/src/style.css"/>
+        <link rel="stylesheet" href="/templates/code-project/src/style.css"/>
+        <link rel="stylesheet" href="/libs/prism/prism.css"/>
+    </head>
+    <body>
+        <p>In many cases, CPUs can be "unlocked" for increased performance. This is called frequency boost, or turbo boost.
+            What this does is increase the maximum frequency of all cores. For example, my CPU has a base maximum
+            frequency of 2.8GHz (2.8 billion hertz), but that can be increased to 3.8GHz by enabling this frequency
+            boost.</p>
+        <p>I've created a bash script that only enables the frequency boost when certain apps are open. It is
+            recommended to run this script on start up, which can be done by running <code class="inline-code">sudo
+                crontab -e</code> (the script needs to be run by a root user) and adding the following entry <code>
+                @reboot path/to/dir/turbo_boost</code>. The apps that should enable frequency boost can be specified
+            in a file called <code>accepted_apps</code>. Each app should be on a new line, and the name can be obtained
+            by running <code>ps -ec</code> and looking for the app's command name.</p>
+        <p>This script runs every 5 seconds. The first thing it does is read the <code>accepted_apps</code> file in
+            case anything has changed. Then, it checks if one of the accepted apps is open, if it is, it enables
+            frequency boost. If there are no accepted apps open and frequency boost is enabled, frequency boost will
+            get turned off.</p>
+        <div class="code-block">
+            <pre class="line-numbers language-bash" data-src="src/turbo_boost"></pre>
+        </div>
+
+        <script src="/libs/prism/prism.js"></script>
+    </body>
+</html>

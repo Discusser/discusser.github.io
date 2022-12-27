@@ -3,25 +3,60 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>GitHub Pages</title>
+		<link rel="stylesheet" href="/global/src/style.css"/>
 		<link rel="stylesheet" href="src/style.css"/>
-		<script src="global/script.js"></script>
-		<script src="src/script.js"></script>
 	</head>
 	<body>
 		<div>
 			<div class="inline" id="titleHeader">
 				<h1>Discusser's website</h1>
 			</div>
-			<div class="inline" id="buttonsHeader">
-				<input class="fl-r al-v" type="button" value="Clock" onclick="redirect('./projects/clock/')"/>
-				<input class="fl-r al-v" type="button" value="File browser" onclick="redirect('./projects/files/')"/>
-				<input class="fl-r al-v" type="button" value="Ball game" onclick="redirect('./projects/ball-game/')"/>
-				<input class="fl-r al-v" type="button" value="Tesseract" onclick="redirect('./projects/tesseract/')"/>
+			<div class="inline" id="linksHeader">
+				<h1 class="inline">Useful links:</h1>
+				<div class="inline" id="buttonsHeader">
+					<input type="button" value="Clock" onclick="redirect(getPathFromID('clock'))"/>
+					<input type="button" value="File browser" onclick="redirect(getPathFromID('files'))"/>
+				</div>
+			</div>
+			<div class="inline" id="timeHeader">
+				<h1 id="timeH1"></h1>
 			</div>
 		</div>
 		<hr>
-		<br>
+		<div>
+			<h2>Programming projects</h2>
+			<div>
+				<div>
+					<p>JS, HTML, CSS:</p>
+					<ul>
+						<li>
+							<input type="button" value="Ball Game" onclick="redirect(getPathFromID('ball-game'))"/>
+						</li>
+						<li>
+							<input type="button" value="File browser" onclick="redirect(getPathFromID('files'))"/>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<p>Bash</p>
+					<ul>
+						<li>
+							<input type="button" value="On demand CPU frequency boost"
+								   onclick="redirect(getPathFromID('turbo-boost'))"/>
+						</li>
+					</ul>
+					<p>Python</p>
+					<ul>
+						<li>
+							<input type="button" value="Minecraft sound extractor"
+								   onclick="redirect(getPathFromID('minecraft-sound-extractor'))"/>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-		<br>
+		<script src="global/script.js"></script>
+		<script src="src/script.js"></script>
 	</body>
 </html>
