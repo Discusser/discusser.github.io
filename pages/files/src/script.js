@@ -35,6 +35,8 @@ let typeSort = null;
 let imgExtensions = [".png", ".gif", ".jpg", ".jpeg", "jpe", "jfif", ".svg"];
 let vidExtensions = [".mp4", ".webm", ".ogg"];
 
+let thumbnailsCheckbox = document.getElementById("thumbnails");
+
 /**
  * @see https://stackoverflow.com/a/18650828
  */
@@ -108,7 +110,8 @@ function displayFile(data) {
     downloadUrl.href = "#"
     downloadUrl.style.marginLeft = "16px";
     downloadUrl.innerText = "Copy link to clipboard";
-    downloadUrl.addEventListener('click', () => {
+    downloadUrl.addEventListener('click', e => {
+        e.preventDefault();
         navigator.clipboard.writeText(download_url)
     });
     downloadUrl.classList.add("remove");
@@ -167,7 +170,8 @@ function displayPage() {
         parentDir.append(img, a)
         let br = document.createElement("br");
         br.classList.add("remove");
-        a.addEventListener("click", () => {
+        a.addEventListener("click", e => {
+            e.preventDefault();
             try {
                 changePath(/.*(?=\/)/gm.exec(currentPath)[0])
             } catch (TypeError) {
@@ -208,7 +212,8 @@ function addRow(table, values) {
             img.style.float = "left";
             v.appendChild(img);
             text.href = "#";
-            text.addEventListener("click", () => {
+            text.addEventListener("click", e => {
+                e.preventDefault();
                 if (currentPath === "") { changePath(values[i]) }
                 else changePath(currentPath + "/" + values[i])
             })
@@ -352,7 +357,7 @@ let files = []; // File array
 
 function displayHeaders(table) {
     let headers = ["Name", "Size", "Type"];
-    if (document.getElementById("thumbnails").checked) {
+    if (thumbnailsCheckbox.checked) {
         headers.push("Thumbnail");
     }
     addHeaders(table, headers);
@@ -362,7 +367,7 @@ function displayHeaders(table) {
 function displayFiles(files) {
     files.forEach(file => {
         let values = [file.name, file.type === "dir" ? "" : formatBytes(file.size), file.type === "file" ? "File" : "Folder"];
-        if (document.getElementById("thumbnails").checked) {
+        if (thumbnailsCheckbox.checked) {
             values.push(file.thumbnail);
         }
         addRow(table, values);
@@ -389,6 +394,6 @@ class File {
     }
 }
 
-document.getElementById("thumbnails").addEventListener('click', () => {
+thumbnailsCheckbox.addEventListener('click', () => {
     if (response.data.name === undefined) refreshTable(table)
 });
