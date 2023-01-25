@@ -123,6 +123,8 @@ function displayFile(data) {
             fileContents = document.createElement("img");
             fileContents.src = download_url;
             fileContents.style.display = "block";
+            document.getElementById("ogImage").setAttribute("content", data.download_url)
+            break;
         }
     }
     for (let i = 0; i < vidExtensions.length; i++) {
@@ -134,6 +136,8 @@ function displayFile(data) {
             src.src = download_url;
             src.type = "video/" + vidExtensions[i].replace(".", "");
             fileContents.appendChild(src);
+            document.getElementById("ogImage").setAttribute("content", data.download_url)
+            break;
         }
     }
     if (fileContents == null) {
