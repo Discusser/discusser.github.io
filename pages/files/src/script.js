@@ -101,40 +101,38 @@ function resetFileView(table) {
     }
 }
 
-// isImage ? image : video
-function createDiscordEmbed(download_url, isImage) {
-    const createMetaElement = (property, content) => {
-        let elem = document.createElement("meta");
-        elem.setAttribute("property", property);
-        elem.setAttribute("content", content);
-        return elem;
-    }
-
-    // const getImageSize = (url, callback) => {
-    //     const img = new Image();
-    //     img.src = url;
-    //     img.onload = function() { callback(this.width, this.height); }
-    // }
-
-    let type = createMetaElement("og:type", isImage ? "website" : "video.movie");
-    let title = createMetaElement("og:title", "discusser.github.io");
-    let image = createMetaElement("og:image", "https://raw.githubusercontent.com/Discusser/fileStorage/main/files/2022-09/CykSejOF6o%202022-09-02%2022h25.png");
-    let imageAlt = createMetaElement("og:image:alt", "some random image");
-    // let imageWidth = createMetaElement("og:image:width", "512");
-    // let imageHeight = createMetaElement("og:image:height", "512");
-    let url = createMetaElement("og:url", window.location.origin + window.location.pathname);
-    let description = createMetaElement("og:description", "File browser");
-    let siteName = createMetaElement("og:site_name", "GitHub Pages")
-    let optionalVideo = createMetaElement("og:video", download_url);
-
-    // getImageSize(download_url, (width, height) => {
-    //     imageWidth.setAttribute("content", width);
-    //     imageHeight.setAttribute("content", height);
-    // });
-
-    document.head.append(type, title, image, imageAlt, description, siteName, url);
-    if (!isImage) document.head.appendChild(optionalVideo);
-}
+// // isImage ? image : video
+// function createDiscordEmbed(download_url, isImage) {
+//     const createMetaElement = (property, content) => {
+//         let elem = document.createElement("meta");
+//         elem.setAttribute("property", property);
+//         elem.setAttribute("content", content);
+//         return elem;
+//     }
+//
+//     // const getImageSize = (url, callback) => {
+//     //     const img = new Image();
+//     //     img.src = url;
+//     //     img.onload = function() { callback(this.width, this.height); }
+//     // }
+//
+//     let type = createMetaElement("og:type", isImage ? "website" : "video.movie");
+//     let title = createMetaElement("og:title", "discusser.github.io");
+//     let image = createMetaElement("og:image", "https://raw.githubusercontent.com/Discusser/fileStorage/main/files/2022-09/CykSejOF6o%202022-09-02%2022h25.png");
+//     let imageAlt = createMetaElement("og:image:alt", "some random image");
+//     let url = createMetaElement("og:url", window.location.origin + window.location.pathname);
+//     let description = createMetaElement("og:description", "File browser");
+//     let siteName = createMetaElement("og:site_name", "GitHub Pages")
+//     let optionalVideo = createMetaElement("og:video", download_url);
+//
+//     // getImageSize(download_url, (width, height) => {
+//     //     imageWidth.setAttribute("content", width);
+//     //     imageHeight.setAttribute("content", height);
+//     // });
+//
+//     document.head.append(type, title, image, imageAlt, description, siteName, url);
+//     if (!isImage) document.head.appendChild(optionalVideo);
+// }
 
 function displayFile(data) {
     let name = data.name;
@@ -158,7 +156,7 @@ function displayFile(data) {
             fileContents = document.createElement("img");
             fileContents.src = download_url;
             fileContents.style.display = "block";
-            createDiscordEmbed(download_url, true);
+            // createDiscordEmbed(download_url, true);
             break;
         }
     }
@@ -171,7 +169,7 @@ function displayFile(data) {
             src.src = download_url;
             src.type = "video/" + vidExtensions[i].replace(".", "");
             fileContents.appendChild(src);
-            createDiscordEmbed(download_url, false);
+            // createDiscordEmbed(download_url, false);
             break;
         }
     }
