@@ -101,6 +101,35 @@ function resetFileView(table) {
     }
 }
 
+// isImage ? image : video
+function createDiscordEmbed(download_url, isImage) {
+    let type = document.createElement("meta");
+    let title = document.createElement("meta");
+    let image = document.createElement("meta");
+    let url = document.createElement("meta");
+    let optionalVideo = document.createElement("meta");
+
+    type.setAttribute("property", "og:type");
+    type.setAttribute("content", isImage ? "website" : "video.movie")
+
+    title.setAttribute("property", "og:title");
+    title.setAttribute("content", "discusser.github.io")
+
+    image.setAttribute("property", "og:image");
+    image.setAttribute("content", download_url)
+
+    url.setAttribute("property", "og:url");
+    url.setAttribute("content", "https://discusser.github.io/pages/files/")
+
+    if (!isImage) {
+        optionalVideo.setAttribute("property", "og:video");
+        optionalVideo.setAttribute("content", download_url)
+    }
+
+    document.head.append(type, title, image, url);
+    if (!isImage) document.head.appendChild(optionalVideo);
+}
+
 function displayFile(data) {
     let name = data.name;
     let download_url = data.download_url;
@@ -123,7 +152,7 @@ function displayFile(data) {
             fileContents = document.createElement("img");
             fileContents.src = download_url;
             fileContents.style.display = "block";
-            document.getElementById("ogImage").setAttribute("content", data.download_url)
+            createDiscordEmbed(download_url, true);
             break;
         }
     }
@@ -136,7 +165,7 @@ function displayFile(data) {
             src.src = download_url;
             src.type = "video/" + vidExtensions[i].replace(".", "");
             fileContents.appendChild(src);
-            document.getElementById("ogImage").setAttribute("content", data.download_url)
+            createDiscordEmbed(download_url, false);
             break;
         }
     }
