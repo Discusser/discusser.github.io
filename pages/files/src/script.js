@@ -103,30 +103,34 @@ function resetFileView(table) {
 
 // isImage ? image : video
 function createDiscordEmbed(download_url, isImage) {
-    let type = document.createElement("meta");
-    let title = document.createElement("meta");
-    let image = document.createElement("meta");
-    let url = document.createElement("meta");
-    let optionalVideo = document.createElement("meta");
-
-    type.setAttribute("property", "og:type");
-    type.setAttribute("content", isImage ? "website" : "video.movie")
-
-    title.setAttribute("property", "og:title");
-    title.setAttribute("content", "discusser.github.io")
-
-    image.setAttribute("property", "og:image");
-    image.setAttribute("content", download_url)
-
-    url.setAttribute("property", "og:url");
-    url.setAttribute("content", "https://discusser.github.io/pages/files/")
-
-    if (!isImage) {
-        optionalVideo.setAttribute("property", "og:video");
-        optionalVideo.setAttribute("content", download_url)
+    const createMetaElement = (property, content) => {
+        let elem = document.createElement("meta");
+        elem.setAttribute("property", property);
+        elem.setAttribute("content", content);
+        return elem;
     }
 
-    document.head.append(type, title, image, url);
+    const getImageSize = (url, callback) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = function() { callback(this.width, this.height); }
+    }
+
+    let type = createMetaElement("og:type", isImage ? "website" : "video.movie");
+    let title = createMetaElement("og:title", "discusser.github.io");
+    let image = createMetaElement("og:image", download_url);
+    let imageWidth = createMetaElement("og:image:width", "512");
+    let imageHeight = createMetaElement("og:image:height", "512");
+    let url = createMetaElement("og:url", window.location.origin + window.location.pathname);
+    let description = createMetaElement("og:description", "File browser");
+    let optionalVideo = createMetaElement("og:video", download_url);
+
+    getImageSize(download_url, (width, height) => {
+        imageWidth.setAttribute("content", width);
+        imageHeight.setAttribute("content", height);
+    });
+
+    document.head.append(type, title, image, imageWidth, imageHeight, description, url);
     if (!isImage) document.head.appendChild(optionalVideo);
 }
 
