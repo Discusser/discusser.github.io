@@ -80,6 +80,8 @@ function getQueryString(key) {
     }
 }
 
+// This causes a page refresh:
+// Is it possible to wait until the URL changes to add these query strings to the URL by buffering them?
 function setQueryString(key, newValue) {
     if (window.location.search.includes(key)) {
         const regex = new RegExp("(?<=\\?|&)" + key + "=(.*?)(?=&|$)");
@@ -192,9 +194,6 @@ function displayPage() {
 async function changePath(path) {
     currentPath = path
     setQueryString("path", path);
-    response = await request(path);
-
-    displayPage();
 }
 
 function addRow(table, values) {
