@@ -83,7 +83,11 @@ function setQueryString(key, newValue) {
         const regex = new RegExp("(?<=\\?|&)" + key + "=(.*?)(?=&|$)");
         window.location.search = window.location.search.replace(regex, key + "=" + newValue);
     } else {
-        window.location.search += "&" + key + "=" + newValue;
+        if (window.location.search === "") {
+            window.location.search += key + "=" + newValue;
+        } else {
+            window.location.search += "&" + key + "=" + newValue;
+        }
     }
 }
 
