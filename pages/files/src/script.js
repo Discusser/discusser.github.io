@@ -5,6 +5,7 @@
 import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
 
 const octokit = new Octokit({
+    contentType: "text/plain",
     auth: `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` // Key is public because it can only be used to read contents of public repositories
     // todo: make the key private/encrypted, I don't like the fact that anyone can use it even if it doesn't have any permissions
 });
@@ -50,14 +51,40 @@ function formatBytes(bytes, decimals = 2) {
 }
 
 let currentPath = ""
-let response = await request(currentPath)
+let response = null;
+
+window.addEventListener("load", async () => {
+    const queryPath = getQueryString("path");
+    if (queryPath !== null) currentPath = decodeURIComponent(queryPath);
+    response = await request(currentPath)
+    displayPage();
+});
 
 function request(path) {
     return octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
         owner: "Discusser",
         repo: "fileStorage",
-        path: path
+        path: path,
+
     })
+}
+
+function getQueryString(key) {
+    try {
+        const regex = new RegExp("(?<=\\?|&)" + key + "=(.*?)(?=&|$)");
+        return regex.exec(window.location.search)[1];
+    } catch (e) {
+        return null;
+    }
+}
+
+function setQueryString(key, newValue) {
+    if (window.location.search.includes(key)) {
+        const regex = new RegExp("(?<=\\?|&)" + key + "=(.*?)(?=&|$)");
+        window.location.search = window.location.search.replace(regex, key + "=" + newValue);
+    } else {
+        window.location.search += "&" + key + "=" + newValue;
+    }
 }
 
 function resetFileView(table) {
@@ -66,21 +93,65 @@ function resetFileView(table) {
     }
 }
 
-async function changePath(path) {
-    currentPath = path
-    response = await request(path);
+function displayFile(data) {
+    let name = data.name;
+    let download_url = data.download_url;
+    let htmlUrl = document.createElement("a");
+    htmlUrl.href = data.html_url;
+    htmlUrl.innerText = "View file on github";
+    htmlUrl.classList.add("remove");
+    let downloadUrl = document.createElement("a");
+    downloadUrl.href = "#"
+    downloadUrl.style.marginLeft = "16px";
+    downloadUrl.innerText = "Copy link to clipboard";
+    downloadUrl.addEventListener('click', () => {
+        navigator.clipboard.writeText(download_url)
+    });
+    downloadUrl.classList.add("remove");
+    let fileContents = null;
+    for (let i = 0; i < imgExtensions.length; i++) {
+        if (name.endsWith(imgExtensions[i])) {
+            fileContents = document.createElement("img");
+            fileContents.src = download_url;
+            fileContents.style.display = "block";
+        }
+    }
+    for (let i = 0; i < vidExtensions.length; i++) {
+        if (name.endsWith(vidExtensions[i])) {
+            fileContents = document.createElement("video");
+            fileContents.toggleAttribute("controls", true)
+            fileContents.style.display = "block";
+            let src = document.createElement("source");
+            src.src = download_url;
+            src.type = "video/" + vidExtensions[i].replace(".", "");
+            fileContents.appendChild(src);
+        }
+    }
+    if (fileContents == null) {
+        fileContents = document.createElement("pre");
+        if (data.encoding === "base64") {
+            fileContents.innerText = atob(data.content);
+        }
+    }
+    fileContents.classList.add("remove");
+    let br = document.createElement("br");
+    br.classList.add("remove")
+    document.body.append(htmlUrl, downloadUrl, fileContents, br);
+}
+
+function displayPage() {
     let index = document.getElementById("index");
-    if (path === "") {
+    if (currentPath === "") {
         index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/\">/" + "</a>"
     } else {
-        index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/blob/main/" + path + "\">/" + path + "</a>"
+        index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/blob/main/" + currentPath + "\">/" + currentPath + "</a>"
     }
     try {
         Array.from(document.getElementsByClassName("remove")).forEach(value => value.remove());
     } catch (TypeError) {}
     resetFileView(table)
     files = []
-    if (path !== "") {
+    if (currentPath !== "") {
         let parentDir = document.createElement("div")
         parentDir.classList.add("remove");
         let img = document.createElement("img");
@@ -94,7 +165,7 @@ async function changePath(path) {
         br.classList.add("remove");
         a.addEventListener("click", () => {
             try {
-                changePath(/.*(?=\/)/gm.exec(path)[0])
+                changePath(/.*(?=\/)/gm.exec(currentPath)[0])
             } catch (TypeError) {
                 changePath("");
             }
@@ -104,51 +175,18 @@ async function changePath(path) {
     let data = response.data;
     let name = data.name;
     if (name !== undefined) { // If the user is viewing a file
-        let download_url = data.download_url;
-        let htmlUrl = document.createElement("a");
-        htmlUrl.href = data.html_url;
-        htmlUrl.innerText = "View file on github";
-        htmlUrl.classList.add("remove");
-        let downloadUrl = document.createElement("a");
-        downloadUrl.href = "#"
-        downloadUrl.style.marginLeft = "16px";
-        downloadUrl.innerText = "Copy link to clipboard";
-        downloadUrl.addEventListener('click', () => {
-            navigator.clipboard.writeText(download_url)
-        });
-        downloadUrl.classList.add("remove");
-        let fileContents = null;
-        for (let i = 0; i < imgExtensions.length; i++) {
-            if (name.endsWith(imgExtensions[i])) {
-                fileContents = document.createElement("img");
-                fileContents.src = download_url;
-                fileContents.style.display = "block";
-            }
-        }
-        for (let i = 0; i < vidExtensions.length; i++) {
-            if (name.endsWith(vidExtensions[i])) {
-                fileContents = document.createElement("video");
-                fileContents.toggleAttribute("controls", true)
-                fileContents.style.display = "block";
-                let src = document.createElement("source");
-                src.src = download_url;
-                src.type = "video/" + vidExtensions[i].replace(".", "");
-                fileContents.appendChild(src);
-            }
-        }
-        if (fileContents == null) {
-            fileContents = document.createElement("pre");
-            if (data.encoding === "base64") {
-                fileContents.innerText = atob(data.content);
-            }
-        }
-        fileContents.classList.add("remove");
-        let br = document.createElement("br");
-        br.classList.add("remove")
-        document.body.append(htmlUrl, downloadUrl, fileContents, br);
+        displayFile(data);
     } else {
         createTable()
     }
+}
+
+async function changePath(path) {
+    currentPath = path
+    setQueryString("path", path);
+    response = await request(path);
+
+    displayPage();
 }
 
 function addRow(table, values) {
@@ -349,5 +387,4 @@ class File {
 
 document.getElementById("thumbnails").addEventListener('click', () => {
     if (response.data.name === undefined) refreshTable(table)
-})
-createTable()
+});
