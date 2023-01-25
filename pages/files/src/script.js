@@ -116,9 +116,9 @@ function createDiscordEmbed(download_url, isImage) {
         img.onload = function() { callback(this.width, this.height); }
     }
 
-    let type = createMetaElement("og:type", isImage ? "website" : "video.movie");
+    // let type = createMetaElement("og:type", isImage ? "website" : "video.movie");
     let title = createMetaElement("og:title", "discusser.github.io");
-    let image = createMetaElement("og:image", download_url);
+    let image = createMetaElement("og:image", "https://raw.githubusercontent.com/Discusser/fileStorage/main/files/2022-09/CykSejOF6o%202022-09-02%2022h25.png");
     let imageWidth = createMetaElement("og:image:width", "512");
     let imageHeight = createMetaElement("og:image:height", "512");
     let url = createMetaElement("og:url", window.location.origin + window.location.pathname);
@@ -130,7 +130,7 @@ function createDiscordEmbed(download_url, isImage) {
         imageHeight.setAttribute("content", height);
     });
 
-    document.head.append(type, title, image, imageWidth, imageHeight, description, url);
+    document.head.append(title, image, imageWidth, imageHeight, description, url);
     if (!isImage) document.head.appendChild(optionalVideo);
 }
 
