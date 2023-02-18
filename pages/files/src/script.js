@@ -5,6 +5,7 @@
 import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
 
 const octokit = new Octokit({
+    contentType: "text/plain",
     auth: `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` // Key is public because it can only be used to read contents of public repositories
     // todo: make the key private/encrypted, I don't like the fact that anyone can use it even if it doesn't have any permissions
 });
@@ -34,6 +35,8 @@ let typeSort = null;
 let imgExtensions = [".png", ".gif", ".jpg", ".jpeg", "jpe", "jfif", ".svg"];
 let vidExtensions = [".mp4", ".webm", ".ogg"];
 
+let thumbnailsCheckbox = document.getElementById("thumbnails");
+
 /**
  * @see https://stackoverflow.com/a/18650828
  */
@@ -50,14 +53,46 @@ function formatBytes(bytes, decimals = 2) {
 }
 
 let currentPath = ""
-let response = await request(currentPath)
+let response = null;
+
+window.addEventListener("load", async () => {
+    const queryPath = getQueryString("path");
+    if (queryPath !== null) currentPath = decodeURIComponent(queryPath);
+    response = await request(currentPath)
+    displayPage();
+});
 
 function request(path) {
     return octokit.request("GET /repos/{owner}/{repo}/contents/{path}", {
         owner: "Discusser",
         repo: "fileStorage",
-        path: path
+        path: path,
+
     })
+}
+
+function getQueryString(key) {
+    try {
+        const regex = new RegExp("(?<=\\?|&)" + key + "=(.*?)(?=&|$)");
+        return regex.exec(window.location.search)[1];
+    } catch (e) {
+        return null;
+    }
+}
+
+// This causes a page refresh:
+// Is it possible to wait until the URL changes to add these query strings to the URL by buffering them?
+function setQueryString(key, newValue) {
+    if (window.location.search.includes(key)) {
+        const regex = new RegExp("(?<=\\?|&)" + key + "=(.*?)(?=&|$)");
+        window.location.search = window.location.search.replace(regex, key + "=" + newValue);
+    } else {
+        if (window.location.search === "") {
+            window.location.search += key + "=" + newValue;
+        } else {
+            window.location.search += "&" + key + "=" + newValue;
+        }
+    }
 }
 
 function resetFileView(table) {
@@ -66,21 +101,103 @@ function resetFileView(table) {
     }
 }
 
-async function changePath(path) {
-    currentPath = path
-    response = await request(path);
+// // isImage ? image : video
+// function createDiscordEmbed(download_url, isImage) {
+//     const createMetaElement = (property, content) => {
+//         let elem = document.createElement("meta");
+//         elem.setAttribute("property", property);
+//         elem.setAttribute("content", content);
+//         return elem;
+//     }
+//
+//     // const getImageSize = (url, callback) => {
+//     //     const img = new Image();
+//     //     img.src = url;
+//     //     img.onload = function() { callback(this.width, this.height); }
+//     // }
+//
+//     let type = createMetaElement("og:type", isImage ? "website" : "video.movie");
+//     let title = createMetaElement("og:title", "discusser.github.io");
+//     let image = createMetaElement("og:image", "https://raw.githubusercontent.com/Discusser/fileStorage/main/files/2022-09/CykSejOF6o%202022-09-02%2022h25.png");
+//     let imageAlt = createMetaElement("og:image:alt", "some random image");
+//     let url = createMetaElement("og:url", window.location.origin + window.location.pathname);
+//     let description = createMetaElement("og:description", "File browser");
+//     let siteName = createMetaElement("og:site_name", "GitHub Pages")
+//     let optionalVideo = createMetaElement("og:video", download_url);
+//
+//     // getImageSize(download_url, (width, height) => {
+//     //     imageWidth.setAttribute("content", width);
+//     //     imageHeight.setAttribute("content", height);
+//     // });
+//
+//     document.head.append(type, title, image, imageAlt, description, siteName, url);
+//     if (!isImage) document.head.appendChild(optionalVideo);
+// }
+
+function displayFile(data) {
+    let name = data.name;
+    let download_url = data.download_url;
+    let htmlUrl = document.createElement("a");
+    htmlUrl.href = data.html_url;
+    htmlUrl.innerText = "View file on github";
+    htmlUrl.classList.add("remove");
+    let downloadUrl = document.createElement("a");
+    downloadUrl.href = "#"
+    downloadUrl.style.marginLeft = "16px";
+    downloadUrl.innerText = "Copy link to clipboard";
+    downloadUrl.addEventListener('click', e => {
+        e.preventDefault();
+        navigator.clipboard.writeText(download_url)
+    });
+    downloadUrl.classList.add("remove");
+    let fileContents = null;
+    for (let i = 0; i < imgExtensions.length; i++) {
+        if (name.endsWith(imgExtensions[i])) {
+            fileContents = document.createElement("img");
+            fileContents.src = download_url;
+            fileContents.style.display = "block";
+            // createDiscordEmbed(download_url, true);
+            break;
+        }
+    }
+    for (let i = 0; i < vidExtensions.length; i++) {
+        if (name.endsWith(vidExtensions[i])) {
+            fileContents = document.createElement("video");
+            fileContents.toggleAttribute("controls", true)
+            fileContents.style.display = "block";
+            let src = document.createElement("source");
+            src.src = download_url;
+            src.type = "video/" + vidExtensions[i].replace(".", "");
+            fileContents.appendChild(src);
+            // createDiscordEmbed(download_url, false);
+            break;
+        }
+    }
+    if (fileContents == null) {
+        fileContents = document.createElement("pre");
+        if (data.encoding === "base64") {
+            fileContents.innerText = atob(data.content);
+        }
+    }
+    fileContents.classList.add("remove");
+    let br = document.createElement("br");
+    br.classList.add("remove")
+    document.body.append(htmlUrl, downloadUrl, fileContents, br);
+}
+
+function displayPage() {
     let index = document.getElementById("index");
-    if (path === "") {
+    if (currentPath === "") {
         index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/\">/" + "</a>"
     } else {
-        index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/blob/main/" + path + "\">/" + path + "</a>"
+        index.innerHTML = "Index of <a href=\"https://github.com/Discusser/fileStorage/blob/main/" + currentPath + "\">/" + currentPath + "</a>"
     }
     try {
         Array.from(document.getElementsByClassName("remove")).forEach(value => value.remove());
     } catch (TypeError) {}
     resetFileView(table)
     files = []
-    if (path !== "") {
+    if (currentPath !== "") {
         let parentDir = document.createElement("div")
         parentDir.classList.add("remove");
         let img = document.createElement("img");
@@ -92,9 +209,10 @@ async function changePath(path) {
         parentDir.append(img, a)
         let br = document.createElement("br");
         br.classList.add("remove");
-        a.addEventListener("click", () => {
+        a.addEventListener("click", e => {
+            e.preventDefault();
             try {
-                changePath(/.*(?=\/)/gm.exec(path)[0])
+                changePath(/.*(?=\/)/gm.exec(currentPath)[0])
             } catch (TypeError) {
                 changePath("");
             }
@@ -104,51 +222,15 @@ async function changePath(path) {
     let data = response.data;
     let name = data.name;
     if (name !== undefined) { // If the user is viewing a file
-        let download_url = data.download_url;
-        let htmlUrl = document.createElement("a");
-        htmlUrl.href = data.html_url;
-        htmlUrl.innerText = "View file on github";
-        htmlUrl.classList.add("remove");
-        let downloadUrl = document.createElement("a");
-        downloadUrl.href = "#"
-        downloadUrl.style.marginLeft = "16px";
-        downloadUrl.innerText = "Copy link to clipboard";
-        downloadUrl.addEventListener('click', () => {
-            navigator.clipboard.writeText(download_url)
-        });
-        downloadUrl.classList.add("remove");
-        let fileContents = null;
-        for (let i = 0; i < imgExtensions.length; i++) {
-            if (name.endsWith(imgExtensions[i])) {
-                fileContents = document.createElement("img");
-                fileContents.src = download_url;
-                fileContents.style.display = "block";
-            }
-        }
-        for (let i = 0; i < vidExtensions.length; i++) {
-            if (name.endsWith(vidExtensions[i])) {
-                fileContents = document.createElement("video");
-                fileContents.toggleAttribute("controls", true)
-                fileContents.style.display = "block";
-                let src = document.createElement("source");
-                src.src = download_url;
-                src.type = "video/" + vidExtensions[i].replace(".", "");
-                fileContents.appendChild(src);
-            }
-        }
-        if (fileContents == null) {
-            fileContents = document.createElement("pre");
-            if (data.encoding === "base64") {
-                fileContents.innerText = atob(data.content);
-            }
-        }
-        fileContents.classList.add("remove");
-        let br = document.createElement("br");
-        br.classList.add("remove")
-        document.body.append(htmlUrl, downloadUrl, fileContents, br);
+        displayFile(data);
     } else {
         createTable()
     }
+}
+
+async function changePath(path) {
+    currentPath = path
+    setQueryString("path", path);
 }
 
 function addRow(table, values) {
@@ -166,7 +248,8 @@ function addRow(table, values) {
             img.style.float = "left";
             v.appendChild(img);
             text.href = "#";
-            text.addEventListener("click", () => {
+            text.addEventListener("click", e => {
+                e.preventDefault();
                 if (currentPath === "") { changePath(values[i]) }
                 else changePath(currentPath + "/" + values[i])
             })
@@ -310,7 +393,7 @@ let files = []; // File array
 
 function displayHeaders(table) {
     let headers = ["Name", "Size", "Type"];
-    if (document.getElementById("thumbnails").checked) {
+    if (thumbnailsCheckbox.checked) {
         headers.push("Thumbnail");
     }
     addHeaders(table, headers);
@@ -320,7 +403,7 @@ function displayHeaders(table) {
 function displayFiles(files) {
     files.forEach(file => {
         let values = [file.name, file.type === "dir" ? "" : formatBytes(file.size), file.type === "file" ? "File" : "Folder"];
-        if (document.getElementById("thumbnails").checked) {
+        if (thumbnailsCheckbox.checked) {
             values.push(file.thumbnail);
         }
         addRow(table, values);
@@ -347,7 +430,6 @@ class File {
     }
 }
 
-document.getElementById("thumbnails").addEventListener('click', () => {
+thumbnailsCheckbox.addEventListener('click', () => {
     if (response.data.name === undefined) refreshTable(table)
-})
-createTable()
+});
