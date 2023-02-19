@@ -16,7 +16,7 @@ class TFunction implements Token {
         this.onApply = onApply;
     }
 
-    apply(args: Array<number>) {
+    apply(args: Array<number>): number {
         return this.onApply.apply(null, args);
     }
 }
@@ -79,11 +79,13 @@ const operators: Map<string, Operator> = new Map([
 
 const functions: Map<string, TFunction> = new Map([]);
 
-const descriptors = Object.getOwnPropertyDescriptors(Math);
-const keys = Object.keys(descriptors);
-for (let i = 0; i < keys.length; i++) {
-    let value = descriptors[keys[i]].value;
-    if (typeof(value) === "function") functions.set(keys[i], new TFunction(keys[i], value))
+{
+    const descriptors = Object.getOwnPropertyDescriptors(Math);
+    const keys = Object.keys(descriptors);
+    for (let i = 0; i < keys.length; i++) {
+        let value = descriptors[keys[i]].value;
+        if (typeof(value) === "function") functions.set(keys[i], new TFunction(keys[i], value))
+    }
 }
 
 function isNumber(str: string) {
@@ -176,6 +178,23 @@ const mathParser = {
             }
 
             expressionCopy = expressionCopy.replace(previous, "");
+        }
+
+        let fromIndex: number = 0;
+
+        while (true) {
+            // @ts-ignore
+            let lastIndex: number = output.lastIndexOf(operators.get("-"));
+            if (lastIndex === fromIndex || lastIndex === - 1) break;
+
+            // @ts-ignore
+            let index = output.indexOf(operators.get("-"), fromIndex);
+
+            if (index >= 1 && !(output[index - 1] instanceof Number)) {
+                output.splice(index, 2, new Operand(output[index].value + output[index + 1].value))
+            }
+
+            fromIndex = index;
         }
 
         return output;
@@ -295,7 +314,7 @@ const mathParser = {
                     foundOperator = true;
 
                     const args: number[] = postfix.slice(i - func.onApply.length, i).map(value => parseFloat(value.value));
-                    const result = func.apply(args)
+                    const result: number = func.apply(args)
 
                     postfix.splice(i - func.onApply.length, func.onApply.length + 1,
                         new Operand(result.toString()))

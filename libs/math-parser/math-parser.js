@@ -65,12 +65,14 @@ const operators = new Map([
     ["-", new Operator("-", 2, Associativity.LEFT, (a, b) => a - b)],
 ]);
 const functions = new Map([]);
-const descriptors = Object.getOwnPropertyDescriptors(Math);
-const keys = Object.keys(descriptors);
-for (let i = 0; i < keys.length; i++) {
-    let value = descriptors[keys[i]].value;
-    if (typeof (value) === "function")
-        functions.set(keys[i], new TFunction(keys[i], value));
+{
+    const descriptors = Object.getOwnPropertyDescriptors(Math);
+    const keys = Object.keys(descriptors);
+    for (let i = 0; i < keys.length; i++) {
+        let value = descriptors[keys[i]].value;
+        if (typeof (value) === "function")
+            functions.set(keys[i], new TFunction(keys[i], value));
+    }
 }
 function isNumber(str) {
     return /^[-+]?\d+\.*\d*$/.test(str);
@@ -157,6 +159,19 @@ const mathParser = {
                 }
             }
             expressionCopy = expressionCopy.replace(previous, "");
+        }
+        let fromIndex = 0;
+        while (true) {
+            // @ts-ignore
+            let lastIndex = output.lastIndexOf(operators.get("-"));
+            if (lastIndex === fromIndex || lastIndex === -1)
+                break;
+            // @ts-ignore
+            let index = output.indexOf(operators.get("-"), fromIndex);
+            if (index >= 1 && !(output[index - 1] instanceof Number)) {
+                output.splice(index, 2, new Operand(output[index].value + output[index + 1].value));
+            }
+            fromIndex = index;
         }
         return output;
     },
@@ -272,3 +287,13 @@ const mathParser = {
     }
 };
 exports.mathParser = mathParser;
+// const userFunctions = new Map([
+//     ["f", "2x+3"],
+//     ["g", "2*f(x)"]
+// ])
+// const constants = new Map([
+//     ["x", "6+5"],
+//     ["y", "2x+3"],
+//     ["z", "5x-2y"]
+// ])
+console.log(mathParser.calculate("sqrt(-1)"));
