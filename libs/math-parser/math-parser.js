@@ -73,30 +73,19 @@ for (let i = 0; i < keys.length; i++) {
         functions.set(keys[i], new TFunction(keys[i], value));
 }
 function isNumber(str) {
-    try {
-        return str.replace(str.match(/\d+\.*\d*/)[0], "").length === 0;
-    }
-    catch (e) {
-        return false;
-    }
+    return /^[-+]?\d+\.*\d*$/.test(str);
 }
 function isVariable(str) {
-    try {
-        return str.replace(str.match(/[a-zA-Z]+'*/)[0], "").length === 0;
-    }
-    catch (e) {
-        return false;
-    }
+    return /^[a-zA-Z]+'*$/.test(str);
 }
 function isParentheses(str) {
-    return str.length === 1 && (str[0] == "(" || str[0] == ")");
+    return str.length === 1 && (str[0] === "(" || str[0] === ")");
 }
 // todo: support operators longer than 1 character
 function isOperator(str) {
     return str.length === 1 && operators.has(str);
 }
 const mathParser = {
-    // todo: support numbers written like -5 or +10
     toTokenArray(expression, constants = new Map(), userFunctions = new Map()) {
         let expressionCopy = expression
             .replace(/\s/g, "")
@@ -107,7 +96,7 @@ const mathParser = {
             let previous = "";
             for (let i = 1; i <= expressionCopy.length; i++) {
                 const slice = expressionCopy.slice(0, i);
-                if ((isNumber(previous) && !isNumber(slice))) {
+                if (isNumber(previous) && !isNumber(slice)) {
                     output.push(new Operand(previous));
                     break;
                 }
@@ -121,7 +110,6 @@ const mathParser = {
                             // @ts-ignore
                             let func = userFunctions.get(previous);
                             if (typeof (func) === "string") {
-                                // todo : impl
                                 func = this.toFunction(previous, func, constants, userFunctions);
                             }
                             output.push(func);
@@ -144,14 +132,19 @@ const mathParser = {
                     }
                 }
                 else if (isOperator(previous) && !isOperator(slice)) {
-                    const operator = operators.get(previous);
-                    if (operator != undefined)
-                        output.push(operator);
-                    break;
+                    if (output.length === 0 && (previous[0] === "+" || previous[0] === "-")) {
+                        previous = slice;
+                    }
+                    else {
+                        const operator = operators.get(previous);
+                        if (operator !== undefined)
+                            output.push(operator);
+                        break;
+                    }
                 }
                 else if (isParentheses(slice)) {
                     const parenthesis = parentheses.get(slice);
-                    if (parenthesis != undefined)
+                    if (parenthesis !== undefined)
                         output.push(parenthesis);
                     previous = slice;
                     break;
@@ -170,9 +163,6 @@ const mathParser = {
     // https://en.wikipedia.org/wiki/Shunting_yard_algorithm
     toPostfixNotation(expression, constants = new Map(), userFunctions = new Map()) {
         expression = expression.replace(/\s/g, "");
-        // if (!/^([-+]*(([a-zA-Z]|\d+.?\d*)+'*)*)([-+*/^(]\(*[-+]*(([a-zA-Z]|\d+.?\d*)+'*)*\)*)*$/.test(expression)) {
-        //     throw new Error("Invalid expression!")
-        // }
         let tokenArray = this.toTokenArray(expression, constants, userFunctions);
         // https://en.wikipedia.org/wiki/Reverse_Polish_notation
         let postfixOutput = [];
@@ -191,7 +181,7 @@ const mathParser = {
                     if (top instanceof Operator
                         && (top.precedence > tokenArray[0].precedence
                             || (top.precedence === tokenArray[0].precedence
-                                && tokenArray[0].associativity == Associativity.LEFT))) {
+                                && tokenArray[0].associativity === Associativity.LEFT))) {
                         // @ts-ignore
                         postfixOutput.push(operatorStack.pop());
                     }
@@ -217,7 +207,6 @@ const mathParser = {
                 if (operatorStack.at(-1).value === "(") {
                     operatorStack.pop();
                 }
-                // todo: allow for functions like f(x) or cos(x)
                 if (operatorStack.at(-1) instanceof TFunction) {
                     // @ts-ignore
                     postfixOutput.push(operatorStack.pop());
@@ -283,12 +272,3 @@ const mathParser = {
     }
 };
 exports.mathParser = mathParser;
-const userFunctions = new Map([
-    ["f", "2x+3"]
-]);
-const constants = new Map([
-    ["x", "6+5"],
-    ["y", "2x+3"],
-    ["z", "5x-2y"]
-]);
-console.log(mathParser.calculate("max(2, 3)", constants, userFunctions));
