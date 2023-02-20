@@ -1,6 +1,4 @@
-// import mathParser from "./math-parser.js";
-//
-// console.log(mathParser.compile("2+3").calculate())
+import mathParser from "../../../libs/math-parser/math-parser.js";
 
 const main = document.getElementById("main");
 const data = document.getElementById("data");
@@ -225,7 +223,25 @@ window.addEventListener("load", () => {
     setCssProperties();
 });
 
-for (let i = 0; i < 50; i++) {
-    // submitFunctionInput((Math.floor(Math.random() * 10) + 1) + "x + " + (Math.floor(Math.random() * 10) + 1));
-    // submitConstantInput(String.fromCharCode(65 + i) + " = " + (Math.floor(Math.random() * 10) + 1));
+{
+    const userFunctions = new Map([
+        ["f", "x^2"]
+    ])
+    const constants = new Map([
+        ["x", "-16"]
+    ]);
+
+    let expression = mathParser.compile("f(x)", constants, userFunctions);
+
+    const start = new Date();
+
+    for (let i = 0; i < 1001; i++) {
+        expression.calculate()
+
+        constants.set("x", numToStr((parseFloat(constants.get("x")) + 0.032)));
+        expression = mathParser.compile("f(x)", constants, userFunctions);
+    }
+
+    const end = new Date();
+    console.log(end.getTime() - start.getTime());
 }
