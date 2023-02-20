@@ -1,3 +1,7 @@
+// import mathParser from "./math-parser.js";
+//
+// console.log(mathParser.compile("2+3").calculate())
+
 const main = document.getElementById("main");
 const data = document.getElementById("data");
 const outputs = document.getElementById("outputs");
