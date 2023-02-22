@@ -55,6 +55,16 @@ class Operand implements Token {
     }
 }
 
+// class Constant implements Operand {
+//     readonly key: string
+//     readonly value: string;
+//
+//     constructor(key: string, value: string) {
+//         this.key = key;
+//         this.value = value;
+//     }
+// }
+
 // Represents a list of tokens in Reverse Polish notation
 class CompiledExpression {
     readonly tokens: Array<Token>;
@@ -68,7 +78,7 @@ class CompiledExpression {
     }
 
     calculate() {
-        const expression = this.tokens;
+        const expression = this.tokens.slice();
 
         while (true) {
             let foundOperator = false;
@@ -98,6 +108,19 @@ class CompiledExpression {
                         new Operand(mathParser.numToStr(result)))
 
                     break;
+                } else if (expression[i] instanceof Operand) {
+                    const value = expression[i].value;
+
+                    if (!isVariable(value)) continue;
+
+                    if (this.constants.has(value)) {
+                        expression.splice(i, 1,
+                            ...mathParser.toPostfixNotation("(" + this.constants.get(value) + ")",
+                                this.constants, this.userFunctions).tokens
+                        )
+                    } else {
+                        throw new Error("Could not find variable \"" + expression[i] + "\"!")
+                    }
                 }
             }
 
@@ -150,19 +173,35 @@ const functions: Map<string, TFunction> = new Map([]);
 }
 
 function isNumber(str: string) {
+    if (str == undefined) {
+        throw new Error("Input string cannot be undefined")
+    }
+
     return /^[-+]?\d+\.*\d*$/.test(str);
 }
 
 function isVariable(str: string) {
+    if (str == undefined) {
+        throw new Error("Input string cannot be undefined!")
+    }
+
     return /^[a-zA-Z]+'*$/.test(str);
 }
 
 function isParentheses(str: string) {
+    if (str == undefined) {
+        throw new Error("Input string cannot be undefined")
+    }
+
     return str.length === 1 && (str[0] === "(" || str[0] === ")")
 }
 
 // todo: support operators longer than 1 character
 function isOperator(str: string) {
+    if (str == undefined) {
+        throw new Error("Input string cannot be undefined")
+    }
+
     return str.length === 1 && operators.has(str);
 }
 
@@ -260,15 +299,10 @@ const mathParser = {
                         } else {
                             throw new Error("Found invalid function " + previous);
                         }
-                    } else if (constants.has(previous)) {
-                        const constant: string = constants.get(previous);
-                        const constantsCopy = new Map(constants);
-                        constantsCopy.delete(constant)
-                        output.push(...this.toTokenArray("(" + constant + ")", constantsCopy, userFunctions));
+                    } else {
+                        output.push(new Operand(previous));
 
                         break;
-                    } else {
-                        throw new Error("Could not find variable \"" + previous + "\"!")
                     }
                 } else if (isOperator(previous) && !isOperator(slice)) {
                     output.push(operators.get(previous));
@@ -427,19 +461,24 @@ const mathParser = {
 //         ["x", "-16"]
 //     ]);
 //
-//     let expression = mathParser.compile("f(x)", constants, userFunctions);
+//     let expression = mathParser.compile("f(x)", constants);
 //
 //     const start = new Date();
 //
 //     for (let i = 0; i < 1001; i++) {
 //         expression.calculate()
 //
-//         constants.set("x", numToStr((parseFloat(constants.get("x")) + 0.032)));
-//         expression = mathParser.compile("f(x)", constants, userFunctions);
+//         constants.set("x", mathParser.numToStr((parseFloat(constants.get("x")) + 0.032)));
+//         expression = mathParser.compile("f(x)", constants);
 //     }
 //
 //     const end = new Date();
 //     console.log(end.getTime() - start.getTime());
 // }
 
-export default mathParser
+const consts = new Map([
+    ["x", "16"]
+])
+console.log(mathParser.compile("sin(x)", consts).calculate());
+
+export default mathParser;
