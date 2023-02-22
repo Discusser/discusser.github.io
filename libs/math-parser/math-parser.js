@@ -60,7 +60,6 @@ class CompiledExpression {
         this.constants = constants;
         this.userFunctions = userFunctions;
     }
-    // todo: only evaluate variables during calculation, not during compiling
     calculate() {
         const expression = this.tokens.slice();
         while (true) {
@@ -96,12 +95,6 @@ class CompiledExpression {
                     else {
                         throw new Error("Could not find variable \"" + expression[i] + "\"!");
                     }
-                    //     const constant: string = constants.get(previous);
-                    //     const constantsCopy = new Map(constants);
-                    //     constantsCopy.delete(constant)
-                    //     output.push(...this.toTokenArray("(" + constant + ")", constantsCopy, userFunctions));
-                    //
-                    //     break;
                 }
             }
             if (!foundOperator)
@@ -417,8 +410,4 @@ const mathParser = {
 //     const end = new Date();
 //     console.log(end.getTime() - start.getTime());
 // }
-const consts = new Map([
-    ["x", "16"]
-]);
-console.log(mathParser.compile("sin(x)", consts).calculate());
 export default mathParser;
