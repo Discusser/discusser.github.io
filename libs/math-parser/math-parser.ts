@@ -476,9 +476,4 @@ const mathParser = {
 //     console.log(end.getTime() - start.getTime());
 // }
 
-const consts = new Map([
-    ["x", "16"]
-])
-console.log(mathParser.compile("sin(x)", consts).calculate());
-
 export default mathParser;
