@@ -44,7 +44,7 @@ class Operand {
 // Represents a list of tokens in Reverse Polish notation
 class CompiledExpression {
     tokens;
-    constants;
+    constants; // todo: only accept Map<string, number>
     userFunctions;
     constructor(tokens, constants, userFunctions) {
         this.tokens = tokens;
@@ -84,6 +84,9 @@ class CompiledExpression {
             throw new Error("Invalid expression! There are too many operands");
         }
         return parseFloat(expression[0].value);
+    }
+    compile() {
+        return mathParser.compile(mathParser.tokensToStr(this.tokens), this.constants, this.userFunctions);
     }
 }
 const parentheses = new Map([

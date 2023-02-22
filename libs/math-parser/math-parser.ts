@@ -58,7 +58,7 @@ class Operand implements Token {
 // Represents a list of tokens in Reverse Polish notation
 class CompiledExpression {
     readonly tokens: Array<Token>;
-    readonly constants: Map<string, string>;
+    readonly constants: Map<string, string>; // todo: only accept Map<string, number>
     readonly userFunctions: Map<string, TFunction>;
 
     constructor(tokens: Array<Token>, constants: Map<string, string>, userFunctions: Map<string, TFunction>) {
@@ -109,6 +109,10 @@ class CompiledExpression {
         }
 
         return parseFloat(expression[0].value);
+    }
+
+    compile() {
+        return mathParser.compile(mathParser.tokensToStr(this.tokens), this.constants, this.userFunctions);
     }
 }
 
@@ -256,8 +260,7 @@ const mathParser = {
                         } else {
                             throw new Error("Found invalid function " + previous);
                         }
-                    }
-                    else if (constants.has(previous)) {
+                    } else if (constants.has(previous)) {
                         const constant: string = constants.get(previous);
                         const constantsCopy = new Map(constants);
                         constantsCopy.delete(constant)
