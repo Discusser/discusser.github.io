@@ -90,10 +90,10 @@ class CompiledExpression {
                     if (!isVariable(value))
                         continue;
                     if (this.constants.has(value)) {
-                        expression.splice(i, 1, ...mathParser.toPostfixNotation("(" + this.constants.get(value) + ")", this.constants, this.userFunctions).tokens);
+                        expression.splice(i, 1, ...mathParser.toPostfixNotation("(" + parseFloat(this.constants.get(value)) + ")", this.constants, this.userFunctions).tokens);
                     }
                     else {
-                        throw new Error("Could not find variable \"" + expression[i] + "\"!");
+                        throw new Error("Could not find variable \"" + value + "\"!");
                     }
                 }
             }
@@ -140,26 +140,26 @@ const functions = new Map([]);
     }
 }
 function isNumber(str) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined");
     }
     return /^[-+]?\d+\.*\d*$/.test(str);
 }
 function isVariable(str) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined!");
     }
     return /^[a-zA-Z]+'*$/.test(str);
 }
 function isParentheses(str) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined");
     }
     return str.length === 1 && (str[0] === "(" || str[0] === ")");
 }
 // todo: support operators longer than 1 character
 function isOperator(str) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined");
     }
     return str.length === 1 && operators.has(str);
@@ -250,7 +250,7 @@ const mathParser = {
                             throw new Error("Found invalid function " + previous);
                         }
                     }
-                    else {
+                    else { // is variable
                         output.push(new Operand(previous));
                         break;
                     }

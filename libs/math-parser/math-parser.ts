@@ -115,11 +115,11 @@ class CompiledExpression {
 
                     if (this.constants.has(value)) {
                         expression.splice(i, 1,
-                            ...mathParser.toPostfixNotation("(" + this.constants.get(value) + ")",
+                            ...mathParser.toPostfixNotation("(" + parseFloat(this.constants.get(value)) + ")",
                                 this.constants, this.userFunctions).tokens
                         )
                     } else {
-                        throw new Error("Could not find variable \"" + expression[i] + "\"!")
+                        throw new Error("Could not find variable \"" + value + "\"!")
                     }
                 }
             }
@@ -173,7 +173,7 @@ const functions: Map<string, TFunction> = new Map([]);
 }
 
 function isNumber(str: string) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined")
     }
 
@@ -181,7 +181,7 @@ function isNumber(str: string) {
 }
 
 function isVariable(str: string) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined!")
     }
 
@@ -189,7 +189,7 @@ function isVariable(str: string) {
 }
 
 function isParentheses(str: string) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined")
     }
 
@@ -198,7 +198,7 @@ function isParentheses(str: string) {
 
 // todo: support operators longer than 1 character
 function isOperator(str: string) {
-    if (str == undefined) {
+    if (str === undefined || str === null) {
         throw new Error("Input string cannot be undefined")
     }
 
@@ -299,7 +299,7 @@ const mathParser = {
                         } else {
                             throw new Error("Found invalid function " + previous);
                         }
-                    } else {
+                    } else { // is variable
                         output.push(new Operand(previous));
 
                         break;
