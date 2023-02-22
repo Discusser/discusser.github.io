@@ -6,10 +6,21 @@ const outputs = document.getElementById("outputs");
 const graph = document.getElementById("graph");
 const functionInput = document.getElementById("function");
 const constantInput = document.getElementById("constant");
+const iterationsInput = document.getElementById("iterations");
+
+const ctx = graph.getContext("2d");
+
+let X_CENTER = graph.width / 2;
+let Y_CENTER = graph.height / 2;
+
+let MARKING_LENGTH = 16;
+let PX_PER_MARKING = 64;
+let UNITS_PER_MARKING = 1;
+let PX_PER_UNIT = PX_PER_MARKING / UNITS_PER_MARKING;
 
 let functionName = "f";
-let functions = new Map();
-let constants = new Map();
+let functions = [];
+let constants = [];
 
 class InputElement {
     /**
@@ -45,10 +56,11 @@ class InputElement {
 }
 
 class Function extends InputElement {
-    constructor(funcName, expression) {
+    constructor(funcName, expression, color) {
         super();
         this.funcName = funcName;
         this.expression = expression;
+        this.color = color;
     }
 
     getKey() {
@@ -57,6 +69,10 @@ class Function extends InputElement {
 
     getFullName() {
         return this.funcName + "(x) = ";
+    }
+
+    getColor() {
+        return this.color;
     }
 
     listAll() {
@@ -88,14 +104,17 @@ function setCssProperties() {
     main.style.height = cssValue(main.parentElement.getBoundingClientRect().height)
         .subtract(cssValue(style(main).padding).multiply(2))
         .toString();
-    data.style.height = cssValue(style(data.parentElement).height)
+    data.style.height = cssValue(style(main).height)
         .subtract(cssValue(style(data).padding).multiply(2))
         .toString();
-    graph.style.width = cssValue(graph.parentElement.getBoundingClientRect().width)
+    graph.style.width = cssValue(style(main).width)
         .subtract(data.getBoundingClientRect().width)
         .subtract(cssValue(style(graph.parentElement).padding)
             .multiply(2))
         .toString();
+    graph.style.height = style(main).height;
+    graph.width = parseFloat(style(graph).width);
+    graph.height = parseFloat(style(graph).height);
 }
 
 function labelForInput(forValue) {
@@ -116,23 +135,35 @@ function nextFunctionName() {
     label.textContent = label.textContent.replace(previous, functionName)
 }
 
+function arrayToMap(arr) {
+    const map = new Map();
+
+    for (let i = 0; i < arr.length; i++) {
+        map.set(arr[i].getKey(), arr[i].expression);
+    }
+
+    return map;
+}
+
 function createOutputElement(inputElement) {
-    const div = document.createElement("div");
     const output = document.createElement("div");
     const expressionSpan = document.createElement("span");
     const editBtn = document.createElement("button");
+    const deleteBtn = document.createElement("button");
     const edit = document.createElement("input");
 
-    output.style.width = "fit-content";
+    const compiled = mathParser.compile(inputElement.expression, arrayToMap(constants), arrayToMap(functions));
+
+    output.style.width = "100%";
     output.textContent = inputElement.getFullName();
     expressionSpan.textContent = inputElement.expression.replace(output.textContent, "");
     editBtn.type = "button";
     editBtn.textContent = "Edit";
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "Delete";
     edit.type = "text";
     edit.value = "";
     edit.style.visibility = "hidden";
-
-    const compiled = math.compile(inputElement.expression);
 
     editBtn.addEventListener("click", () => {
         if (edit.style.visibility === "hidden") {
@@ -140,34 +171,43 @@ function createOutputElement(inputElement) {
             edit.style.visibility = "visible";
             editBtn.textContent = "Submit";
         } else {
-            inputElement.expression = edit.value
+            inputElement.expression = edit.value;
+            expressionSpan.textContent = inputElement.expression;
             edit.style.visibility = "hidden";
             editBtn.textContent = "Edit";
 
-            inputElement.listAll().delete(inputElement.getKey());
-            inputElement.listAll().set(inputElement.getKey(), compiled);
+            inputElement.listAll().splice(inputElement.listAll().indexOf(inputElement), 1, inputElement);
+
+            setupGraph();
         }
     })
 
+    deleteBtn.addEventListener("click", () => {
+        output.remove();
+
+        inputElement.listAll().splice(inputElement.listAll().indexOf(inputElement), 1);
+
+        setupGraph();
+    })
 
     output.append(expressionSpan);
 
     if (!(inputElement instanceof Function) && !/^[-+]?\d*$/.test(inputElement.expression)) {
-        output.innerHTML += " = " + compiled.evaluate(constants);
+        output.innerHTML += " = " + compiled.calculate();
     }
 
-    div.append(output, edit, editBtn);
-    outputs.append(div);
+    output.append(edit, deleteBtn, editBtn)
+    outputs.append(output);
 }
 
 function submitFunctionInput(input) {
-    try {
-        functions.set(functionName, math.compile(input));
-    } catch (e) {
-        return;
-    }
+    const func = new Function(functionName, input,
+        '#'+(0x1000000+Math.random()*0xffffff).toString(16).slice(1,7));
 
-    createOutputElement(new Function(functionName, input))
+    functions.push(func);
+    setupGraph();
+
+    createOutputElement(func)
     nextFunctionName();
 }
 
@@ -175,21 +215,142 @@ function submitConstantInput(input) {
     try {
         const trimmedInput = input.trim();
 
-        if (constants.has(trimmedInput[0])) return;
+        if (constants.includes(trimmedInput[0])) return;
 
         const regex = /[a-zA-Z]\s*=\s*/;
 
         if (trimmedInput.match(regex) == null) return;
 
-        // scope = constants = { a : 6, b : 7 * 6 ... }
         const expression = trimmedInput.replace(regex, "")
-        const evaluated = math.compile(expression).evaluate(constants);
-        createOutputElement(new Constant(trimmedInput[0], expression))
-        constants.set(trimmedInput[0], evaluated);
+        const constant = new Constant(trimmedInput[0], expression);
+        createOutputElement(constant)
+        constants.push(constant);
     } catch (e) {
 
     }
 }
+
+// Converts (2; 3) into useable coordinates
+function toHTMLCoords(x, y) {
+    return {
+        x: x * PX_PER_UNIT + X_CENTER,
+        y: -y * PX_PER_UNIT + Y_CENTER
+    }
+}
+
+// Converts (750; 300) into graph coordinates
+function toGraphCoords(x, y) {
+    return {
+        x: (x - X_CENTER) / PX_PER_UNIT,
+        y: (Y_CENTER - y) / PX_PER_UNIT
+    }
+}
+
+function setupGraph() {
+    X_CENTER = graph.width / 2;
+    Y_CENTER = graph.height / 2;
+
+    ctx.clearRect(0, 0, graph.width, graph.height);
+
+    // x and y axis
+    {
+        ctx.strokeStyle = "gray";
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+
+        // x-axis
+        ctx.moveTo(0, Y_CENTER)
+        ctx.lineTo(graph.width, Y_CENTER);
+
+        // y-axis
+        ctx.moveTo(X_CENTER, 0);
+        ctx.lineTo(X_CENTER, graph.height);
+
+        ctx.stroke();
+    }
+    // markings
+    {
+        ctx.strokeStyle = "white";
+        ctx.fillStyle = "white";
+        ctx.font = "14px Arial";
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+
+        for (let i = -1; i < 2; i += 2) {
+            // x-axis
+            const MARKINGS_X_AXIS = Math.floor(graph.width / PX_PER_MARKING);
+            for (let j = 1; j < MARKINGS_X_AXIS / 2; j++) {
+                const x = X_CENTER + i * j * PX_PER_MARKING;
+                const txt = String(i * j * UNITS_PER_MARKING);
+                const metrics = ctx.measureText(txt);
+                ctx.moveTo(x, Y_CENTER + MARKING_LENGTH / 2);
+                ctx.lineTo(x, Y_CENTER - MARKING_LENGTH / 2);
+                ctx.fillText(txt,
+                    x - metrics.width / 2,
+                    Y_CENTER + MARKING_LENGTH + metrics.actualBoundingBoxAscent
+                );
+            }
+
+            // y-axis
+            const MARKINGS_Y_AXIS = Math.floor(graph.height / PX_PER_MARKING);
+            for (let j = 1; j < MARKINGS_Y_AXIS / 2; j++) {
+                const y = Y_CENTER + i * j * PX_PER_MARKING;
+                const txt = String(-1 * i * j * UNITS_PER_MARKING);
+                const metrics = ctx.measureText(txt);
+                ctx.moveTo(X_CENTER + MARKING_LENGTH / 2, y);
+                ctx.lineTo(X_CENTER - MARKING_LENGTH / 2, y);
+                ctx.fillText(txt,
+                    X_CENTER + MARKING_LENGTH + metrics.actualBoundingBoxLeft,
+                    y + metrics.actualBoundingBoxAscent / 2
+                );
+            }
+        }
+
+        // (0; 0)
+        const metrics = ctx.measureText("0");
+        ctx.fillText("0",
+            X_CENTER + MARKING_LENGTH / 2,
+            Y_CENTER + metrics.actualBoundingBoxAscent + MARKING_LENGTH / 2
+        );
+
+        ctx.stroke();
+    }
+
+    for (let i = 0; i < functions.length; i++) {
+        graphExpression(functions[i], constants, functions, iterationsInput.value);
+    }
+
+    // graphExpression("cos(sinh(x)) - 4", consts, userFunctions, graph.width / 2);
+    // graphExpression("cos(sinh(x)) + 0", consts, userFunctions, graph.width);
+    // graphExpression("cos(sinh(x)) + 4", consts, userFunctions, 4000);
+}
+
+function graphExpression(functionObject, consts, funcs, iterations) {
+    iterations = parseInt(iterations);
+
+    const increment = graph.width / iterations;
+    let compiled = mathParser.compile(functionObject.expression, arrayToMap(consts), arrayToMap(funcs));
+
+    ctx.strokeStyle = functionObject.getColor();
+    ctx.beginPath();
+
+    let x1 = -graph.width / PX_PER_UNIT / 2;
+    compiled.constants.set("x", mathParser.numToStr(x1));
+    ctx.moveTo(0, Y_CENTER);
+
+    for (let i = 0; i < iterations + 1; i++) {
+        const { x, y } = toHTMLCoords(x1, compiled.calculate());
+        ctx.lineTo(x, y);
+
+        x1 = toGraphCoords(toHTMLCoords(x1, 0).x + increment, 0).x;
+        compiled.constants.set("x", mathParser.numToStr(x1));
+    }
+
+    ctx.stroke();
+}
+
 
 document.getElementById("submitFunction").addEventListener("click", () => {
     submitFunctionInput(functionInput.value);
@@ -215,33 +376,19 @@ constantInput.addEventListener("click", ev => {
     }
 })
 
+iterationsInput.addEventListener("input", () => {
+    document.getElementById("iterationsSpan").textContent = iterationsInput.value;
+    setupGraph();
+})
+
 window.addEventListener("resize", () => {
     setCssProperties();
+    setupGraph();
 });
 
 window.addEventListener("load", () => {
     setCssProperties();
+    iterationsInput.value = graph.width;
+    document.getElementById("iterationsSpan").textContent = iterationsInput.value;
+    setupGraph();
 });
-
-{
-    const userFunctions = new Map([
-        ["f", "x^2"]
-    ])
-    const constants = new Map([
-        ["x", "-16"]
-    ]);
-
-    let expression = mathParser.compile("f(x)", constants, userFunctions);
-
-    const start = new Date();
-
-    for (let i = 0; i < 1001; i++) {
-        expression.calculate()
-
-        constants.set("x", numToStr((parseFloat(constants.get("x")) + 0.032)));
-        expression = mathParser.compile("f(x)", constants, userFunctions);
-    }
-
-    const end = new Date();
-    console.log(end.getTime() - start.getTime());
-}
