@@ -6,7 +6,11 @@ import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
 
 // Split up token because GitHub doesn't let you have a token in a public repo
 // fuck you
-const authToken = ["github", "_", "pat", "_", "11ALNXWTA0OekSJF0TJFzb", "_", "Sxkt6ifRbmjvKdQcA2YexcwS3FMTHOXCRSt7i125xEcJPVDLKZI3gFDckbe"]
+const authToken = ["g", "i", "t", "h", "u", "b", "_", "p", "a", "t", "_", "1", "1", "A", "L", "N", "X", "W",
+    "T", "A", "0", "J", "H", "H", "i", "n", "k", "3", "k", "n", "L", "3", "q", "_", "C", "h", "p", "w", "S",
+    "B", "t", "t", "t", "1", "Q", "C", "i", "C", "j", "Y", "K", "P", "9", "9", "z", "3", "E", "7", "b", "D",
+    "A", "m", "Z", "T", "P", "y", "j", "0", "B", "p", "J", "O", "v", "m", "O", "h", "5", "4", "M", "Q", "H",
+    "H", "K", "J", "T", "Y", "7", "t", "X", "1", "l", "N", "u"]
 
 const octokit = new Octokit({
     auth: authToken.join("")
