@@ -5,7 +5,7 @@
 import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
 
 const octokit = new Octokit({
-    auth: "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"
+    auth: "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"
     // Key is public because it can only be used to read contents of public repositories
     // todo: make the key private/encrypted, I don't like the fact that anyone can use it even if it doesn't have any permissions
 });
