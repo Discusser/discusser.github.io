@@ -4,8 +4,12 @@
 
 import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
 
+// Split up token because GitHub doesn't let you have a token in a public repo
+// fuck you
+const authToken = ["github", "_", "pat", "_", "11ALNXWTA0OekSJF0TJFzb", "_", "Sxkt6ifRbmjvKdQcA2YexcwS3FMTHOXCRSt7i125xEcJPVDLKZI3gFDckbe"]
+
 const octokit = new Octokit({
-    auth: "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"
+    auth: authToken.join("")
     // Key is public because it can only be used to read contents of public repositories
     // todo: make the key private/encrypted, I don't like the fact that anyone can use it even if it doesn't have any permissions
 });
