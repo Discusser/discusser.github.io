@@ -36,3 +36,24 @@
     float: right;
     padding-right: 16px;
 }
+
+table {
+    width: 100%;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th, td {
+    border: 1px solid grey;
+    padding: 12px;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #212429;
+}
+
+tr:nth-child(even) {
+    background-color: #191b1f;
+}
