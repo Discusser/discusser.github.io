@@ -5,8 +5,8 @@
 import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
 
 const octokit = new Octokit({
-    contentType: "text/plain",
-    auth: `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` // Key is public because it can only be used to read contents of public repositories
+    auth: "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"
+    // Key is public because it can only be used to read contents of public repositories
     // todo: make the key private/encrypted, I don't like the fact that anyone can use it even if it doesn't have any permissions
 });
 
@@ -58,7 +58,7 @@ let response = null;
 window.addEventListener("load", async () => {
     const queryPath = getQueryString("path");
     if (queryPath !== null) currentPath = decodeURIComponent(queryPath);
-    response = await request(currentPath)
+    response = await request(currentPath);
     displayPage();
 });
 
@@ -67,7 +67,6 @@ function request(path) {
         owner: "Discusser",
         repo: "fileStorage",
         path: path,
-
     })
 }
 
@@ -147,7 +146,7 @@ function displayFile(data) {
     downloadUrl.innerText = "Copy link to clipboard";
     downloadUrl.addEventListener('click', e => {
         e.preventDefault();
-        navigator.clipboard.writeText(download_url)
+        navigator.clipboard.writeText(download_url).catch(reason => alert(reason));
     });
     downloadUrl.classList.add("remove");
     let fileContents = null;
