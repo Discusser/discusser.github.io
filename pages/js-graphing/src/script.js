@@ -204,9 +204,17 @@ function submitFunctionInput(input) {
     const func = new Function(functionName, input,
         '#'+(0x1000000+Math.random()*0xffffff).toString(16).slice(1,7));
 
+    try {
+        const compiled = mathParser.compile(func.expression, arrayToMap(constants), arrayToMap(functions));
+        compiled.constants.set("x", 1)
+        compiled.calculate();
+    } catch (e) {
+        alert(e);
+        return;
+    }
+
     functions.push(func);
     setupGraph();
-
     createOutputElement(func)
     nextFunctionName();
 }
@@ -341,10 +349,16 @@ function graphExpression(functionObject, consts, funcs, iterations) {
     ctx.moveTo(0, Y_CENTER);
 
     for (let i = 0; i < iterations + 1; i++) {
-        const { x, y } = toHTMLCoords(x1, compiled.calculate());
-        ctx.lineTo(x, y);
+        const result = compiled.calculate();
+        if (!Number.isNaN(result)) {
+            const { x, y } = toHTMLCoords(x1, result);
+            ctx.lineTo(x, y);
+        } else {
+            ctx.moveTo(toHTMLCoords(x1).x, Y_CENTER);
+        }
 
-        x1 = toGraphCoords(toHTMLCoords(x1, 0).x + increment, 0).x;
+        x1 = toGraphCoords(toHTMLCoords(x1).x + increment).x;
+
         compiled.constants.set("x", mathParser.numToStr(x1));
     }
 
