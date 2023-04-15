@@ -230,9 +230,8 @@ function submitConstantInput(input) {
         if (trimmedInput.match(regex) == null) return;
 
         const expression = trimmedInput.replace(regex, "")
-        const constant = new Constant(trimmedInput[0], expression);
-        createOutputElement(constant)
-        constants.push(constant);
+        createOutputElement(new Constant(trimmedInput[0], expression))
+        constants.push(new Constant(trimmedInput[0], mathParser.compile(expression, arrayToMap(constants), arrayToMap(functions)).calculate()));
     } catch (e) {
 
     }
