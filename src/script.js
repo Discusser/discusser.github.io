@@ -12,7 +12,7 @@ function toggleDebugMode() {
 }
 
 function updateTime() {
-    document.getElementById("timeH1").textContent = getTime();
+    document.getElementById("time").textContent = getTime();
 }
 
 updateTime(); setInterval(updateTime, 1000);

@@ -1,7 +1,65 @@
 body {
     background-color: #131417;
-    font-size: 18px;
+    font-size: 22px;
     margin: 8px 8px 8px 8px;
     color: #FFFFFF;
     font-family: Arial, serif;
+}
+
+header {
+    margin: 0 16px 0 16px;
+    display: flex;
+}
+
+.text {
+    width: 60%;
+    margin: auto;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.imageContainer > * {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+
+.imageContainer > a {
+    margin: 0 16px 0 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.imageContainer > a > img,
+.imageContainer > a > video,
+.imageContainer > img,
+.imageContainer > video {
+    width: 100%;
+    min-width: 0;
+    margin: auto;
+}
+
+.animatedAnchor {
+    position: relative;
+}
+
+.animatedAnchor:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    top: 125%;
+    background-color: #FFFFFF;
+    transition: width 0.5s;
+}
+
+.animatedAnchor:hover:before {
+    width: 100%;
 }

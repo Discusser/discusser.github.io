@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>GitHub Pages</title>
+        <link rel="stylesheet" href="/global/src/style.css"/>
+        <link rel="stylesheet" href="../style.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>Discusser's Website - Programming</h1>
+            <h1 id="time"></h1>
+        </header>
+        <hr>
+        <div class="text">
+            <h2>Why programming?</h2>
+            <p>It can be fun at times but challenging other times. However, the end goal is always satisfying. Seeing the results of the code
+                I wrote is what motivates me.</p>
+            <p>A lot of times you want to give up because you get stuck on a little thing, but you can always try again. Additionally,
+                there are many places like <a href="https://stackoverflow.com/">StackOverflow</a> that help with most if not all of your
+                errors.</p>
+            <h2>Languages</h2>
+            <p>Here are the programming languages I know ranked by level of proficiency:</p>
+            <ol>
+                <li>Java (turned out to be quite useless)</li>
+                <li>JavaScript (and HTML + CSS)</li>
+                <li>Python</li>
+                <li>Bash (enough to make simple scripts)</li>
+                <li>CPP (currently learning)</li>
+            </ol>
+            <h2>My projects</h2>
+            <p>Surprisingly, I don't have that many impressive or useful projects because I never have ideas, so don't expect to be shocked.</p>
+            <h3><a href="/pages/js-graphing">Rudimentary graphing calculator</a></h3>
+            <div class="imageContainer">
+                <img src="/uploads/graphing_calculator.png" alt="Graphing Calculator"/>
+            </div>
+            <p>I didn't want to spend too much time on this project because my goal wasn't to make a fully functioning graphing calculator.
+                Instead, I basically just made a graphing, without the calculator.</p>
+            <p>The hardest part of this project was actually making something that could parse strings into mathematical expressions and
+                calculate them. The second-hardest part was making the page look half decent.</p>
+            <h3><a href="/pages/files">File hosting via GitHub</a></h3>
+            <div class="imageContainer">
+                <img src="/uploads/file_browser.png" alt="File Browser"/>
+            </div>
+            <p>While this might sound stupid at first (and will probably sound more stupid once I explain it), this isn't what you think it
+                is.</p>
+            <p>One day I opened my <a href="https://getsharex.com/">ShareX</a> screenshots folder, only to see that it had grown to multiple
+                gigabytes in size. This was unacceptable for me and I decided I wanted to host my pictures externally. Not wanting to spend
+                money, I got the idea to use GitHub to store my images.</p>
+            <p>Now, whenever I record something or take a screenshot using ShareX, a python script runs and uploads the image or video to
+                GitHub. In order to not have to log in every time I wanted to upload something, I simply set up an SSH key on my computer
+                that keeps me logged in at all times.</p>
+            <p>For convenience, I created a (badly made) file browser that lets me browse that repository. To access repositories on GitHub
+                without going through the website, you need to make a token. Fortunately, you can configure token permissions, so don't even
+                try doing anything with it.</p>
+            <h2>Other projects</h2>
+            <p><a href="/pages/ball-game">Ball game</a> - A simple game with a bouncing ball</p>
+            <p><a href="/pages/minecraft-sound-extractor">Minecraft sound extractor</a> - A python script to extract sound files from a
+                Minecraft jar file</p>
+            <p><a href="/pages/turbo-boost">Turbo/frequency boost bash script</a> - A bash script to automatically enable CPU frequency
+                boosting</p>
+            <p><a href="https://github.com/Discusser/JsonVM">JsonVM</a> - A joke project to convert JSON into Java code</p>
+            <p><a href="https://github.com/Discusser?tab=repositories">My GitHub</a> - Check out my GitHub profile for more</p>
+        </div>
+
+        <script src="/global/src/script.js"></script>
+        <script src="../script.js"></script>
+    </body>
+</html>
