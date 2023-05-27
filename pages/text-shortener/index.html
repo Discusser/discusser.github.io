@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/global/src/style.css"/>
+        <link rel="stylesheet" href="src/style.css"/>
+        <title>Text shortener</title>
+    </head>
+    <body>
+        <div id="ui">
+            <div id="inputs">
+                <label for="text_input">Input text</label>
+                <textarea id="text_input" spellcheck="false"></textarea>
+
+                <label for="text_output">Output text</label>
+                <textarea id="text_output" readonly></textarea>
+
+                <label for="case_sensitive">Case sensitive</label>
+                <input type="checkbox" id="case_sensitive" checked/>
+
+                <label for="text_size">Text size</label>
+                <input type="number" id="text_size" min="2" max="64" value="24"/>
+            </div>
+            <hr>
+            <div id="information">
+                <p>Characters shortened</p>
+                <span id="characters_shortened">0</span>
+
+                <p>Characters not modified</p>
+                <span id="characters_not_modified">0</span>
+
+                <p>Starting length</p>
+                <span id="starting_length">0</span>
+
+                <p>Final length</p>
+                <span id="final_length">0</span>
+
+            </div>
+        </div>
+
+        <script src="src/script.js"></script>
+    </body>
+</html>
