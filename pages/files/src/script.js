@@ -2,7 +2,7 @@
 // thank you
 
 
-import {Octokit} from "https://cdn.skypack.dev/@octokit/core";
+import {Octokit} from "https://esm.sh/octokit";
 
 // Split up token because GitHub doesn't let you have a token in a public repo
 // fuck you
