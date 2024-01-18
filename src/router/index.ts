@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHistory,
+  createWebHashHistory,
   type RouteComponent,
   type RouteRecordRaw,
 } from "vue-router";
@@ -50,7 +50,7 @@ function createSingleViewRoute({
 }
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(),
   routes: [
     createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
     createSingleViewRoute({ path: "/programming" }),
@@ -62,6 +62,8 @@ const router = createRouter({
     createSingleViewRoute({ path: "/hobbies/blender" }),
     createSingleViewRoute({ path: "/hobbies/workout" }),
     createSingleViewRoute({ path: "/contact" }),
+    // // will match everything and put it under `$route.params.pathMatch`
+    // { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   ],
 });
 
