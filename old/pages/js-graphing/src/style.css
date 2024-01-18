@@ -1,0 +1,51 @@
+#data {
+    display: inline;
+    float: left;
+    width: 20%;
+    outline: 1px solid white;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    padding: 4px;
+}
+
+#graph {
+    display: inline;
+    float: right;
+    height: 100%;
+    outline: 1px solid white;
+}
+
+#main {
+    padding: 8px;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+#outputs {
+
+}
+
+#outputs > div {
+    padding: 8px 4px 8px 4px;
+    outline: 2px solid gray;
+    overflow-y: scroll;
+}
+
+#outputs > div > p {
+    display: inline;
+    margin: 0;
+}
+
+#outputs > div > button {
+    display: inline;
+    visibility: hidden;
+    float: right;
+    margin-right: 4px;
+}
+
+#outputs > div:hover > button {
+    visibility: visible;
+}

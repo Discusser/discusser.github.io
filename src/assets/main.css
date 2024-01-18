@@ -1,0 +1,65 @@
+@import './base.css';
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+#app {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 16px 8rem;
+  min-height: 100vh;
+}
+
+nav {
+  display: flex;
+
+  background-color: var(--vt-c-black-mute);
+  padding: 4px;
+}
+
+a {
+  text-decoration: none;
+  padding: 3px;
+  transition: background-color 0.4s;
+
+  color: var(--color-url);
+}
+
+h1 {
+  @apply text-2xl;
+}
+
+h1, h2, h3 {
+  @apply font-bold;
+  color: var(--color-heading);
+
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+code, pre {
+  padding: 2px;
+  background-color: var(--color-background-mute);
+}
+
+.router-link-exact-active {
+  @apply font-extrabold;
+}
+
+.border-color {
+  border-color: var(--color-border);
+  transition: border-color 0.5s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: var(--color-url-hover);
+  }
+
+  .border-color:hover {
+    border-color: var(--color-border-hover);
+  }
+}
