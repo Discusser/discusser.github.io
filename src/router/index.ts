@@ -1,6 +1,6 @@
 import {
   createRouter,
-  createWebHashHistory,
+  createWebHistory,
   type RouteComponent,
   type RouteRecordRaw,
 } from "vue-router";
@@ -50,7 +50,7 @@ function createSingleViewRoute({
 }
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
     createSingleViewRoute({ path: "/programming" }),
