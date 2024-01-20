@@ -41,15 +41,42 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
-    createSingleViewRoute({ path: "/programming", component: () => import("@/views/ProgrammingView.vue") }),
-    createSingleViewRoute({ path: "/programming/cpp", component: () => import("@/views/programming/CppView.vue") }),
-    createSingleViewRoute({ path: "/programming/mobile", component: () => import("@/views/programming/MobileView.vue") }),
-    createSingleViewRoute({ path: "/programming/python", component: () => import("@/views/programming/PythonView.vue") }),
-    createSingleViewRoute({ path: "/programming/web", component: () => import("@/views/programming/WebView.vue") }),
-    createSingleViewRoute({ path: "/hobbies", component: () => import("@/views/HobbiesView.vue") }),
-    createSingleViewRoute({ path: "/hobbies/blender", component: () => import("@/views/hobbies/BlenderView.vue") }),
-    createSingleViewRoute({ path: "/hobbies/workout", component: () => import("@/views/hobbies/WorkoutView.vue") }),
-    createSingleViewRoute({ path: "/contact", component: () => import("@/views/ContactView.vue") }),
+    createSingleViewRoute({
+      path: "/programming",
+      component: () => import("@/views/ProgrammingView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/programming/cpp",
+      component: () => import("@/views/programming/CppView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/programming/mobile",
+      component: () => import("@/views/programming/MobileView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/programming/python",
+      component: () => import("@/views/programming/PythonView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/programming/web",
+      component: () => import("@/views/programming/WebView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/hobbies",
+      component: () => import("@/views/HobbiesView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/hobbies/blender",
+      component: () => import("@/views/hobbies/BlenderView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/hobbies/workout",
+      component: () => import("@/views/hobbies/WorkoutView.vue"),
+    }),
+    createSingleViewRoute({
+      path: "/contact",
+      component: () => import("@/views/ContactView.vue"),
+    }),
   ],
 });
 
