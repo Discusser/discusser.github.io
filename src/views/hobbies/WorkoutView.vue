@@ -4,7 +4,7 @@ import LinkableHeader from '../../components/LinkableHeader.vue';
 
 <template>
   <div>
-    <LinkableHeader><h1>Hobbies/Workout</h1></LinkableHeader>
+    <LinkableHeader id="hobbies-workout"><h1>Hobbies/Workout</h1></LinkableHeader>
     <p>If you come back another time, maybe there will be more text...</p>
   </div>
 </template>

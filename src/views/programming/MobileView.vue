@@ -5,10 +5,10 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
 
 <template>
   <div>
-    <LinkableHeader><h1>Programming/Mobile</h1></LinkableHeader>
+    <LinkableHeader id="programming-mobile"><h1>Programming/Mobile</h1></LinkableHeader>
     <p>Mobile development is quite a foreign subject for me, mainly because I do all my programming on my computer, therefore it would make sense for all my projects to be made for computers. Thanks to an android emulator and <a href="https://flutter.dev/">Flutter</a>, I was able to build an application made for mobile phones. For the moment, this is my only experience in mobile development and I probably won't do it again.</p>
-    <LinkableHeader><h2>Projects</h2></LinkableHeader>
-    <LinkableHeader><h3>Workout App</h3></LinkableHeader>
+    <LinkableHeader id="projects"><h2>Projects</h2></LinkableHeader>
+    <LinkableHeader id="workout-app"><h3>Workout App</h3></LinkableHeader>
     <ProjectPreview
       project-url="https://github.com/Discusser/workout_app"
       :tags="['programming/mobile']"

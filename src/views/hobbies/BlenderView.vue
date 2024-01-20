@@ -5,10 +5,10 @@ import ProjectPreview from '../../components/ProjectPreview.vue';
 
 <template>
   <div>
-    <LinkableHeader><h1>Hobbies/Blender</h1></LinkableHeader>
+    <LinkableHeader id="hobbies-blender"><h1>Hobbies/Blender</h1></LinkableHeader>
     <p>A while back, I learned to model on Blender just for the sake of it. I'm not an artist but I still managed to get familiar with Blender. I made a few basic projects that deserve to be displayed on this page.</p>
-    <LinkableHeader><h2>Projects</h2></LinkableHeader>
-    <LinkableHeader><h3>Donut</h3></LinkableHeader>
+    <LinkableHeader id="projects"><h2>Projects</h2></LinkableHeader>
+    <LinkableHeader id="donut"><h3>Donut</h3></LinkableHeader>
     <ProjectPreview :tags="['hobbies/blender']">
       <template #preview-content>
         <video autoplay loop muted>

@@ -5,7 +5,7 @@ import ProjectPreview from "../components/ProjectPreview.vue";
 
 <template>
   <div>
-    <LinkableHeader><h1>Programming</h1></LinkableHeader>
+    <LinkableHeader id="programming"><h1>Programming</h1></LinkableHeader>
     <p>
       I started programming many years ago, when I was still a kid, with
       JavaScript and Python. It took me a while to make programming a habit and
@@ -17,8 +17,8 @@ import ProjectPreview from "../components/ProjectPreview.vue";
       the Harvard CS50 course. I also have some basic knowledge in Rust, Lua,
       Bash, and a few other negligible languages.
     </p>
-    <LinkableHeader><h2>Notable projects</h2></LinkableHeader>
-    <LinkableHeader><h3>Workout App</h3></LinkableHeader>
+    <LinkableHeader id="notable-projects"><h2>Notable projects</h2></LinkableHeader>
+    <LinkableHeader id="workout-app"><h3>Workout App</h3></LinkableHeader>
     <ProjectPreview project-url="https://github.com/Discusser/workout_app" :tags="['programming/mobile']">
       <template #preview-content>
         <iframe
@@ -49,7 +49,7 @@ import ProjectPreview from "../components/ProjectPreview.vue";
         </p>
       </template>
     </ProjectPreview>
-    <LinkableHeader><h3>Math Parser</h3></LinkableHeader>
+    <LinkableHeader id="math-parser"><h3>Math Parser</h3></LinkableHeader>
     <ProjectPreview projectUrl="https://github.com/Discusser/math-parser" :tags="['programming/web']">
       <template #preview-content>
         <img src="/media/graphing_calculator.png" alt="Graphing calculator" />
@@ -75,7 +75,7 @@ import ProjectPreview from "../components/ProjectPreview.vue";
         </p></template
       >
     </ProjectPreview>
-    <LinkableHeader><h3>SxhkdRofi</h3></LinkableHeader>
+    <LinkableHeader id="sxhkdrofi"><h3>SxhkdRofi</h3></LinkableHeader>
     <ProjectPreview projectUrl="https://github.com/Discusser/SxhkdRofi" :tags="['programming/cpp']">
       <template #preview-content>
         <img src="/media/sxhkdrofi.png" alt="SxhkdRofi" />

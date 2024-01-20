@@ -1,1 +1,0 @@
-import{d as t,o,c as a,a as s,w as n,_ as c,b as e}from"./index-jNjhh533.js";const r=e("h1",null,"Hobbies/Workout",-1),_=e("p",null,"If you come back another time, maybe there will be more text...",-1),d=t({__name:"WorkoutView",setup(l){return(i,u)=>(o(),a("div",null,[s(c,null,{default:n(()=>[r]),_:1}),_]))}});export{d as default};

@@ -5,7 +5,7 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
 
 <template>
   <div>
-    <LinkableHeader><h1>Programming/Python</h1></LinkableHeader>
+    <LinkableHeader id="programming-python"><h1>Programming/Python</h1></LinkableHeader>
     <p>
       As you may know, Python is great as a scripting language, meaning you
       should avoid having projects made entirely in Python. I've made a few
@@ -15,8 +15,8 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
       important project scraped images from a URL and create a video out of
       them, though I've unfortunately lost the source code to it.
     </p>
-    <LinkableHeader><h2>Projects</h2></LinkableHeader>
-    <LinkableHeader><h3>Bouncing Squares</h3></LinkableHeader>
+    <LinkableHeader id="projects"><h2>Projects</h2></LinkableHeader>
+    <LinkableHeader id="bouncing-squares"><h3>Bouncing Squares</h3></LinkableHeader>
     <ProjectPreview :tags="['programming/python']">
       <template #preview-content> 
         <video controls class="aspect-video">

@@ -5,7 +5,9 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
 
 <template>
   <div>
-    <LinkableHeader><h1>Programming/CPP</h1></LinkableHeader>
+    <LinkableHeader id="programming-cpp"
+      ><h1>Programming/CPP</h1></LinkableHeader
+    >
     <p>
       I haven't made a major project with C++ yet, but I do have two publicly
       available projects. You can take a look at
@@ -14,8 +16,8 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
       to know how they worked.
     </p>
   </div>
-  <LinkableHeader><h2>Projects</h2></LinkableHeader>
-  <LinkableHeader><h3>PasswordManager</h3></LinkableHeader>
+  <LinkableHeader id="projects"><h2>Projects</h2></LinkableHeader>
+  <LinkableHeader id="passwordmanager"><h3>PasswordManager</h3></LinkableHeader>
   <ProjectPreview
     project-url="https://github.com/Discusser/PasswordManager"
     :tags="['programming/cpp']"
@@ -40,14 +42,14 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
       </p>
     </template>
   </ProjectPreview>
-  <LinkableHeader><h3>BookAPI</h3></LinkableHeader>
+  <LinkableHeader id="bookapi"><h3>BookAPI</h3></LinkableHeader>
   <ProjectPreview :tags="['programming/cpp']">
     <template #preview-content>
       <video controls>
         <source src="/media/bookapi.mp4" />
       </video>
     </template>
-    <template #preview-content-text> 
+    <template #preview-content-text>
       A video demonstrating the features of the application
     </template>
     <template #description>
@@ -58,7 +60,13 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
         complicated, I did it with
         <a href="https://developers.google.com/books/docs/overview"
           >Google's Book API</a
-        >. This project was an opportunity for me to learn about GTK and GLib, libraries which are commonly used on Linux. I also got to learn a lot about build systems in C++, first with CMake, then with Meson, which is more adapted to gnome projects. Unfortunately I don't plan on publishing this application's source code because it's not very well written and also has a few memory leaks, because I dealt with C libraries, which I never bothered fixing.
+        >. This project was an opportunity for me to learn about GTK and GLib,
+        libraries which are commonly used on Linux. I also got to learn a lot
+        about build systems in C++, first with CMake, then with Meson, which is
+        more adapted to gnome projects. Unfortunately I don't plan on publishing
+        this application's source code because it's not very well written and
+        also has a few memory leaks, because I dealt with C libraries, which I
+        never bothered fixing.
       </p>
     </template>
   </ProjectPreview>
