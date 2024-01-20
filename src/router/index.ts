@@ -62,6 +62,7 @@ const router = createRouter({
     createSingleViewRoute({ path: "/hobbies/blender" }),
     createSingleViewRoute({ path: "/hobbies/workout" }),
     createSingleViewRoute({ path: "/contact" }),
+    { path: "/:catchAll(.*)", redirect: "/" }
   ],
 });
 
