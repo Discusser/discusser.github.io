@@ -52,17 +52,16 @@ function createSingleViewRoute({
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    createSingleViewRoute({ path: "/pages/", component: HomeView, name: "home" }),
-    createSingleViewRoute({ path: "/pages/programming" }),
-    createSingleViewRoute({ path: "/pages/programming/cpp" }),
-    createSingleViewRoute({ path: "/pages/programming/mobile" }),
-    createSingleViewRoute({ path: "/pages/programming/python" }),
-    createSingleViewRoute({ path: "/pages/programming/web" }),
-    createSingleViewRoute({ path: "/pages/hobbies" }),
-    createSingleViewRoute({ path: "/pages/hobbies/blender" }),
-    createSingleViewRoute({ path: "/pages/hobbies/workout" }),
-    createSingleViewRoute({ path: "/pages/contact" }),
-    // { path: "/:catchAll(.*)", redirect: "/" }
+    createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
+    createSingleViewRoute({ path: "/programming" }),
+    createSingleViewRoute({ path: "/programming/cpp" }),
+    createSingleViewRoute({ path: "/programming/mobile" }),
+    createSingleViewRoute({ path: "/programming/python" }),
+    createSingleViewRoute({ path: "/programming/web" }),
+    createSingleViewRoute({ path: "/hobbies" }),
+    createSingleViewRoute({ path: "/hobbies/blender" }),
+    createSingleViewRoute({ path: "/hobbies/workout" }),
+    createSingleViewRoute({ path: "/contact" }),
   ],
 });
 
