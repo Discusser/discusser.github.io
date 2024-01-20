@@ -19,26 +19,14 @@ function createSingleViewRoute({
   children,
 }: {
   path: string;
-  component?: RouteComponent | (() => Promise<RouteComponent>);
+  component: RouteComponent | (() => Promise<RouteComponent>);
   name?: string;
   children?: RouteRecordRaw[];
 }): RouteRecordRaw {
   const split = path.split("/");
-  let filename = "";
 
   if (name === undefined) {
     name = split[split.length - 1];
-  }
-
-  if (split.length > 1) {
-    filename += split.slice(0, split.length - 1).join("/");
-  }
-  filename += "/" + createFilenameFromRouteName(name);
-
-  if (component === undefined) {
-    // Note: Vite doesn't like dynamic imports because it can't inject the rollup bundle or whatever, but I don't really care, this is much simpler.
-    /* @vite-ignore */
-    component = () => import("../views/" + filename);
   }
 
   return {
@@ -55,13 +43,13 @@ const router = createRouter({
     createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
     createSingleViewRoute({ path: "/programming", component: () => import("@/views/ProgrammingView.vue") }),
     createSingleViewRoute({ path: "/programming/cpp", component: () => import("@/views/programming/CppView.vue") }),
-    createSingleViewRoute({ path: "/programming/mobile" }),
-    createSingleViewRoute({ path: "/programming/python" }),
-    createSingleViewRoute({ path: "/programming/web" }),
-    createSingleViewRoute({ path: "/hobbies" }),
-    createSingleViewRoute({ path: "/hobbies/blender" }),
-    createSingleViewRoute({ path: "/hobbies/workout" }),
-    createSingleViewRoute({ path: "/contact" }),
+    createSingleViewRoute({ path: "/programming/mobile", component: () => import("@/views/programming/MobileView.vue") }),
+    createSingleViewRoute({ path: "/programming/python", component: () => import("@/views/programming/PythonView.vue") }),
+    createSingleViewRoute({ path: "/programming/web", component: () => import("@/views/programming/WebView.vue") }),
+    createSingleViewRoute({ path: "/hobbies", component: () => import("@/views/HobbiesView.vue") }),
+    createSingleViewRoute({ path: "/hobbies/blender", component: () => import("@/views/hobbies/BlenderView.vue") }),
+    createSingleViewRoute({ path: "/hobbies/workout", component: () => import("@/views/hobbies/WorkoutView.vue") }),
+    createSingleViewRoute({ path: "/contact", component: () => import("@/views/ContactView.vue") }),
   ],
 });
 
