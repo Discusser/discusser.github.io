@@ -1,6 +1,5 @@
 import {
   createRouter,
-  createWebHashHistory,
   createWebHistory,
   type RouteComponent,
   type RouteRecordRaw,
@@ -51,8 +50,7 @@ function createSingleViewRoute({
 }
 
 const router = createRouter({
-  // history: createWebHistory(import.meta.env.BASE_URL),
-  history: createWebHashHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
     createSingleViewRoute({ path: "/programming" }),
