@@ -53,8 +53,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     createSingleViewRoute({ path: "/", component: HomeView, name: "home" }),
-    createSingleViewRoute({ path: "/programming" }),
-    createSingleViewRoute({ path: "/programming/cpp" }),
+    createSingleViewRoute({ path: "/programming", component: () => import("@/views/ProgrammingView.vue") }),
+    createSingleViewRoute({ path: "/programming/cpp", component: () => import("@/views/programming/CppView.vue") }),
     createSingleViewRoute({ path: "/programming/mobile" }),
     createSingleViewRoute({ path: "/programming/python" }),
     createSingleViewRoute({ path: "/programming/web" }),
