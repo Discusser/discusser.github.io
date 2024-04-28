@@ -18,7 +18,7 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
       </template>
       <template #preview-content-text>An example of what can be created with this program</template>
       <template #description
-        ><p>You can try this project <a href="/projects/epicycles/">here</a>.</p>
+        ><p>You can try this project <a href="/assets/projects/epicycles/">here</a>.</p>
         <p>
           I got the idea of making this after seeing
           <a href="https://en.wikipedia.org/wiki/Johannes_Kepler">Kepler</a>'s explanation of orbits with
