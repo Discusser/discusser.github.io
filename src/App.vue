@@ -9,11 +9,9 @@ import hljs from "highlight.js";
 
 watch(useRoute(), () => {
   nextTick(() => {
-    document
-      .querySelectorAll("pre code:not([data-highlighted])")
-      .forEach((elem) => {
-        hljs.highlightElement(elem as HTMLElement);
-      });
+    document.querySelectorAll("pre code:not([data-highlighted])").forEach((elem) => {
+      hljs.highlightElement(elem as HTMLElement);
+    });
   });
 });
 </script>
@@ -30,5 +28,3 @@ watch(useRoute(), () => {
     </div>
   </main>
 </template>
-
-<style scoped></style>

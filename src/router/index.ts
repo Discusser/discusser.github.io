@@ -6,12 +6,6 @@ import {
 } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
-function createFilenameFromRouteName(name: string) {
-  return (
-    name.charAt(0).toUpperCase() + name.substring(1).toLowerCase() + "View.vue"
-  );
-}
-
 function createSingleViewRoute({
   path,
   component,

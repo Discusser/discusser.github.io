@@ -8,7 +8,7 @@
           <li><RouterLink to="/programming/cpp">C++</RouterLink></li>
           <li><RouterLink to="/programming/mobile">Mobile</RouterLink></li>
           <li><RouterLink to="/programming/python">Python</RouterLink></li>
-          <li><RouterLink to="/programming/web">Web</RouterLink></li>
+          <li><RouterLink to="/programming/web">Web/JS</RouterLink></li>
         </ul>
       </li>
       <li>
