@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+}
+
+#canvas-container {
+  margin-top: 16px;
+  border: 2px solid black;
+  width: fit-content;
+  height: fit-content;
+}
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 2rem;
+}
+
+.option-with-label {
+  display: flex;
+  gap: 1rem;
+}
+
