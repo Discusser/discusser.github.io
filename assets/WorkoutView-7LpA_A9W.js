@@ -1,1 +1,0 @@
-import{d as o,o as t,c as a,a as s,w as n,_ as r,b as e}from"./index-c5Aa2imk.js";const c=e("h1",null,"Hobbies/Workout",-1),_=e("p",null,"If you come back another time, maybe there will be more text...",-1),d=o({__name:"WorkoutView",setup(i){return(l,u)=>(t(),a("div",null,[s(r,{id:"hobbies-workout"},{default:n(()=>[c]),_:1}),_]))}});export{d as default};
