@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" -- && cp dist/index.html dist/404.html && cp -r projects/ dist/",
+    "build": "run-p type-check \"build-only {@}\" -- && cp dist/index.html dist/404.html && cp -r projects/ dist/ && rm -r dist/projects/**/node_modules",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
