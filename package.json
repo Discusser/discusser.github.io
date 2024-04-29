@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" -- && cp dist/index.html dist/404.html",
+    "build": "run-p type-check \"build-only {@}\" -- && cp dist/index.html dist/404.html && cp -r projects/ dist/",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --cname discusser.is-a.dev"
   },
   "dependencies": {
     "highlight.js": "^11.9.0",
