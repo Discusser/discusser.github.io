@@ -20,7 +20,9 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
       </template>
       <template #preview-content-text>An example of what can be created with this program</template>
       <template #description
-        ><p>You can try this project <a href="/projects/epicycles/">here</a>.</p>
+        ><p>
+          <strong>You can try this project <a href="/projects/epicycles/">here</a>.</strong>
+        </p>
         <p>
           I got the idea of making this after seeing
           <a href="https://en.wikipedia.org/wiki/Johannes_Kepler">Kepler</a>'s explanation of orbits with
@@ -32,6 +34,24 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
           uses epicycles aswell, but in a more coordinated and calculated manner.
         </p></template
       >
+    </ProjectPreview>
+    <ProjectPreview :tags="['programming/web']">
+      <template #preview-content>
+        <video controls>
+          <source src="/media/game_of_life.mp4" />
+        </video>
+      </template>
+      <template #preview-content-text>An example of what can be done in the game of life</template>
+      <template #description>
+        <p>
+          <strong>You can try this project <a href="/projects/game-of-life/">here</a>.</strong>
+        </p>
+        <p>
+          This project is based off
+          <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>. I ddecided to make
+          it because it's really cool, and you get very nice patterns after a bit of trial and error. That's about it.
+        </p>
+      </template>
     </ProjectPreview>
   </div>
 </template>
