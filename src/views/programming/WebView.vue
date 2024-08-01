@@ -5,22 +5,28 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
 
 <template>
   <div>
-    <LinkableHeader id="programming-web"><h1>Programming/Web</h1></LinkableHeader>
+    <LinkableHeader id="programming-web">
+      <h1>Programming/Web</h1>
+    </LinkableHeader>
     <p>
       I'm not really into web development. The website you're currently on is probably the best thing I've made if we
       don't count projects that rely very heavily on JavaScript. At the moment of writing this, I am following a course
       called <a href="https://www.theodinproject.com/">The Odin Project</a>. I keep track of all my progress on GitHub,
       you can check out my page for that course <a href="https://discusser.is-a.dev/TheOdinProject/">here</a>
     </p>
-    <LinkableHeader id="projects"><h2>Projects</h2></LinkableHeader>
-    <LinkableHeader id="epicycles"><h3>Epicycles</h3></LinkableHeader>
+    <LinkableHeader id="projects">
+      <h2>Projects</h2>
+    </LinkableHeader>
+    <LinkableHeader id="epicycles">
+      <h3>Epicycles</h3>
+    </LinkableHeader>
     <ProjectPreview :tags="['programming/web']">
       <template #preview-content>
         <img src="/media/epicycles.png" alt="Epicycles" />
       </template>
       <template #preview-content-text>An example of what can be created with this program</template>
-      <template #description
-        ><p>
+      <template #description>
+        <p>
           <strong>You can try this project <a href="/projects/epicycles/">here</a>.</strong>
         </p>
         <p>
@@ -32,9 +38,12 @@ import ProjectPreview from "@/components/ProjectPreview.vue";
           add more and more circles. If you played around with the program a bit, you might notice that the concept is
           similar to drawing with <a href="https://en.wikipedia.org/wiki/Fourier_series">Fourier series</a>, as that
           uses epicycles aswell, but in a more coordinated and calculated manner.
-        </p></template
-      >
+        </p>
+      </template>
     </ProjectPreview>
+    <LinkableHeader id="game-of-life">
+      <h3>Game of Life</h3>
+    </LinkableHeader>
     <ProjectPreview :tags="['programming/web']">
       <template #preview-content>
         <video controls>
