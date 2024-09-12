@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Epicycles</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="src/style.css" rel="stylesheet" />
+    <script src="src/script.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Épicycle de Kepler</h1>
+    <div id="controls">
+      <div>
+        <input type="button" value="Start" id="inputStart" aria-label="start-animation" />
+        <input type="button" value="Stop" id="inputStop" aria-label="stop-animation" />
+        <input type="button" value="Clear" id="inputClear" aria-label="clear-animation" />
+        <input type="button" value="Add circle" id="inputAddCircle" aria-label="add-circle" />
+        <input type="button" value="Remove circle" id="inputRemoveCircle" aria-label="remove-circle" />
+        <input type="button" value="Randomize values" id="inputRandomizeValues" aria-label="randomize-values" />
+        <input type="button" value="Fullscreen" id="inputFullscreen" aria-label="fullscreen-canvas" />
+      </div>
+      <div id="animation-options"></div>
+    </div>
+    <div id="canvas-container">
+      <canvas width="768" height="768" id="canvas"></canvas>
+    </div>
+  </body>
+</html>

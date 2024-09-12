@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script/index.js" defer></script>
+    <title>Game of Life</title>
+  </head>
+  <body>
+    <canvas class="game-container" width="1024" height="800"></canvas>
+    <div class="extra-container">
+      <div>
+        <div class="options">
+          <input type="button" value="Play" class="button-play" />
+          <input type="button" value="Pause" class="button-pause" />
+          <input type="button" value="Next generation" class="button-next-generation" />
+          <input type="button" value="Reset" class="button-reset" />
+          <input type="button" value="Toggle grid" class="button-toggle-grid" />
+          <input type="button" value="Create mode" class="button-draw-mode" />
+          <br />
+          <label for="option-generation-interval">Generation interval (ms): </label>
+          <input type="number" min="1" max="5000" value="200" class="option-generation-interval" />
+        </div>
+        <div class="info">
+          <label class="game-status">Game paused</label>
+          <label>Generation: <span class="generation-count">0</span></label>
+          <label>Population: <span class="population-count">0</span></label>
+        </div>
+      </div>
+      <div>
+        <p>Controls:</p>
+        <div class="controls">
+          <table>
+            <tr>
+              <td>Left click</td>
+              <td>:</td>
+              <td>Create/erase cell</td>
+            </tr>
+            <tr>
+              <td>Left click + Drag</td>
+              <td>:</td>
+              <td>Create/erase multiple cells</td>
+            </tr>
+            <tr>
+              <td>Right click + Drag</td>
+              <td>:</td>
+              <td>Move grid</td>
+            </tr>
+            <tr>
+              <td>Scroll wheel</td>
+              <td>:</td>
+              <td>Zoom in/out</td>
+            </tr>
+            <tr>
+              <td>F</td>
+              <td>:</td>
+              <td>Switch draw mode (create/erase)</td>
+            </tr>
+            <tr>
+              <td>G</td>
+              <td>:</td>
+              <td>Toggle grid</td>
+            </tr>
+            <tr>
+              <td>V</td>
+              <td>:</td>
+              <td>Toggle hover</td>
+            </tr>
+            <tr>
+              <td>P</td>
+              <td>:</td>
+              <td>Play/pause game</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
