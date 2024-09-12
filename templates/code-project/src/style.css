@@ -1,0 +1,11 @@
+.code-block {
+    max-width: 60em;
+}
+
+pre {
+    max-height: 30em;
+}
+
+code {
+    background-color: #2d2d2d;
+}

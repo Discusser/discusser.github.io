@@ -1,0 +1,70 @@
+#information {
+    width: 50%;
+    justify-content: center;
+
+    display: grid;
+    grid-template-columns: [label col-0] max-content [col-1] 2.5% [input col-2] max-content [end col-3];
+}
+
+#information > p {
+    margin: 0;
+}
+
+#information > span {
+    grid-column: col-2;
+}
+
+#inputs {
+    width: 75%;
+
+    display: grid;
+    grid-template-columns: [label col-0] max-content [col-1] 5% [input col-2] auto [end col-3];
+    row-gap: 0.2em;
+}
+
+textarea {
+    resize: none;
+}
+
+#inputs > textarea,
+#inputs > input {
+    grid-column: col-2;
+}
+
+#inputs > input {
+    justify-self: start;
+    width: max-content;
+}
+
+#text_input,
+#text_output {
+    height: 150px;
+}
+
+#ui {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-radius: 5%;
+    background: radial-gradient(#495fa9, #2b3c7c);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    height: 90%;
+}
+
+#ui > div {
+    margin: 16px auto;
+}
+
+hr {
+    width: 75%;
+}
+
+body {
+    margin: 8px;
+    height: calc(100vh - 16px);
+}
