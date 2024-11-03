@@ -11,7 +11,10 @@ const config = {
 		// We use adapter-static for a static site
 		adapter: adapter({
 			fallback: '404.html'
-		})
+		}),
+		prerender: {
+			handleHttpError: 'warn'
+		}
 	}
 };
 
