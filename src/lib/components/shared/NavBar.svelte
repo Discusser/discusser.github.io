@@ -1,11 +1,26 @@
 <script lang="ts">
 	import NavAnchor from '$lib/components/shared/NavAnchor.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import { IconMoon, IconSun } from '@tabler/icons-svelte';
+	import { toggleMode } from 'mode-watcher';
 </script>
 
-<div class="flex justify-center space-x-8 p-4 *:text-muted-foreground">
-	<NavAnchor href="/">Home</NavAnchor>
-	<NavAnchor href="/projects">Projects</NavAnchor>
-	<NavAnchor href="/blog">Blog</NavAnchor>
-	<NavAnchor href="/contact">Contact</NavAnchor>
+<div class="flex w-1/2 justify-center self-center p-4">
+	<div class="flex items-center space-x-8">
+		<NavAnchor href="/">Home</NavAnchor>
+		<NavAnchor fuzzy href="/projects">Projects</NavAnchor>
+		<NavAnchor fuzzy href="/blog">Blog</NavAnchor>
+	</div>
+	<div class="flex-grow">
+		<Button on:click={toggleMode} class="float-right" variant="outline" size="icon">
+			<IconSun
+				class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+			/>
+			<IconMoon
+				class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+			/>
+			<span class="sr-only">Toggle theme</span>
+		</Button>
+	</div>
 </div>
 <hr />

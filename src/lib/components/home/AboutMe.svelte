@@ -1,6 +1,3 @@
-<script lang="ts">
-</script>
-
 <div class="space-y-2">
 	<p class="text-2xl font-bold text-foreground">About me</p>
 	<p>

@@ -2,15 +2,22 @@
 	import type { HTMLAttributes } from "svelte/elements";
 	import { cn } from "$lib/utils.js";
 
-	type $$Props = HTMLAttributes<HTMLDivElement>;
+	type $$Props = HTMLAttributes<HTMLTableRowElement> & {
+		"data-state"?: unknown;
+	};
 
 	let className: $$Props["class"] = undefined;
 	export { className as class };
 </script>
 
-<div
-	class={cn("bg-card text-card-foreground rounded-lg border shadow-sm", className)}
+<tr
+	class={cn(
+		"hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
+		className
+	)}
 	{...$$restProps}
+	on:click
+	on:keydown
 >
 	<slot />
-</div>
+</tr>

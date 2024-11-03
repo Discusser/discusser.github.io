@@ -2,21 +2,19 @@
 	import { IconBrandGithub, IconMail } from '@tabler/icons-svelte';
 </script>
 
-<hr />
-<div class="flex justify-around p-8">
-	<p class="text-muted-foreground/50">Web page made by Discusser with Svelte</p>
-	<div class="flex space-x-4">
-		<a
-			class="text-muted-foreground hover:text-muted-foreground/80"
-			href="mailto:discussercodes@gmail.com"
-		>
-			<IconMail />
-		</a>
-		<a
-			class="text-muted-foreground hover:text-muted-foreground/80"
-			href="https://github.com/Discusser"
-		>
-			<IconBrandGithub />
-		</a>
+<div class="mt-8">
+	<hr />
+	<div class="flex justify-center p-8">
+		<div class="flex w-1/2">
+			<p class="flex-grow text-muted-foreground/50">Web page made by Discusser with Svelte</p>
+			<div class="flex space-x-4">
+				<a href="mailto:discussercodes@gmail.com">
+					<IconMail />
+				</a>
+				<a href="https://github.com/Discusser">
+					<IconBrandGithub />
+				</a>
+			</div>
+		</div>
 	</div>
 </div>

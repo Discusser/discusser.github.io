@@ -12,12 +12,14 @@
 	<Toaster />
 	<NavBar />
 
-	<div class="flex flex-grow items-start space-x-4 p-4">
-		<div class="w-1/4">
+	<div class="flex flex-grow p-4">
+		<div class="absolute w-1/4">
 			<SideNav />
 		</div>
-		<div class="w-1/2">
-			<slot />
+		<div class="flex flex-grow justify-center">
+			<div class="w-1/2">
+				<slot />
+			</div>
 		</div>
 	</div>
 
