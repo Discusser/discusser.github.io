@@ -10,7 +10,7 @@
 		fuzzy,
 		children,
 		class: className,
-		...others
+		...restProps
 	}: {
 		children: Snippet;
 		href: string;
@@ -28,7 +28,7 @@
 		isAnchorActive($page.url.pathname, href, fuzzy) ? 'font-displayBold' : 'font-display',
 		className
 	)}
-	{...others}
+	{...restProps}
 >
 	{@render children()}
 </a>

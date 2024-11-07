@@ -14,5 +14,6 @@
 			</ul>
 		</li>
 		<li><NavAnchor href="/blog">Blog</NavAnchor></li>
+		<li><NavAnchor href="/hobbies">Hobbies</NavAnchor></li>
 	</ul>
 </div>
