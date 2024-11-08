@@ -3,11 +3,18 @@ import { getGithubURLForProject, getPageURLForProject } from '$lib/utils/index';
 import type { ColumnDef } from '@tanstack/table-core';
 import { createRawSnippet } from 'svelte';
 
+export enum Category {
+  Cpp = 'cpp',
+  Web = 'web',
+  Python = 'python',
+  Other = 'other'
+}
+
 export type Project = {
   label: string; // Label to be displayed
-  category: string;
+  category: Category;
   name: string;
-  github: boolean;
+  hasGithub?: boolean;
   notes?: string;
   hasPage?: boolean;
 };
@@ -29,7 +36,8 @@ export const columns: ColumnDef<Project>[] = [
         url: getPageURLForProject(ctx.row.original),
         label: ctx.row.original.label
       });
-    }
+    },
+    header: 'Name'
   },
   {
     accessorKey: 'category',
@@ -57,89 +65,117 @@ export const columns: ColumnDef<Project>[] = [
 export const projects: Project[] = [
   {
     label: 'Workout Tracker',
-    category: 'other',
+    category: Category.Other,
     name: 'workout_app',
-    github: true,
+    hasGithub: true,
     hasPage: true,
     notes: 'A mobile app that lets you track your workouts'
   },
   {
     label: 'Website Generator',
-    category: 'web',
+    category: Category.Web,
     name: 'website-generator',
-    github: true,
+    hasGithub: true,
     hasPage: true,
     notes: 'A basic static website generator'
   },
   {
     label: 'Game of Life',
-    category: 'web',
+    category: Category.Web,
     name: 'game-of-life',
-    github: true,
+    hasGithub: true,
     notes: "An implementation of Conway's game of life"
   },
   {
     label: 'MoreTNT',
-    category: 'other',
+    category: Category.Other,
     name: 'MoreTNT',
-    github: true,
+    hasGithub: true,
     notes: 'A minecraft mod that adds variants of TNT'
   },
   {
     label: 'TooManyEntities',
-    category: 'other',
+    category: Category.Other,
     name: 'TooManyEntities',
-    github: true,
+    hasGithub: true,
     notes: 'A minecraft performance mod that hides entities past a certain threshold '
   },
   {
     label: 'TheOdinProject',
-    category: 'other',
+    category: Category.Other,
     name: 'TheOdinProject',
-    github: true,
+    hasGithub: true,
     notes: 'My files for the odin project'
   },
   {
     label: 'Steganographer',
-    category: 'cpp',
+    category: Category.Cpp,
     name: 'Steganographer',
-    github: true,
+    hasGithub: true,
     notes: 'A command line program to encode messages into images'
   },
   {
     label: 'MarkovSentenceGenerator',
-    category: 'cpp',
+    category: Category.Cpp,
     name: 'MarkovSentenceGenerator',
-    github: true,
+    hasGithub: true,
     notes:
       'A command line program that generates sentences given a starting word using Markov chains'
   },
   {
     label: 'Minesweeper',
-    category: 'web',
+    category: Category.Web,
     name: 'Minesweeper',
-    github: true,
+    hasGithub: true,
     notes: 'A minesweeper clone written in HTML and JS'
   },
   {
     label: 'ImgToASCII',
-    category: 'cpp',
+    category: Category.Cpp,
     name: 'ImgToASCII',
-    github: true,
+    hasGithub: true,
     notes: 'A command line program that converts images to ASCII characters'
   },
   {
     label: 'SxhkdRofi',
-    category: 'cpp',
+    category: Category.Cpp,
     name: 'SxhkdRofi',
-    github: true,
+    hasGithub: true,
     notes: 'A rofi menu for displaying Sxhkd keybindings'
   },
   {
     label: 'PasswordManager',
-    category: 'cpp',
+    category: Category.Cpp,
     name: 'PasswordManager',
-    github: true,
+    hasGithub: true,
     notes: 'A command line password manager'
+  },
+  {
+    label: 'Bouncing Squares',
+    category: Category.Python,
+    name: 'bouncing-squares',
+    hasPage: true,
+    notes: 'A calculator program in which colored moving squares bounce around'
+  },
+  {
+    label: 'Draw 3D',
+    category: Category.Python,
+    name: 'draw-3d',
+    hasPage: true,
+    notes: 'A basic 3D renderer for my calculator'
+  },
+  {
+    label: 'Draw 2D',
+    category: Category.Python,
+    name: 'draw-2d',
+    hasPage: true,
+    notes: 'A basic 2D drawing tool for my calculator'
+  },
+  {
+    label: 'Flappy Bird',
+    category: Category.Python,
+    name: 'flappy-bird',
+    hasPage: true,
+    notes: 'A clone of Flappy Bird for my calculator'
   }
 ];

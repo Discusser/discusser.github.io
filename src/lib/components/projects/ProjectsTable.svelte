@@ -4,6 +4,12 @@
 	import * as Table from '$lib/components/ui/table';
 	import { getCoreRowModel } from '@tanstack/table-core';
 
+	let {
+		categories
+	}: {
+		categories?: string[];
+	} = $props();
+
 	const table = createSvelteTable({
 		data: projects,
 		columns: columns,
@@ -31,13 +37,15 @@
 		</Table.Header>
 		<Table.Body>
 			{#each table.getRowModel().rows as row (row.id)}
-				<Table.Row data-state={row.getIsSelected() && 'selected'}>
-					{#each row.getVisibleCells() as cell (cell.id)}
-						<Table.Cell>
-							<FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
-						</Table.Cell>
-					{/each}
-				</Table.Row>
+				{#if !categories || categories.includes(row.original.category)}
+					<Table.Row data-state={row.getIsSelected() && 'selected'}>
+						{#each row.getVisibleCells() as cell (cell.id)}
+							<Table.Cell>
+								<FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
+							</Table.Cell>
+						{/each}
+					</Table.Row>
+				{/if}
 			{/each}
 		</Table.Body>
 	</Table.Root>

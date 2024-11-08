@@ -3,11 +3,13 @@ import { toast } from 'svelte-sonner';
 import path from 'path-browserify';
 
 export const getGithubURLForProject = (project: Project) => {
-  return project.github ? `https://github.com/Discusser/${project.name}` : null;
+  return project.hasGithub ? `https://github.com/Discusser/${project.name}` : null;
 };
 
 export const getPageURLForProject = (project: Project) => {
-  return project.hasPage ? path.join('/projects/', project.category, project.name) : null;
+  return project.hasPage
+    ? path.join('/projects/', project.category, project.name.replaceAll(/[_]/g, '-'))
+    : null;
 };
 
 export const isAnchorActive = (pathname: string, href: string, fuzzy?: boolean) => {

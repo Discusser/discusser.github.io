@@ -8,9 +8,10 @@
 		<li>
 			<NavAnchor href="/projects">Projects</NavAnchor>
 			<ul>
-				<li><NavAnchor href="/projects/web">Web</NavAnchor></li>
-				<li><NavAnchor href="/projects/cpp">C/C++</NavAnchor></li>
-				<li><NavAnchor href="/projects/python">Python</NavAnchor></li>
+				<li><NavAnchor fuzzy href="/projects/web">Web</NavAnchor></li>
+				<li><NavAnchor fuzzy href="/projects/cpp">C/C++</NavAnchor></li>
+				<li><NavAnchor fuzzy href="/projects/python">Python</NavAnchor></li>
+				<li><NavAnchor fuzzy href="/projects/other">Other</NavAnchor></li>
 			</ul>
 		</li>
 		<li><NavAnchor href="/blog">Blog</NavAnchor></li>

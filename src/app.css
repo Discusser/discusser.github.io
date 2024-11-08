@@ -119,3 +119,7 @@ a {
 ul {
 	@apply pl-4;
 }
+
+code {
+	@apply bg-secondary p-0.5;
+}
