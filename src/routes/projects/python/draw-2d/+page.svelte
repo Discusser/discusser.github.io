@@ -6,7 +6,7 @@
 
 <Project project={DRAW_2D}>
 	<div class="flex items-stretch space-x-4">
-		<Image width="500" height="300" src="/" alt="Preview of the Draw 2D program" />
+		<!-- <Image width="500" height="300" src="/" alt="Preview of the Draw 2D program" /> -->
 		<p>
 			This is one of the first programs that I made on my calculator, and it sort of served as a
 			stepping stone towards greater programs. It's very basic, and allows you to draw pixels

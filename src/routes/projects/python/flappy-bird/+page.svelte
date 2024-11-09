@@ -6,7 +6,7 @@
 
 <Project project={FLAPPY_BIRD}>
 	<div class="flex items-stretch space-x-4">
-		<Image width="500" height="300" src="/" alt="Preview of the Flappy Bird program" />
+		<!-- <Image width="500" height="300" src="/" alt="Preview of the Flappy Bird program" /> -->
 		<p>
 			This program is a clone of the very famous mobile game, Flappy Bird. It was surprisingly easy
 			to make. The bird itself is a square, and the pipes are just rectangles. Since you only need

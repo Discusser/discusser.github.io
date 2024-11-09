@@ -11,8 +11,9 @@
 		most Python libraries to be untyped, or to have weird types, which can make the editor think
 		that your code is wrong when it's completely fine, or think that your code is fine when it's
 		totally wrong. On top of that, Python is an interpreted language, which just makes it harder to
-		spot these types of errors. However, the calculator (<a href="https://www.numworks.com/"
-			>NumWorks</a
+		spot these types of errors. However, the calculator (<a
+			target="_blank"
+			href="https://www.numworks.com/">NumWorks</a
 		>) I got for school has a Python editor, which I use when I'm bored in class. With this, I've
 		made a few different projects, ranging from simple games like snake, or flappy bird, to more
 		sophisticated programs, such as my <i>magnum opus</i>, a 3D renderer. On top of that, I also

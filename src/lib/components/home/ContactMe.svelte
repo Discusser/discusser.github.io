@@ -5,16 +5,21 @@
 <div class="space-y-2">
 	<p class="text-2xl font-bold text-foreground">Contact</p>
 	<p>
-		You can contact me via <a class="text-blue-500" href="mailto:discussercodes@gmail.com">mail</a>,
-		or on Discord:
+		You can contact me via <a
+			target="_blank"
+			class="text-blue-500"
+			href="mailto:discussercodes@gmail.com">mail</a
+		>, or on Discord:
 	</p>
 	<div class="grid w-1/2 auto-cols-min grid-cols-2 gap-y-2">
 		<span>Email</span>
-		<a href="mailto:discussercodes@gmail.com" class="underline hover:text-foreground"
-			>discussercodes@gmail.com</a
+		<a
+			target="_blank"
+			href="mailto:discussercodes@gmail.com"
+			class="underline hover:text-foreground">discussercodes@gmail.com</a
 		>
 		<span>GitHub</span>
-		<a href="https://github.com/Discusser" class="underline">Discusser</a>
+		<a target="_blank" href="https://github.com/Discusser" class="underline">Discusser</a>
 		<span>Discord</span>
 		<div class="flex justify-start">
 			<button on:click={() => copyToClipboard('Discusser')} class="underline decoration-dotted">

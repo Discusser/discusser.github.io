@@ -24,7 +24,7 @@
 			{project.label}
 		</p>
 		{#if project.hasGithub}
-			<Button href={getGithubURLForProject(project)} variant="outline" size="icon">
+			<Button target="_blank" href={getGithubURLForProject(project)} variant="outline" size="icon">
 				<IconBrandGithub />
 			</Button>
 		{/if}

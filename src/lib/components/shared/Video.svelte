@@ -31,7 +31,7 @@
 		{@render children?.()}
 		<source {src} />
 		<p>
-			Your browser can't display videos! Download the video <a href={src}>here</a>
+			Your browser can't display videos! Download the video <a target="_blank" href={src}>here</a>
 		</p>
 	</video>
 	<p class="text-sm">{alt}</p>

@@ -13,12 +13,13 @@
 		using Dart along with Flutter, which was for my
 		<a
 			class="text-blue-500"
+			target="_blank"
 			href="https://pll.harvard.edu/course/cs50-introduction-computer-science">CS50</a
 		>
 		final project. To top it all off, I of course know JavaScript (along with HTML and CSS even if they
 		aren't programming languages). I've used Vue in the past, but now I'm making this website with Svelte
 		as I prefer it over Vue. My most worthy projects are available on my
-		<a class="text-blue-500" href="https://github.com/Discusser">GitHub</a> profile
+		<a class="text-blue-500" target="_blank" href="https://github.com/Discusser">GitHub</a> profile
 	</p>
 	<p>You can find a non-exhaustive list of my projects below:</p>
 	<ProjectsTable />

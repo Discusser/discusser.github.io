@@ -9,6 +9,7 @@
 		specific event depends solely on the state attained at the previous event. For a more complete
 		description of these, feel free to consult the <a
 			class="text-blue-500"
+			target="_blank"
 			href="https://en.wikipedia.org/wiki/Markov_chain">Wikipedia article</a
 		>
 		on markov chains. Concretely, markov chains are used for autocompletion when typing. You can see
@@ -21,13 +22,13 @@
 		in the input file, the probability of a certain word appearing right after it. The
 		<code>big.json</code>
 		model in the GitHub repository is created from a few books, taken from
-		<a class="text-blue-500" href="https://www.gutenberg.org/">Project Gutenberg</a>. In this model,
-		the word "zinc" has a 50% chance to be followed by "and", 25% chance to be followed by
-		"Immersion" and a 25% chance to be followed by "A". This is essentially what a markov chain is.
-		After parsing the JSON file and storing the information into a data structure that is optimized
-		for our needs, the program will spout whole paragraphs on autocomplete from one starting word,
-		even if they tend to be nonsensical at times, which is normal, since the words proposed by the
-		model are just suggestions of the most common words.
+		<a target="_blank" class="text-blue-500" href="https://www.gutenberg.org/">Project Gutenberg</a
+		>. In this model, the word "zinc" has a 50% chance to be followed by "and", 25% chance to be
+		followed by "Immersion" and a 25% chance to be followed by "A". This is essentially what a
+		markov chain is. After parsing the JSON file and storing the information into a data structure
+		that is optimized for our needs, the program will spout whole paragraphs on autocomplete from
+		one starting word, even if they tend to be nonsensical at times, which is normal, since the
+		words proposed by the model are just suggestions of the most common words.
 	</p>
 	<p>Example prompt using a model based on the Frankenstein book:</p>
 	<code>

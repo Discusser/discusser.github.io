@@ -51,7 +51,10 @@ export const columns: ColumnDef<Project>[] = [
       const snippet = createRawSnippet<[string | null]>((getUrl) => {
         const url = getUrl();
         return {
-          render: () => (url ? `<a class="text-blue-500" href=${url}>${url}</a>` : '<span></span>')
+          render: () =>
+            url
+              ? `<a class="text-blue-500" target="_blank" href=${url}>${url}</a>`
+              : '<span></span>'
         };
       });
       return renderSnippet(snippet, getGithubURLForProject(ctx.row.original));
@@ -135,6 +138,7 @@ export const MINESWEEPER = addProject({
   category: Category.Web,
   name: 'Minesweeper',
   hasGithub: true,
+  hasPage: true,
   notes: 'A minesweeper clone written in HTML and JS'
 });
 export const IMG_TO_ASCII = addProject({
