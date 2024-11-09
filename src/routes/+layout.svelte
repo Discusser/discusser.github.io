@@ -7,7 +7,7 @@
 	import SideNav from '$lib/components/shared/SideNav.svelte';
 </script>
 
-<div class="flex h-screen flex-col">
+<div class="flex min-h-screen flex-col">
 	<ModeWatcher />
 	<Toaster />
 	<NavBar />
