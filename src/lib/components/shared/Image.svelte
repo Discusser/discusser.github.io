@@ -5,10 +5,14 @@
 
 	let {
 		alt,
+		width,
+		height,
 		class: className,
 		...restProps
 	}: {
 		alt?: string;
+		width: string;
+		height: string;
 		class?: string;
 	} & HTMLImgAttributes = $props();
 
@@ -16,11 +20,16 @@
 </script>
 
 <div class="h-full space-y-2 text-center">
-	<div class="h-full w-full">
+	<div
+		class="h-full w-full"
+		style="{width ? 'width:' + width + 'px;' : ''}{height ? 'height:' + height + 'px;' : ''}"
+	>
 		<Skeleton class="h-full w-full {!loading ? 'hidden' : ''}" />
 		<img
 			onload={() => (loading = false)}
 			onerror={() => (loading = false)}
+			{width}
+			{height}
 			{...restProps}
 			{alt}
 			class={twMerge(
