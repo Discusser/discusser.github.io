@@ -9,7 +9,7 @@
 		very seriously. Up to this point, I have tried out many different languages, and I have taken a
 		liking for some, but not all. I've made basic scripts with Bash, Python, programs with Rust,
 		C/C++, Ruby, ASM (I wouldn't recommend), Minecraft mods with Java. I also created a very basic
-		<a class="text-blue-500" href="/projects/other/workoutapp">workout app</a> for mobile devices
+		<a class="text-blue-500" href="/projects/other/workout-app">workout app</a> for mobile devices
 		using Dart along with Flutter, which was for my
 		<a
 			class="text-blue-500"

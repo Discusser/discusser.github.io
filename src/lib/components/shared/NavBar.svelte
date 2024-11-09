@@ -15,7 +15,7 @@
 				<NavAnchor fuzzy href="/hobbies">Hobbies</NavAnchor>
 			</div>
 			<div class="flex-grow">
-				<Button on:click={toggleMode} class="float-right" variant="outline" size="icon">
+				<Button onclick={toggleMode} class="float-right" variant="outline" size="icon">
 					<IconSun
 						class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 					/>
