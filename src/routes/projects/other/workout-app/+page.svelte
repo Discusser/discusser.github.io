@@ -1,10 +1,11 @@
 <script lang="ts">
+	import Project from '$lib/components/projects/Project.svelte';
 	import { AspectRatio } from '$lib/components/ui/aspect-ratio';
 	import { Skeleton } from '$lib/components/ui/skeleton';
+	import { WORKOUT_TRACKER } from '$lib/constants/projects';
 </script>
 
-<div class="flex flex-col space-y-4">
-	<p class="text-2xl font-bold text-foreground">Workout Tracker</p>
+<Project project={WORKOUT_TRACKER}>
 	<p>
 		This is one of my most time consuming projects at the time of writing this. Workout Tracker is
 		an app that allows you to, as the name indicates, track your workouts. However, it's not only
@@ -30,4 +31,4 @@
 		></iframe>
 		<Skeleton class="absolute z-0 h-full w-full" />
 	</AspectRatio>
-</div>
+</Project>

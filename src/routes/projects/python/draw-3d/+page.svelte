@@ -1,15 +1,13 @@
 <script lang="ts">
+	import Project from '$lib/components/projects/Project.svelte';
 	import Image from '$lib/components/shared/Image.svelte';
+	import { DRAW_3D } from '$lib/constants/projects';
 </script>
 
-<div class="flex flex-col space-y-4">
-	<p class="text-2xl font-bold text-foreground">Draw 3D</p>
-	<p></p>
+<Project project={DRAW_3D}>
 	<div class="flex items-stretch space-x-4">
-		<div class="flex-[2]">
-			<Image src="/" alt="Preview of the Draw 3D program" />
-		</div>
-		<p class="flex-[3]">
+		<Image width="500" height="300" src="/" alt="Preview of the Draw 3D program" />
+		<p>
 			This is one of, if not my most complicated program I've made on my calculator. Weighing in at
 			a whopping {(7.36).toLocaleString()} kilobytes, this program allows rendering virtually any 3 dimensional
 			shape, with the ability to rotate, translate, and scale at will. I was only able to make this thanks
@@ -24,4 +22,4 @@
 			keyboard.
 		</p>
 	</div>
-</div>
+</Project>

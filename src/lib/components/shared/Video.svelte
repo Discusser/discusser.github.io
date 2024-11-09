@@ -24,7 +24,7 @@
 		controls
 		{src}
 		class={twMerge(
-			'flex h-full w-full items-center justify-center rounded-sm border-2 border-foreground/30 bg-secondary/50 hover:border-foreground/40 hover:bg-secondary/60',
+			'flex h-full w-full items-center justify-center rounded-sm hover:bg-secondary/20',
 			className
 		)}
 	>

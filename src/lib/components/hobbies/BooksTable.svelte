@@ -16,7 +16,7 @@
 	});
 </script>
 
-<div class="h-96 overflow-scroll">
+<div class="max-h-96 overflow-scroll">
 	<Table.Root>
 		<Table.Header>
 			<Table.Row class="text-base *:font-displayBold">

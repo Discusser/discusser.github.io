@@ -123,3 +123,7 @@ ul {
 code {
 	@apply bg-secondary p-0.5;
 }
+
+pre {
+	@apply text-wrap;
+}

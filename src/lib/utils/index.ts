@@ -8,7 +8,7 @@ export const getGithubURLForProject = (project: Project) => {
 
 export const getPageURLForProject = (project: Project) => {
   return project.hasPage
-    ? path.join('/projects/', project.category, project.name.replaceAll(/[_]/g, '-'))
+    ? path.join('/projects/', project.category, project.name.replaceAll(/[_]/g, '-').toLowerCase())
     : null;
 };
 

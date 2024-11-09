@@ -17,7 +17,7 @@
 	});
 </script>
 
-<div class="h-96 overflow-scroll">
+<div class="max-h-96 overflow-scroll">
 	<Table.Root>
 		<Table.Header>
 			{#each table.getHeaderGroups() as headerGroup (headerGroup.id)}

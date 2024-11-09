@@ -11,18 +11,18 @@
 		...restProps
 	}: {
 		alt?: string;
-		width: string;
-		height: string;
+		width?: string;
+		height?: string;
 		class?: string;
 	} & HTMLImgAttributes = $props();
 
 	let loading: boolean = $state(true);
 </script>
 
-<div class="h-full space-y-2 text-center">
+<div class="h-full w-full space-y-2 text-center">
 	<div
 		class="h-full w-full"
-		style="{width ? 'width:' + width + 'px;' : ''}{height ? 'height:' + height + 'px;' : ''}"
+		style="{width ? 'width:' + width + ';' : ''}{height ? 'height:' + height + ';' : ''}"
 	>
 		<Skeleton class="h-full w-full {!loading ? 'hidden' : ''}" />
 		<img
@@ -33,7 +33,7 @@
 			{...restProps}
 			{alt}
 			class={twMerge(
-				'flex h-full w-full items-center justify-center rounded-sm border-2 border-foreground/30 bg-secondary/50 hover:border-foreground/40 hover:bg-secondary/60',
+				'flex h-full w-full items-center justify-center rounded-sm hover:bg-secondary/20',
 				className,
 				loading ? 'hidden' : ''
 			)}

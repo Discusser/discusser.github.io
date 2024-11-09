@@ -22,7 +22,7 @@ export const books: Book[] = [
   },
   {
     name: 'Ethics',
-    author: 'Spinoza',
+    author: 'Baruch Spinoza',
     rating: 3.5
   },
   {
@@ -75,4 +75,4 @@ export const books: Book[] = [
     author: 'Voltaire',
     rating: 4.5
   }
-];
+].sort((a, b) => b.rating - a.rating);

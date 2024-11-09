@@ -1,10 +1,10 @@
 <script lang="ts">
+	import Project from '$lib/components/projects/Project.svelte';
 	import Video from '$lib/components/shared/Video.svelte';
+	import { BOUNCING_SQUARES } from '$lib/constants/projects';
 </script>
 
-<div class="flex flex-col space-y-4">
-	<p class="text-2xl font-bold text-foreground">Bouncing Squares</p>
-	<p></p>
+<Project project={BOUNCING_SQUARES}>
 	<div class="flex space-x-4">
 		<div class="flex-[2]">
 			<Video alt="A demonstration of the bouncing squares program" src="/bouncing_squares.mov" />
@@ -18,4 +18,4 @@
 			more features after recording that, but the principle stays the same.
 		</p>
 	</div>
-</div>
+</Project>
