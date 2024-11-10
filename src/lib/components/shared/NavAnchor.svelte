@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { isAnchorActive } from '$lib/utils/index';
 	import type { Snippet } from 'svelte';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import { twMerge } from 'tailwind-merge';
 
 	let {
@@ -17,7 +18,7 @@
 		target?: string;
 		fuzzy?: boolean;
 		class?: string;
-	} = $props();
+	} & HTMLAnchorAttributes = $props();
 </script>
 
 <a

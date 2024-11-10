@@ -7,7 +7,10 @@
 
 	let sidebarOpen = $state(false);
 
-	const toggleSidebar = () => (sidebarOpen = !sidebarOpen);
+	const toggleSidebar = () => {
+		console.log('test');
+		sidebarOpen = !sidebarOpen;
+	};
 
 	$effect(() => {
 		if (sidebarOpen) {
@@ -26,7 +29,7 @@
 			<Button variant="outline" size="icon" onclick={toggleSidebar}>
 				<IconX />
 			</Button>
-			<SideNav class="-ml-4" />
+			<SideNav class="-ml-4" onclick={toggleSidebar} />
 		</div>
 	{/if}
 	<div class="flex flex-grow justify-center p-4">
