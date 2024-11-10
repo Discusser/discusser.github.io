@@ -1,8 +1,15 @@
 <script lang="ts">
 	import NavAnchor from '$lib/components/shared/NavAnchor.svelte';
+
+	let {
+		class: className,
+		...restProps
+	}: {
+		class?: string;
+	} = $props();
 </script>
 
-<div>
+<div class={className} {...restProps}>
 	<ul>
 		<li><NavAnchor href="/">Home</NavAnchor></li>
 		<li>

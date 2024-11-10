@@ -13,11 +13,11 @@
 	<NavBar />
 
 	<div class="flex flex-grow p-4">
-		<div class="absolute w-1/4">
+		<div class="absolute hidden w-1/4 lg:block">
 			<SideNav />
 		</div>
 		<div class="flex flex-grow justify-center">
-			<div class="w-1/2">
+			<div class="w-full lg:w-1/2">
 				<slot />
 			</div>
 		</div>

@@ -25,25 +25,30 @@ export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: 'label',
     cell: (ctx) => {
-      const snippet = createRawSnippet<[{ url: string | null; label: string | null }]>((props) => {
-        const { url, label } = props();
+      const snippet = createRawSnippet<[Project]>((props) => {
+        const project = props();
+        const url = getPageURLForProject(project);
+        const githubUrl = getGithubURLForProject(project);
         return {
           render: () =>
-            url
-              ? `<a class="text-blue-500" href=${url}>${label}</a>`
-              : `<span>${label ?? ''}</span>`
+            `<div class="flex flex-col space-y-2">` +
+            (url
+              ? `<a class="text-blue-500" href=${url}>${project.label}</a>`
+              : `<span>${project.label ?? ''}</span>`) +
+            (githubUrl
+              ? `<a class="text-blue-500 md:hidden lg:table-cell 2xl:hidden" href="${githubUrl}">GitHub</a>`
+              : '') +
+            `</div>`
         };
       });
-      return renderSnippet(snippet, {
-        url: getPageURLForProject(ctx.row.original),
-        label: ctx.row.original.label
-      });
+      return renderSnippet(snippet, ctx.row.original);
     },
     header: 'Name'
   },
   {
     accessorKey: 'category',
-    header: 'Category'
+    header: 'Category',
+    id: 'category'
   },
   {
     accessorFn: (project) => getGithubURLForProject(project) ?? '',
@@ -59,7 +64,8 @@ export const columns: ColumnDef<Project>[] = [
       });
       return renderSnippet(snippet, getGithubURLForProject(ctx.row.original));
     },
-    header: 'GitHub'
+    header: 'GitHub',
+    id: 'github'
   },
   {
     accessorKey: 'notes',

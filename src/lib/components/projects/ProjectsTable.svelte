@@ -17,13 +17,17 @@
 	});
 </script>
 
-<div class="max-h-96 overflow-scroll">
+<div class="max-h-96 min-w-0 overflow-y-scroll">
 	<Table.Root>
 		<Table.Header>
 			{#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
 				<Table.Row>
 					{#each headerGroup.headers as header (header.id)}
-						<Table.Head>
+						<Table.Head
+							class="{header.id == 'github'
+								? 'hidden md:table-cell lg:hidden 2xl:table-cell'
+								: ''} {header.id == 'category' ? 'hidden sm:table-cell' : ''}"
+						>
 							{#if !header.isPlaceholder}
 								<FlexRender
 									content={header.column.columnDef.header}
@@ -35,12 +39,16 @@
 				</Table.Row>
 			{/each}
 		</Table.Header>
-		<Table.Body>
+		<Table.Body class="max-h-96">
 			{#each table.getRowModel().rows as row (row.id)}
 				{#if !categories || categories.includes(row.original.category)}
 					<Table.Row data-state={row.getIsSelected() && 'selected'}>
 						{#each row.getVisibleCells() as cell (cell.id)}
-							<Table.Cell>
+							<Table.Cell
+								class="{cell.column.columnDef.id == 'github'
+									? 'hidden md:table-cell lg:hidden 2xl:table-cell'
+									: ''} {cell.column.columnDef.id == 'category' ? 'hidden sm:table-cell' : ''}"
+							>
 								<FlexRender content={cell.column.columnDef.cell} context={cell.getContext()} />
 							</Table.Cell>
 						{/each}
