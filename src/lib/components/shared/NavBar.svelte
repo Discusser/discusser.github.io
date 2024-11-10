@@ -8,7 +8,6 @@
 	let sidebarOpen = $state(false);
 
 	const toggleSidebar = () => {
-		console.log('test');
 		sidebarOpen = !sidebarOpen;
 	};
 
