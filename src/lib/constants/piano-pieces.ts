@@ -36,6 +36,14 @@ export const pieces: Piece[] = [
     composer: Composer.Heller
   },
   {
+    name: 'Étude Op. 46 No. 23',
+    composer: Composer.Heller
+  },
+  {
+    name: 'Étude Op. 46 No. 26',
+    composer: Composer.Heller
+  },
+  {
     name: 'La Foule',
     composer: Composer.Cabral
   },

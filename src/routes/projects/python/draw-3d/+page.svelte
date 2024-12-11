@@ -1,12 +1,10 @@
 <script lang="ts">
 	import Project from '$lib/components/projects/Project.svelte';
-	import Image from '$lib/components/shared/Image.svelte';
 	import { DRAW_3D } from '$lib/constants/projects';
 </script>
 
 <Project project={DRAW_3D}>
 	<div class="flex items-stretch space-x-4">
-		<!-- <Image width="500" height="300" src="/" alt="Preview of the Draw 3D program" /> -->
 		<p>
 			This is one of, if not my most complicated program I've made on my calculator. Weighing in at
 			a whopping {(7.36).toLocaleString()} kilobytes, this program allows rendering virtually any 3 dimensional
