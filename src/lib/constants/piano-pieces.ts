@@ -60,6 +60,14 @@ export const pieces: Piece[] = [
     composer: Composer.Chopin
   },
   {
+    name: 'Waltz in A minor (rediscovered 2024)',
+    composer: Composer.Chopin
+  },
+  {
+    name: 'Mazurka Op. 7 No. 1',
+    composer: Composer.Chopin
+  },
+  {
     name: 'Nocturne Op. 72 No. 1',
     composer: Composer.Chopin
   },
