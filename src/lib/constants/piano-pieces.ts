@@ -68,6 +68,10 @@ export const pieces: Piece[] = [
     composer: Composer.Chopin
   },
   {
+    name: 'Mazurka Op. 6 No. 1',
+    composer: Composer.Chopin
+  },
+  {
     name: 'Nocturne Op. 72 No. 1',
     composer: Composer.Chopin
   },
@@ -91,4 +95,6 @@ export const pieces: Piece[] = [
     name: 'Hungarian Sonata',
     composer: Composer.Clayderman
   }
-];
+].sort((a, b) => {
+  return a.composer.localeCompare(b.composer) || a.name.localeCompare(b.name);
+});

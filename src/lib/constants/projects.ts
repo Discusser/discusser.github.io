@@ -102,6 +102,14 @@ export const GAME_OF_LIFE = addProject({
   hasPage: true,
   notes: "An implementation of Conway's game of life"
 });
+export const MAZE_GENERATOR = addProject({
+  label: 'Maze Generator',
+  category: Category.Web,
+  name: 'maze-generator',
+  hasGithub: true,
+  hasPage: true,
+  notes: 'A program that generates mazes'
+});
 export const MORE_TNT = addProject({
   label: 'MoreTNT',
   category: Category.Other,
