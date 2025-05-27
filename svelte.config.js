@@ -14,7 +14,10 @@ const config = {
 		}),
 		prerender: {
 			handleHttpError: 'warn'
-		}
+		},
+		alias: {
+			"@/*": "./src/lib/*",
+		},
 	}
 };
 
