@@ -68,6 +68,14 @@ export const pieces: Piece[] = [
     composer: Composer.Chopin
   },
   {
+    name: 'Mazurka Op. 30 No. 4',
+    composer: Composer.Chopin
+  },
+  {
+    name: 'Mazurka Op. 41 No. 1',
+    composer: Composer.Chopin
+  },
+  {
     name: 'Mazurka Op. 6 No. 1',
     composer: Composer.Chopin
   },
@@ -77,6 +85,14 @@ export const pieces: Piece[] = [
   },
   {
     name: 'Nocturne Op. 9 No. 2',
+    composer: Composer.Chopin
+  },
+  {
+    name: 'Nocturne Op. 27 No. 1',
+    composer: Composer.Chopin
+  },
+  {
+    name: 'Nocturne Op. 32 No. 2',
     composer: Composer.Chopin
   },
   {

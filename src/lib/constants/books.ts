@@ -6,6 +6,21 @@ export type Book = {
 
 export const books: Book[] = [
   {
+    name: "Man's Search for Meaning",
+    author: 'Viktor Frankl',
+    rating: 4
+  },
+  {
+    name: 'The Alchemist',
+    author: 'Paulo Coelho',
+    rating: 4.5
+  },
+  {
+    name: 'Notes from Underground',
+    author: 'Fyodor Dostoevsky',
+    rating: 4.5
+  },
+  {
     name: 'Fear and Trembling',
     author: 'Søren Kierkegaard',
     rating: 3.75
