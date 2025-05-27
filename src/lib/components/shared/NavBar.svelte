@@ -23,7 +23,7 @@
 <div class="sticky top-0 z-50 w-full bg-background">
 	{#if sidebarOpen}
 		<div
-			class="absolute left-0 top-0 z-[100] h-screen w-screen space-y-4 bg-background p-4 opacity-95 lg:hidden"
+			class="absolute left-0 top-0 z-100 h-screen w-screen space-y-4 bg-background p-4 opacity-95 lg:hidden"
 		>
 			<Button variant="outline" size="icon" onclick={toggleSidebar}>
 				<IconX />
@@ -31,12 +31,12 @@
 			<SideNav class="-ml-4" onclick={toggleSidebar} />
 		</div>
 	{/if}
-	<div class="flex flex-grow justify-center p-4">
+	<div class="flex grow justify-center p-4">
 		<div class="flex w-full justify-start lg:w-1/2 lg:justify-center">
 			<Button variant="outline" size="icon" class="mr-4 lg:mr-0 lg:hidden" onclick={toggleSidebar}>
 				<IconMenu2 />
 			</Button>
-			<div class="hidden sm:flex sm:flex-grow sm:items-center sm:space-x-8">
+			<div class="hidden sm:flex sm:grow sm:items-center sm:space-x-8">
 				<NavAnchor href="/">Home</NavAnchor>
 				<NavAnchor fuzzy href="/projects">Projects</NavAnchor>
 				<NavAnchor fuzzy href="/blog">Blog</NavAnchor>

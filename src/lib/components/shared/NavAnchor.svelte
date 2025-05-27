@@ -26,7 +26,7 @@
 	{target}
 	class={twMerge(
 		'text-lg',
-		isAnchorActive($page.url.pathname, href, fuzzy) ? 'font-displayBold' : 'font-display',
+		isAnchorActive($page.url.pathname, href, fuzzy) ? 'font-display-bold' : 'font-display',
 		className
 	)}
 	{...restProps}

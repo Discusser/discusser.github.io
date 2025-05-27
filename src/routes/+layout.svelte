@@ -12,11 +12,11 @@
 	<Toaster />
 	<NavBar />
 
-	<div class="flex flex-grow p-4">
+	<div class="flex grow p-4">
 		<div class="absolute hidden w-1/4 lg:block">
 			<SideNav />
 		</div>
-		<div class="flex flex-grow justify-center">
+		<div class="flex grow justify-center">
 			<div class="w-full lg:w-1/2">
 				<slot />
 			</div>
