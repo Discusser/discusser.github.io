@@ -173,5 +173,10 @@ code {
 }
 
 pre {
-	@apply text-wrap;
+	@apply bg-muted;
+	@apply overflow-x-scroll;
 }
+
+* {
+	min-width: 0;
+} 

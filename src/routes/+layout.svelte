@@ -1,10 +1,17 @@
 <script lang="ts">
 	import '../app.css';
+	import 'highlight.js/styles/atom-one-dark.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import NavBar from '$lib/components/shared/NavBar.svelte';
 	import Footer from '$lib/components/shared/Footer.svelte';
 	import SideNav from '$lib/components/shared/SideNav.svelte';
+	import hljs from 'highlight.js';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		hljs.highlightAll();
+	});
 </script>
 
 <div class="flex min-h-screen flex-col">
