@@ -1,25 +1,42 @@
 <script lang="ts">
-	import {
-		Card,
-		CardContent,
-		CardDescription,
-		CardFooter,
-		CardHeader,
-		CardTitle
-	} from '$lib/components/ui/card';
+	import * as Card from '$lib/components/ui/card/index.js';
+	import type { Article } from '@/constants/articles';
+	import { cn } from '@/utils';
+
+	const {
+		article,
+		class: className,
+		...restProps
+	}: {
+		article: Article;
+		class?: string;
+	} = $props();
 </script>
 
-<div>
-	<Card>
-		<CardHeader>
-			<CardTitle>Card Title</CardTitle>
-			<CardDescription>Card Description</CardDescription>
-		</CardHeader>
-		<CardContent>
-			<p>Card Content</p>
-		</CardContent>
-		<CardFooter>
-			<p>Card Footer</p>
-		</CardFooter>
-	</Card>
+<div class={cn('flex', className)} {...restProps}>
+	<Card.Root class="flex-grow justify-between">
+		<Card.Header>
+			<Card.Title
+				><a href={'/blog/articles/' + article.id} class="text-blue-500">{article.title}</a
+				></Card.Title
+			>
+			{#if article.tags != undefined}
+				<div class="mt-1 space-x-1">
+					{#each article.tags as tag}
+						<span class="text-muted-foreground bg-muted rounded-md px-1 py-0.5 text-xs">
+							{tag}
+						</span>
+					{/each}
+				</div>
+			{/if}
+		</Card.Header>
+		<Card.Content class="text-muted-foreground">
+			{article.description}
+		</Card.Content>
+		<Card.Footer>
+			<span class="text-muted-foreground text-sm">
+				{article.date.toLocaleDateString()}
+			</span>
+		</Card.Footer>
+	</Card.Root>
 </div>
