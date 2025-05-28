@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Article from '$lib/components/blog/Article.svelte';
 	import { NUMWORKS_PROGRAMMING } from '$lib/constants/articles';
+	import Code from '@/components/shared/Code.svelte';
 	import Collapsible from '@/components/shared/Collapsible.svelte';
 	import Linkable from '@/components/shared/Linkable.svelte';
 	import TableOfContents from '@/components/shared/TableOfContents.svelte';
@@ -57,21 +58,21 @@
 		the methods provided by the some modules below.
 	</p>
 	<Collapsible title="Kandinsky">
-		<pre><code class="nohighlight"
-				>get_pixel(x, y) - returns the color of the pixel at (x,y)
-set_pixel(x, y, color) - colors the pixel at (x,y)
-color(r, g, b) - defines an RGB color
-draw_string(text, x, y, fg, bg) - displays a string at (x, y), and if specified, with a foreground and background color
-fill_rect(x, y, w, h, col) - fills a rectangle spanning from (x, y) to (x + w, y + h) with a color</code
-			></pre>
+		<Code nohl
+			>get_pixel(x, y) - returns the color of the pixel at (x,y) set_pixel(x, y, color) - colors the
+			pixel at (x,y) color(r, g, b) - defines an RGB color draw_string(text, x, y, fg, bg) -
+			displays a string at (x, y), and if specified, with a foreground and background color
+			fill_rect(x, y, w, h, col) - fills a rectangle spanning from (x, y) to (x + w, y + h) with a
+			color</Code
+		>
 	</Collapsible>
 	<Collapsible title="Ion">
-		<pre><code class="nohighlight">keydown(k) - returns true if the key k is down</code></pre>
+		<Code nohl>keydown(k) - returns true if the key k is down</Code>
 	</Collapsible><Collapsible title="Time"
-		><pre><code class="nohighlight"
-				>monotonic() - returns the clock's time (not to be confused with the actual time)
-sleep(t) - suspend execution for t seconds</code
-			></pre>
+		><Code nohl
+			>monotonic() - returns the clock's time (not to be confused with the actual time) sleep(t) -
+			suspend execution for t seconds</Code
+		>
 	</Collapsible>
 	<Linkable id="limits">
 		<p class="text-foreground text-xl font-bold">Limitations</p>
@@ -116,13 +117,13 @@ sleep(t) - suspend execution for t seconds</code
 		and also uses a special implementation of python called MicroPython. Digging into the
 		MicroPython source code, we can find a base definition of an object in C:
 	</p>
-	<pre><code class="language-c"
-			>{`// Anything that wants to be a concrete MicroPython object must have mp_obj_base_t
+	<Code language="c"
+		>{`// Anything that wants to be a concrete MicroPython object must have mp_obj_base_t
 // as its first member (small ints, qstr objs and inline floats are not concrete).
 struct _mp_obj_base_t {
     const mp_obj_type_t *type MICROPY_OBJ_BASE_ALIGNMENT;
-};`}</code
-		></pre>
+};`}</Code
+	>
 	<p>
 		Thus we can conclude that in MicroPython, an object takes up atleast 4 bytes (the size of a
 		pointer). Of course, each object has a value associated to it, and with padding that brings us
@@ -163,8 +164,8 @@ struct _mp_obj_base_t {
 		code for the header file, pulled from my latest app at the time of writing, below.
 	</p>
 	<Collapsible title="eadk.h">
-		<pre class="h-96"><code class="language-c"
-				>{`#ifndef EADK_H
+		<Code language="c" class="h-96"
+			>{`#ifndef EADK_H
 #define EADK_H
 
 #include <stdbool.h>
@@ -453,8 +454,8 @@ extern size_t eadk_external_data_size;
 bool eadk_usb_is_plugged();
 uint32_t eadk_random();
 
-#endif`}</code
-			></pre>
+#endif`}</Code
+		>
 	</Collapsible>
 	<p>
 		This time, a lot more functions are provided. I have yet to explore all the different functions

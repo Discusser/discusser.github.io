@@ -6,18 +6,8 @@
 	import NavBar from '$lib/components/shared/NavBar.svelte';
 	import Footer from '$lib/components/shared/Footer.svelte';
 	import SideNav from '$lib/components/shared/SideNav.svelte';
-	import hljs from 'highlight.js';
-	import { afterNavigate } from '$app/navigation';
-	// import { onMount } from 'svelte';
 
 	let { children } = $props();
-
-	afterNavigate(() => {
-		hljs.highlightAll();
-	});
-	// onMount(() => {
-	// 	hljs.highlightAll();
-	// });
 </script>
 
 <div class="flex min-h-screen flex-col">
