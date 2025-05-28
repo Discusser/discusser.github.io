@@ -6,11 +6,13 @@
 		children,
 		language,
 		nohl = false,
+		class: className,
 		...restProps
 	}: {
 		children: Snippet;
 		language?: string;
 		nohl?: boolean;
+		class: string;
 	} = $props();
 
 	let codeElement: HTMLElement;
@@ -22,7 +24,7 @@
 	});
 </script>
 
-<pre {...restProps}><code
+<pre class={className} {...restProps}><code
 		class={language != undefined ? 'language-' + language : ''}
 		bind:this={codeElement}>{@render children()}</code
 	></pre>

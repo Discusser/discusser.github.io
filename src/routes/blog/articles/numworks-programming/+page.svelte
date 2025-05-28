@@ -4,8 +4,8 @@
 	import Code from '@/components/shared/Code.svelte';
 	import Collapsible from '@/components/shared/Collapsible.svelte';
 	import Linkable from '@/components/shared/Linkable.svelte';
-	import TableOfContents from '@/components/shared/TableOfContents.svelte';
-	import type { TOC } from '@/lib/tableOfContents';
+	import * as TableOfContents from '$lib/components/shared/table-of-contents/index.js';
+	import type { TOC } from '@/lib/table-of-contents';
 
 	let tableOfContents: TOC = [
 		{ title: 'Introduction', id: 'intro' },
@@ -22,8 +22,8 @@
 </script>
 
 <Article article={NUMWORKS_PROGRAMMING}>
-	<TableOfContents {tableOfContents} />
-	<Linkable id="intro"><p class="text-foreground text-xl font-bold">Introduction</p></Linkable>
+	<TableOfContents.Root />
+	<TableOfContents.Element title="Introduction" />
 	<p>
 		Towards the end of 2023, I got a <a
 			target="_blank"
@@ -43,9 +43,7 @@
 		customizable graphs). I mostly programmed on my calculator when I had nothing to do during
 		class.
 	</p>
-	<Linkable id="py-modules">
-		<p class="text-foreground text-xl font-bold">Python Modules</p>
-	</Linkable>
+	<TableOfContents.Element title="Python Modules" />
 	<p>
 		The Python implementation comes with a select few custom modules: <code>math</code>,
 		<code>cmath</code>, <code>matplotlib.pyplot</code>, <code>numpy</code>, <code>turtle</code>,
@@ -74,12 +72,8 @@
 			suspend execution for t seconds</Code
 		>
 	</Collapsible>
-	<Linkable id="limits">
-		<p class="text-foreground text-xl font-bold">Limitations</p>
-	</Linkable>
-	<Linkable id="py-performance">
-		<p class="text-foreground text-xl font-bold">Performance</p>
-	</Linkable>
+	<TableOfContents.Element title="Limitations" />
+	<TableOfContents.Element title="Performance" level={1} />
 	<p>
 		With these methods mentioned above, you can theoretically make just about anything, only limited
 		by hardware. These limitations catch up to you quite quickly. For one, clearing the screen every
@@ -105,9 +99,7 @@
 		creating full-fledged modules. After all, the calculator wasn't made to create games with
 		Python, which is why the drawing module is as simple as it is.
 	</p>
-	<Linkable id="py-mem">
-		<p class="text-foreground text-xl font-bold">Memory and Storage</p>
-	</Linkable>
+	<TableOfContents.Element title="Memory and Storage" level={1} />
 	<p>
 		It should be obvious that the team behind this calculator chose Python as the programming
 		language available for users because of its simplicity for making scripts, and even more for
@@ -140,9 +132,7 @@ struct _mp_obj_base_t {
 		seem like a lot, and it actually is, but when you have multiple large scripts installed, the
 		limit is definitely reachable.
 	</p>
-	<Linkable id="native-apps">
-		<p class="text-foreground text-xl font-bold">Writing native apps</p>
-	</Linkable>
+	<TableOfContents.Element title="Writing Native Apps" />
 	<p>
 		Recently, I discovered that it is possible to write external apps in C (and C++ or any other
 		language that is compatible with C) that can be uploaded onto the calculator. This discovery
