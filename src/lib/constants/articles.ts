@@ -21,46 +21,9 @@ export const addArticle = (article: Article) => {
 };
 
 export const NUMWORKS_PROGRAMMING = addArticle({
-  title: 'Programming with a numworks calculator',
+  title: 'Programming with a NumWorks calculator',
   id: 'numworks-programming',
-  description: 'oaisjfiauhsefiu hsoiufh oiasehf iosf uahf iushf',
+  description: 'An introduction on programming with Python and C on a NumWorks calculator',
   tags: [ArticleTag.Python, ArticleTag.CCpp, ArticleTag.Embedded],
-  date: new Date(2025, 5, 28)
-});
-
-export const BLEBLE = addArticle({
-  title: 'ADBASBD',
-  id: 'numworks-programming',
-  description: 'wqfeiu hsofh aoiewhf oiashdfoi aheoifh aoishf adsf hf jahljf ',
-  tags: [ArticleTag.Embedded],
-  date: new Date(2025, 5, 28)
-});
-
-addArticle({
-  title: 'ADBASBD',
-  id: 'numworks-programming',
-  description: 'wqfeiu hsofh aoiewhf oiashdfoi aheoifh aoishf ',
-  tags: [ArticleTag.Embedded],
-  date: new Date(2025, 5, 28)
-});
-addArticle({
-  title: 'ADBASBD',
-  id: 'numworks-programming',
-  description: 'wqfeiu hsofh aoiewhf oiashdfoi aheoifh aoishf ',
-  tags: [ArticleTag.Embedded],
-  date: new Date(2025, 5, 28)
-});
-addArticle({
-  title: 'ADBASBD',
-  id: 'numworks-programming',
-  description: 'wqfeiu hsofh aoiewhf oiashdfoi aheoifh aoishf ',
-  tags: [ArticleTag.Embedded],
-  date: new Date(2025, 5, 28)
-});
-addArticle({
-  title: 'ADBASBD',
-  id: 'numworks-programming',
-  description: 'wqfeiu hsofh aoiewhf oiashdfoi aheoifh aoishf ',
-  tags: [ArticleTag.Embedded],
   date: new Date(2025, 5, 28)
 });
