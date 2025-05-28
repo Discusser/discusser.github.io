@@ -24,7 +24,7 @@
 				<li><NavAnchor {onclick} fuzzy href="/projects/other">Other</NavAnchor></li>
 			</ul>
 		</li>
-		<li><NavAnchor {onclick} href="/blog">Blog</NavAnchor></li>
-		<li><NavAnchor {onclick} href="/hobbies">Hobbies</NavAnchor></li>
+		<li><NavAnchor {onclick} fuzzy href="/blog">Blog</NavAnchor></li>
+		<li><NavAnchor {onclick} fuzzy href="/hobbies">Hobbies</NavAnchor></li>
 	</ul>
 </div>

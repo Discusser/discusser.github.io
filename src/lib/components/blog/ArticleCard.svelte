@@ -21,9 +21,9 @@
 				></Card.Title
 			>
 			{#if article.tags != undefined}
-				<div class="mt-1 space-x-1">
+				<div class="mt-1 flex flex-wrap space-x-1">
 					{#each article.tags as tag}
-						<span class="text-muted-foreground bg-muted rounded-md px-1 py-0.5 text-xs">
+						<span class="text-muted-foreground bg-muted mb-1 rounded-md px-1 py-0.5 text-xs">
 							{tag}
 						</span>
 					{/each}
