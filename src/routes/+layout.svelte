@@ -6,16 +6,18 @@
 	import NavBar from '$lib/components/shared/NavBar.svelte';
 	import Footer from '$lib/components/shared/Footer.svelte';
 	import SideNav from '$lib/components/shared/SideNav.svelte';
-	import hljs from 'highlight.js/lib/core';
-	import c from 'highlight.js/lib/languages/c';
+	import hljs from 'highlight.js';
 	import { afterNavigate } from '$app/navigation';
+	// import { onMount } from 'svelte';
 
 	let { children } = $props();
 
-	hljs.registerLanguage('c', c);
 	afterNavigate(() => {
 		hljs.highlightAll();
 	});
+	// onMount(() => {
+	// 	hljs.highlightAll();
+	// });
 </script>
 
 <div class="flex min-h-screen flex-col">

@@ -57,7 +57,7 @@
 		the methods provided by the some modules below.
 	</p>
 	<Collapsible title="Kandinsky">
-		<pre><code
+		<pre><code class="nohighlight"
 				>get_pixel(x, y) - returns the color of the pixel at (x,y)
 set_pixel(x, y, color) - colors the pixel at (x,y)
 color(r, g, b) - defines an RGB color
@@ -66,9 +66,9 @@ fill_rect(x, y, w, h, col) - fills a rectangle spanning from (x, y) to (x + w, y
 			></pre>
 	</Collapsible>
 	<Collapsible title="Ion">
-		<pre><code>keydown(k) - returns true if the key k is down</code></pre>
+		<pre><code class="nohighlight">keydown(k) - returns true if the key k is down</code></pre>
 	</Collapsible><Collapsible title="Time"
-		><pre><code
+		><pre><code class="nohighlight"
 				>monotonic() - returns the clock's time (not to be confused with the actual time)
 sleep(t) - suspend execution for t seconds</code
 			></pre>
@@ -116,7 +116,7 @@ sleep(t) - suspend execution for t seconds</code
 		and also uses a special implementation of python called MicroPython. Digging into the
 		MicroPython source code, we can find a base definition of an object in C:
 	</p>
-	<pre><code
+	<pre><code class="language-c"
 			>{`// Anything that wants to be a concrete MicroPython object must have mp_obj_base_t
 // as its first member (small ints, qstr objs and inline floats are not concrete).
 struct _mp_obj_base_t {
@@ -163,7 +163,7 @@ struct _mp_obj_base_t {
 		code for the header file, pulled from my latest app at the time of writing, below.
 	</p>
 	<Collapsible title="eadk.h">
-		<pre class="h-96"><code
+		<pre class="h-96"><code class="language-c"
 				>{`#ifndef EADK_H
 #define EADK_H
 
