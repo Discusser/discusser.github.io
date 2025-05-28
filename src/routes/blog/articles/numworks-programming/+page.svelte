@@ -116,7 +116,7 @@ sleep(t) - suspend execution for t seconds</code
 		and also uses a special implementation of python called MicroPython. Digging into the
 		MicroPython source code, we can find a base definition of an object in C:
 	</p>
-	<pre><code class="language-c"
+	<pre><code
 			>{`// Anything that wants to be a concrete MicroPython object must have mp_obj_base_t
 // as its first member (small ints, qstr objs and inline floats are not concrete).
 struct _mp_obj_base_t {
@@ -163,7 +163,7 @@ struct _mp_obj_base_t {
 		code for the header file, pulled from my latest app at the time of writing, below.
 	</p>
 	<Collapsible title="eadk.h">
-		<pre class="h-96"><code class="language-c"
+		<pre class="h-96"><code
 				>{`#ifndef EADK_H
 #define EADK_H
 

@@ -6,10 +6,14 @@
 	import NavBar from '$lib/components/shared/NavBar.svelte';
 	import Footer from '$lib/components/shared/Footer.svelte';
 	import SideNav from '$lib/components/shared/SideNav.svelte';
-	import hljs from 'highlight.js';
-	import { onMount } from 'svelte';
+	import hljs from 'highlight.js/lib/core';
+	import c from 'highlight.js/lib/languages/c';
+	import { afterNavigate } from '$app/navigation';
 
-	onMount(() => {
+	let { children } = $props();
+
+	hljs.registerLanguage('c', c);
+	afterNavigate(() => {
 		hljs.highlightAll();
 	});
 </script>
@@ -25,7 +29,7 @@
 		</div>
 		<div class="flex grow justify-center">
 			<div class="w-full lg:w-1/2">
-				<slot />
+				{@render children()}
 			</div>
 		</div>
 	</div>
