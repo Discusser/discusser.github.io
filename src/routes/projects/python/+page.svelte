@@ -1,9 +1,10 @@
 <script lang="ts">
-	import ProjectsTable from '$lib/components/projects/ProjectsTable.svelte';
+	import ProjectCard from '@/components/projects/ProjectCard.svelte';
+	import { Category, projects } from '@/constants/projects';
 </script>
 
 <div class="flex flex-col space-y-4">
-	<p class="text-2xl font-bold text-foreground">Python</p>
+	<p class="text-foreground text-2xl font-bold">Python</p>
 	<p>
 		In my opinion, Python is an amazing language for scripting, but it can get quite cumbersome to
 		use for more complicated purposes. The main thing that I dislike is the lack of real types
@@ -35,5 +36,12 @@
 		shapes, but at the cost of performance.
 	</p>
 	<p>You can find most of my Python projects here:</p>
-	<ProjectsTable categories={['python']} />
+
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+		{#each projects as project}
+			{#if project.category == Category.Python}
+				<ProjectCard {project} />
+			{/if}
+		{/each}
+	</div>
 </div>

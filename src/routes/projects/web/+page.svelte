@@ -1,9 +1,10 @@
 <script lang="ts">
-	import ProjectsTable from '$lib/components/projects/ProjectsTable.svelte';
+	import ProjectCard from '@/components/projects/ProjectCard.svelte';
+	import { Category, projects } from '@/constants/projects';
 </script>
 
 <div class="flex flex-col space-y-4">
-	<p class="text-2xl font-bold text-foreground">Web</p>
+	<p class="text-foreground text-2xl font-bold">Web</p>
 	<p>
 		Web development is great, because you can make practically anything on the web. You can make
 		games, tools, or actual websites. I know how to use JS, HTML, and CSS. On top of that, I've
@@ -13,5 +14,12 @@
 		aren't certain of the type of the object you're dealing with.
 	</p>
 	<p>You can find most of my web projects here:</p>
-	<ProjectsTable categories={['web']} />
+
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+		{#each projects as project}
+			{#if project.category == Category.Web}
+				<ProjectCard {project} />
+			{/if}
+		{/each}
+	</div>
 </div>

@@ -1,9 +1,10 @@
 <script lang="ts">
-	import ProjectsTable from '$lib/components/projects/ProjectsTable.svelte';
+	import ProjectCard from '@/components/projects/ProjectCard.svelte';
+	import { projects } from '@/constants/projects';
 </script>
 
 <div class="flex flex-col space-y-4">
-	<p class="text-2xl font-bold text-foreground">Projects</p>
+	<p class="text-foreground text-2xl font-bold">Projects</p>
 	<p>
 		I've been coding for at least 5 years now, but for most of that time period I was not taking it
 		very seriously. Up to this point, I have tried out many different languages, and I have taken a
@@ -22,5 +23,10 @@
 		<a class="text-blue-500" target="_blank" href="https://github.com/Discusser">GitHub</a> profile
 	</p>
 	<p>You can find a non-exhaustive list of my projects below:</p>
-	<ProjectsTable />
+
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+		{#each projects as project}
+			<ProjectCard {project} />
+		{/each}
+	</div>
 </div>
