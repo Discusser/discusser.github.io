@@ -3,22 +3,8 @@
 	import { NUMWORKS_PROGRAMMING } from '$lib/constants/articles';
 	import Code from '@/components/shared/Code.svelte';
 	import Collapsible from '@/components/shared/Collapsible.svelte';
-	import Linkable from '@/components/shared/Linkable.svelte';
 	import * as TableOfContents from '$lib/components/shared/table-of-contents/index.js';
 	import type { TOC } from '@/lib/table-of-contents';
-
-	let tableOfContents: TOC = [
-		{ title: 'Introduction', id: 'intro' },
-		{ title: 'Python Modules', id: 'py-modules' },
-		[
-			{ title: 'Limitations', id: 'limits' },
-			[
-				{ title: 'Performance', id: 'py-performance' },
-				{ title: 'Memory and Storage', id: 'py-mem' }
-			]
-		],
-		{ title: 'Writing native apps', id: 'native-apps' }
-	];
 </script>
 
 <Article article={NUMWORKS_PROGRAMMING}>
@@ -57,19 +43,19 @@
 	</p>
 	<Collapsible title="Kandinsky">
 		<Code nohl
-			>get_pixel(x, y) - returns the color of the pixel at (x,y) set_pixel(x, y, color) - colors the
-			pixel at (x,y) color(r, g, b) - defines an RGB color draw_string(text, x, y, fg, bg) -
-			displays a string at (x, y), and if specified, with a foreground and background color
-			fill_rect(x, y, w, h, col) - fills a rectangle spanning from (x, y) to (x + w, y + h) with a
-			color</Code
+			>{`get_pixel(x, y) - returns the color of the pixel at (x,y)
+set_pixel(x, y, color) - colors the pixel at (x,y)
+color(r, g, b) - defines an RGB color
+draw_string(text, x, y, fg, bg) - displays a string at (x, y), and if specified, with a foreground and background color
+fill_rect(x, y, w, h, col) - fills a rectangle spanning from (x, y) to (x + w, y + h) with a color`}</Code
 		>
 	</Collapsible>
 	<Collapsible title="Ion">
-		<Code nohl>keydown(k) - returns true if the key k is down</Code>
+		<Code nohl>{`keydown(k) - returns true if the key k is down`}</Code>
 	</Collapsible><Collapsible title="Time"
 		><Code nohl
-			>monotonic() - returns the clock's time (not to be confused with the actual time) sleep(t) -
-			suspend execution for t seconds</Code
+			>{`monotonic() - returns the clock's time (not to be confused with the actual time)
+sleep(t) - suspend execution for t seconds`}`</Code
 		>
 	</Collapsible>
 	<TableOfContents.Element title="Limitations" />

@@ -12,7 +12,7 @@
 		children: Snippet;
 		language?: string;
 		nohl?: boolean;
-		class: string;
+		class?: string;
 	} = $props();
 
 	let codeElement: HTMLElement;
