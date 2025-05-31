@@ -11,7 +11,8 @@ export enum Composer {
   Tchaikovsky = 'Pyotr Ilyich Tchaikovsky',
   Napier = 'Kenneth Napier',
   Cosma = 'Vladimir Cosma',
-  Clayderman = 'Richard Clayderman'
+  Clayderman = 'Richard Clayderman',
+  Schumann = 'Robert Schumann'
 }
 
 export const pieces: Piece[] = [
@@ -96,8 +97,20 @@ export const pieces: Piece[] = [
     composer: Composer.Chopin
   },
   {
+    name: 'Mazurka Op. 63 No. 3',
+    composer: Composer.Chopin
+  },
+  {
     name: 'Étude Op. 25 No. 9',
     composer: Composer.Chopin
+  },
+  {
+    name: 'Carnaval Op. 9 No. 11 "Chiarina"',
+    composer: Composer.Schumann
+  },
+  {
+    name: 'Carnaval Op. 9 No. 12 "Chopin"',
+    composer: Composer.Schumann
   },
   {
     name: 'Swan Lake',

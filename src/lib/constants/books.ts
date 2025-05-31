@@ -6,6 +6,16 @@ export type Book = {
 
 export const books: Book[] = [
   {
+    name: 'Civilization and Its Discontents',
+    author: 'Sigmund Freud',
+    rating: 3.5
+  },
+  {
+    name: '1984',
+    author: 'George Orwell',
+    rating: 4.75
+  },
+  {
     name: "Man's Search for Meaning",
     author: 'Viktor Frankl',
     rating: 4
@@ -43,7 +53,7 @@ export const books: Book[] = [
   {
     name: 'The Magic of Thinking Big',
     author: 'David J. Schwartz',
-    rating: 4
+    rating: 3.75
   },
   {
     name: 'Ethics',

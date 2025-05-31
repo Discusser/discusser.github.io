@@ -4,7 +4,6 @@
 	import Code from '@/components/shared/Code.svelte';
 	import Collapsible from '@/components/shared/Collapsible.svelte';
 	import * as TableOfContents from '$lib/components/shared/table-of-contents/index.js';
-	import type { TOC } from '@/lib/table-of-contents';
 </script>
 
 <Article article={NUMWORKS_PROGRAMMING}>
