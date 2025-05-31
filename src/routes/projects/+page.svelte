@@ -1,6 +1,5 @@
 <script lang="ts">
-	import ProjectCard from '@/components/projects/ProjectCard.svelte';
-	import { projects } from '@/constants/projects';
+	import ProjectDisplay from '@/components/projects/ProjectDisplay.svelte';
 </script>
 
 <div class="flex flex-col space-y-4">
@@ -24,9 +23,5 @@
 	</p>
 	<p>You can find a non-exhaustive list of my projects below:</p>
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		{#each projects as project}
-			<ProjectCard {project} />
-		{/each}
-	</div>
+	<ProjectDisplay />
 </div>

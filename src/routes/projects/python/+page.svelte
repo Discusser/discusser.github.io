@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ProjectCard from '@/components/projects/ProjectCard.svelte';
-	import { Category, projects } from '@/constants/projects';
+	import ProjectDisplay from '@/components/projects/ProjectDisplay.svelte';
+	import { Category } from '@/constants/projects';
 </script>
 
 <div class="flex flex-col space-y-4">
@@ -37,11 +37,5 @@
 	</p>
 	<p>You can find most of my Python projects here:</p>
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		{#each projects as project}
-			{#if project.category == Category.Python}
-				<ProjectCard {project} />
-			{/if}
-		{/each}
-	</div>
+	<ProjectDisplay category={Category.Python} />
 </div>
