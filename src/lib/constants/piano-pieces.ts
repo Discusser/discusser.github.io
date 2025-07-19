@@ -53,6 +53,14 @@ export const pieces: Piece[] = [
     composer: Composer.Aznavour
   },
   {
+    name: "Waltz No. 14, Op. Posth.",
+    composer: Composer.Chopin
+  },
+  {
+    name: 'Waltz Op. 69 No. 2',
+    composer: Composer.Chopin
+  },
+  {
     name: 'Waltz Op. 64 No. 2',
     composer: Composer.Chopin
   },

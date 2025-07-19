@@ -6,6 +6,11 @@ export type Book = {
 
 export const books: Book[] = [
   {
+    name: "Letters from a Stoic",
+    author: "Seneca",
+    rating: 3.75
+  },
+  {
     name: 'Civilization and Its Discontents',
     author: 'Sigmund Freud',
     rating: 3.5

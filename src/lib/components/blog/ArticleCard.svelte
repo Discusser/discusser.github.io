@@ -22,7 +22,7 @@
 			>
 			{#if article.tags != undefined}
 				<div class="mt-1 flex flex-wrap space-x-1">
-					{#each article.tags as tag}
+					{#each article.tags as tag (tag)}
 						<span class="text-muted-foreground bg-muted mb-1 rounded-md px-1 py-0.5 text-xs">
 							{tag}
 						</span>

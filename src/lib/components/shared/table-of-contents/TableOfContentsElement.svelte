@@ -12,6 +12,10 @@
 		level?: number;
 	} = $props();
 
+	const sizes = ['text-xl', 'text-lg', 'text-base'];
+	let cssTextSize = level >= sizes.length ? sizes.at(-1) : sizes[level];
+	let positionString = $state('');
+
 	function onCreate(_div: HTMLDivElement) {
 		if (tocState.hasToc == false) return;
 
@@ -43,6 +47,6 @@
 
 <div {...restProps} use:onCreate>
 	<Linkable id={encodeURIComponent(title)} class="grow"
-		><p class="text-foreground text-xl font-bold">{title}</p></Linkable
+		><p class="text-foreground {cssTextSize} font-bold">{positionString} {title}</p></Linkable
 	>
 </div>

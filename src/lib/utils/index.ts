@@ -29,17 +29,11 @@ export const copyToClipboard = (text: string, message?: string, errorMessage?: s
     .then(() => {
       toast.success(message, {
         description: text,
-        cancel: {
-          label: 'Close'
-        }
       });
     })
     .catch((err) => {
       toast.error(errorMessage, {
         description: err.name + ': ' + err.message,
-        cancel: {
-          label: 'Close'
-        }
       });
     });
 };

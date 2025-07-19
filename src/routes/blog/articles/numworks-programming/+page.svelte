@@ -50,7 +50,7 @@ fill_rect(x, y, w, h, col) - fills a rectangle spanning from (x, y) to (x + w, y
 		>
 	</Collapsible>
 	<Collapsible title="Ion">
-		<Code nohl>{`keydown(k) - returns true if the key k is down`}</Code>
+		<Code nohl>keydown(k) - returns true if the key k is down</Code>
 	</Collapsible><Collapsible title="Time"
 		><Code nohl
 			>{`monotonic() - returns the clock's time (not to be confused with the actual time)

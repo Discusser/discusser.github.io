@@ -15,7 +15,6 @@
 	} = $props();
 
 	let searchFilter = $state('');
-	setContext('searchFilter', () => console.log(searchFilter));
 </script>
 
 <div class={cn('space-y-4', className)} {...restProps}>
@@ -25,7 +24,7 @@
 		</div>
 	</div>
 	<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-		{#each projects as project}
+		{#each projects as project (project.name)}
 			{#if (category == undefined || project.category == category) && project.name
 					.toLowerCase()
 					.includes(searchFilter.toLowerCase())}

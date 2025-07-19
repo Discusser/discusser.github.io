@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div>
+<div {...restProps}>
 	<button
 		class={cn(
 			'bg-muted flex w-full items-center space-x-1 px-2 py-1 hover:cursor-pointer',

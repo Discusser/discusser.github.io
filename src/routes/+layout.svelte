@@ -12,11 +12,11 @@
 
 <div class="flex min-h-screen flex-col">
 	<ModeWatcher />
-	<Toaster />
+	<Toaster closeButton />
 	<NavBar />
 
 	<div class="flex grow p-4">
-		<div class="absolute hidden w-1/4 lg:block">
+		<div class="absolute hidden lg:block">
 			<SideNav />
 		</div>
 		<div class="flex grow justify-center">
