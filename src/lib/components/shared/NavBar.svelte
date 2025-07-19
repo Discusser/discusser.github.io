@@ -25,7 +25,7 @@
 		<div
 			class="absolute left-0 top-0 z-100 h-screen w-screen space-y-4 bg-background p-4 opacity-95 lg:hidden"
 		>
-			<Button variant="outline" size="icon" onclick={toggleSidebar}>
+			<Button variant="outline" size="icon" class="hover:cursor-pointer" onclick={toggleSidebar}>
 				<IconX />
 			</Button>
 			<SideNav class="-ml-4" onclick={toggleSidebar} />
@@ -33,7 +33,7 @@
 	{/if}
 	<div class="flex grow justify-center p-4">
 		<div class="flex w-full justify-start lg:w-1/2 lg:justify-center">
-			<Button variant="outline" size="icon" class="mr-4 lg:mr-0 lg:hidden" onclick={toggleSidebar}>
+			<Button variant="outline" size="icon" class="mr-4 lg:mr-0 lg:hidden hover:cursor-pointer" onclick={toggleSidebar}>
 				<IconMenu2 />
 			</Button>
 			<div class="hidden sm:flex sm:grow sm:items-center sm:space-x-8">
