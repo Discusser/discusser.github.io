@@ -3,7 +3,6 @@
 	import ProjectCard from './ProjectCard.svelte';
 	import { cn } from '@/utils';
 	import Input from '@/components/shared/Input.svelte';
-	import { setContext } from 'svelte';
 
 	const {
 		category,

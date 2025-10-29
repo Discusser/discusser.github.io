@@ -1,10 +1,9 @@
 <script lang="ts">
-	import ProjectDisplay from '@/components/projects/ProjectDisplay.svelte';
+	import CategoryPage from '@/components/projects/CategoryPage.svelte';
 	import { Category } from '@/constants/projects';
 </script>
 
-<div class="flex flex-col space-y-4">
-	<p class="text-foreground text-2xl font-bold">Web</p>
+<CategoryPage title="Web" category={Category.Web}>
 	<p>
 		Web development is great, because you can make practically anything on the web. You can make
 		games, tools, or actual websites. I know how to use JS, HTML, and CSS. On top of that, I've
@@ -13,7 +12,4 @@
 		TypeScript over JavaScript, simply because of types. I can't stand using a language where you
 		aren't certain of the type of the object you're dealing with.
 	</p>
-	<p>You can find most of my web projects here:</p>
-
-	<ProjectDisplay category={Category.Web} />
-</div>
+</CategoryPage>

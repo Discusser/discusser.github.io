@@ -1,10 +1,9 @@
 <script lang="ts">
-	import ProjectDisplay from '@/components/projects/ProjectDisplay.svelte';
+	import CategoryPage from '@/components/projects/CategoryPage.svelte';
 	import { Category } from '@/constants/projects';
 </script>
 
-<div class="flex flex-col space-y-4">
-	<p class="text-foreground text-2xl font-bold">Python</p>
+<CategoryPage title="Python" category={Category.Python}>
 	<p>
 		In my opinion, Python is an amazing language for scripting, but it can get quite cumbersome to
 		use for more complicated purposes. The main thing that I dislike is the lack of real types
@@ -35,7 +34,4 @@
 		experience I have from writing programs on my calculator, I've found ways to draw all types of
 		shapes, but at the cost of performance.
 	</p>
-	<p>You can find most of my Python projects here:</p>
-
-	<ProjectDisplay category={Category.Python} />
-</div>
+</CategoryPage>
