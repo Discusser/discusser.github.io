@@ -6,7 +6,7 @@
 <div class="max-h-96 overflow-scroll">
 	<Table.Root>
 		<Table.Header>
-			<Table.Row class="text-base *:font-display-bold">
+			<Table.Row class="*:font-display-bold text-base">
 				<Table.Head>Name</Table.Head>
 				<Table.Head>Composer</Table.Head>
 			</Table.Row>

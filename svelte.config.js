@@ -16,8 +16,8 @@ const config = {
 			handleHttpError: 'warn'
 		},
 		alias: {
-			"@/*": "./src/lib/*",
-		},
+			'@/*': './src/lib/*'
+		}
 	}
 };
 

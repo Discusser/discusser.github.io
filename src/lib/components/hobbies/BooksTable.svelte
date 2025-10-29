@@ -19,7 +19,7 @@
 <div class="max-h-96 overflow-scroll">
 	<Table.Root>
 		<Table.Header>
-			<Table.Row class="text-base *:font-display-bold">
+			<Table.Row class="*:font-display-bold text-base">
 				<Table.Head>Name</Table.Head>
 				<Table.Head>Author</Table.Head>
 				<Table.Head>Rating</Table.Head>
@@ -33,7 +33,7 @@
 					<Table.Cell>
 						<div class="relative m-0 w-fit p-0 text-xl">
 							<div
-								class="absolute left-0 top-0 block w-0 overflow-hidden p-0"
+								class="absolute top-0 left-0 block w-0 overflow-hidden p-0"
 								bind:this={ratingContainers[i]}
 							>
 								<span class="hidden" bind:this={ratings[i]}>{book.rating}</span>

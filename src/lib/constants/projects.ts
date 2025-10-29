@@ -6,202 +6,202 @@ import { createRawSnippet } from 'svelte';
 export const projects: Project[] = [];
 
 export enum Category {
-  Cpp = 'cpp',
-  Web = 'web',
-  Python = 'python',
-  Other = 'other'
+	Cpp = 'cpp',
+	Web = 'web',
+	Python = 'python',
+	Other = 'other'
 }
 
 export type Project = {
-  label: string; // Label to be displayed
-  category: Category;
-  name: string;
-  hasGithub?: boolean;
-  notes?: string;
-  hasPage?: boolean;
+	label: string; // Label to be displayed
+	category: Category;
+	name: string;
+	hasGithub?: boolean;
+	notes?: string;
+	hasPage?: boolean;
 };
 
 export const columns: ColumnDef<Project>[] = [
-  {
-    accessorKey: 'label',
-    cell: (ctx) => {
-      const snippet = createRawSnippet<[Project]>((props) => {
-        const project = props();
-        const url = getPageURLForProject(project);
-        const githubUrl = getGithubURLForProject(project);
-        return {
-          render: () =>
-            `<div class="flex flex-col space-y-2">` +
-            (url
-              ? `<a class="text-blue-500" href=${url}>${project.label}</a>`
-              : `<span>${project.label ?? ''}</span>`) +
-            (githubUrl
-              ? `<a class="text-blue-500 md:hidden lg:table-cell 2xl:hidden" href="${githubUrl}">GitHub</a>`
-              : '') +
-            `</div>`
-        };
-      });
-      return renderSnippet(snippet, ctx.row.original);
-    },
-    header: 'Name'
-  },
-  {
-    accessorKey: 'category',
-    header: 'Category',
-    id: 'category'
-  },
-  {
-    accessorFn: (project) => getGithubURLForProject(project) ?? '',
-    cell: (ctx) => {
-      const snippet = createRawSnippet<[string | null]>((getUrl) => {
-        const url = getUrl();
-        return {
-          render: () =>
-            url
-              ? `<a class="text-blue-500" target="_blank" href=${url}>${url}</a>`
-              : '<span></span>'
-        };
-      });
-      return renderSnippet(snippet, getGithubURLForProject(ctx.row.original));
-    },
-    header: 'GitHub',
-    id: 'github'
-  },
-  {
-    accessorKey: 'notes',
-    header: 'Notes'
-  }
+	{
+		accessorKey: 'label',
+		cell: (ctx) => {
+			const snippet = createRawSnippet<[Project]>((props) => {
+				const project = props();
+				const url = getPageURLForProject(project);
+				const githubUrl = getGithubURLForProject(project);
+				return {
+					render: () =>
+						`<div class="flex flex-col space-y-2">` +
+						(url
+							? `<a class="text-blue-500" href=${url}>${project.label}</a>`
+							: `<span>${project.label ?? ''}</span>`) +
+						(githubUrl
+							? `<a class="text-blue-500 md:hidden lg:table-cell 2xl:hidden" href="${githubUrl}">GitHub</a>`
+							: '') +
+						`</div>`
+				};
+			});
+			return renderSnippet(snippet, ctx.row.original);
+		},
+		header: 'Name'
+	},
+	{
+		accessorKey: 'category',
+		header: 'Category',
+		id: 'category'
+	},
+	{
+		accessorFn: (project) => getGithubURLForProject(project) ?? '',
+		cell: (ctx) => {
+			const snippet = createRawSnippet<[string | null]>((getUrl) => {
+				const url = getUrl();
+				return {
+					render: () =>
+						url
+							? `<a class="text-blue-500" target="_blank" href=${url}>${url}</a>`
+							: '<span></span>'
+				};
+			});
+			return renderSnippet(snippet, getGithubURLForProject(ctx.row.original));
+		},
+		header: 'GitHub',
+		id: 'github'
+	},
+	{
+		accessorKey: 'notes',
+		header: 'Notes'
+	}
 ];
 
 export const addProject = (project: Project) => {
-  projects.push(project);
-  return project;
+	projects.push(project);
+	return project;
 };
 
 export const WORKOUT_TRACKER = addProject({
-  label: 'Workout Tracker',
-  category: Category.Other,
-  name: 'workout_app',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A mobile app that lets you track your workouts'
+	label: 'Workout Tracker',
+	category: Category.Other,
+	name: 'workout_app',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A mobile app that lets you track your workouts'
 });
 export const WEBSITE_GENERATOR = addProject({
-  label: 'Website Generator',
-  category: Category.Web,
-  name: 'website-generator',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A basic static website generator'
+	label: 'Website Generator',
+	category: Category.Web,
+	name: 'website-generator',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A basic static website generator'
 });
 export const GAME_OF_LIFE = addProject({
-  label: 'Game of Life',
-  category: Category.Web,
-  name: 'game-of-life',
-  hasGithub: true,
-  hasPage: true,
-  notes: "An implementation of Conway's game of life"
+	label: 'Game of Life',
+	category: Category.Web,
+	name: 'game-of-life',
+	hasGithub: true,
+	hasPage: true,
+	notes: "An implementation of Conway's game of life"
 });
 export const MAZE_GENERATOR = addProject({
-  label: 'Maze Generator',
-  category: Category.Web,
-  name: 'maze-generator',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A program that generates mazes'
+	label: 'Maze Generator',
+	category: Category.Web,
+	name: 'maze-generator',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A program that generates mazes'
 });
 export const MORE_TNT = addProject({
-  label: 'MoreTNT',
-  category: Category.Other,
-  name: 'MoreTNT',
-  hasGithub: true,
-  notes: 'A minecraft mod that adds variants of TNT'
+	label: 'MoreTNT',
+	category: Category.Other,
+	name: 'MoreTNT',
+	hasGithub: true,
+	notes: 'A minecraft mod that adds variants of TNT'
 });
 export const TOO_MANY_ENTITIES = addProject({
-  label: 'TooManyEntities',
-  category: Category.Other,
-  name: 'TooManyEntities',
-  hasGithub: true,
-  notes: 'A minecraft performance mod that hides entities past a certain threshold '
+	label: 'TooManyEntities',
+	category: Category.Other,
+	name: 'TooManyEntities',
+	hasGithub: true,
+	notes: 'A minecraft performance mod that hides entities past a certain threshold '
 });
 export const THE_ODIN_PROJECT = addProject({
-  label: 'TheOdinProject',
-  category: Category.Other,
-  name: 'TheOdinProject',
-  hasGithub: true,
-  notes: 'My files for the odin project'
+	label: 'TheOdinProject',
+	category: Category.Other,
+	name: 'TheOdinProject',
+	hasGithub: true,
+	notes: 'My files for the odin project'
 });
 export const STEGANOGRAPHER = addProject({
-  label: 'Steganographer',
-  category: Category.Cpp,
-  name: 'Steganographer',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A command line program to encode messages into images'
+	label: 'Steganographer',
+	category: Category.Cpp,
+	name: 'Steganographer',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A command line program to encode messages into images'
 });
 export const MARKOV_SENTENCE_GENERATOR = addProject({
-  label: 'MarkovSentenceGenerator',
-  category: Category.Cpp,
-  name: 'MarkovSentenceGenerator',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A command line program that generates sentences given a starting word using Markov chains'
+	label: 'MarkovSentenceGenerator',
+	category: Category.Cpp,
+	name: 'MarkovSentenceGenerator',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A command line program that generates sentences given a starting word using Markov chains'
 });
 export const MINESWEEPER = addProject({
-  label: 'Minesweeper',
-  category: Category.Web,
-  name: 'Minesweeper',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A minesweeper clone written in HTML and JS'
+	label: 'Minesweeper',
+	category: Category.Web,
+	name: 'Minesweeper',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A minesweeper clone written in HTML and JS'
 });
 export const IMG_TO_ASCII = addProject({
-  label: 'ImgToASCII',
-  category: Category.Cpp,
-  name: 'ImgToASCII',
-  hasGithub: true,
-  notes: 'A command line program that converts images to ASCII characters'
+	label: 'ImgToASCII',
+	category: Category.Cpp,
+	name: 'ImgToASCII',
+	hasGithub: true,
+	notes: 'A command line program that converts images to ASCII characters'
 });
 export const SXHKD_ROFI = addProject({
-  label: 'SxhkdRofi',
-  category: Category.Cpp,
-  name: 'SxhkdRofi',
-  hasGithub: true,
-  hasPage: true,
-  notes: 'A rofi menu for displaying Sxhkd keybindings'
+	label: 'SxhkdRofi',
+	category: Category.Cpp,
+	name: 'SxhkdRofi',
+	hasGithub: true,
+	hasPage: true,
+	notes: 'A rofi menu for displaying Sxhkd keybindings'
 });
 export const PASSWORD_MANAGER = addProject({
-  label: 'PasswordManager',
-  category: Category.Cpp,
-  name: 'PasswordManager',
-  hasGithub: true,
-  notes: 'A command line password manager'
+	label: 'PasswordManager',
+	category: Category.Cpp,
+	name: 'PasswordManager',
+	hasGithub: true,
+	notes: 'A command line password manager'
 });
 export const BOUNCING_SQUARES = addProject({
-  label: 'Bouncing Squares',
-  category: Category.Python,
-  name: 'bouncing-squares',
-  hasPage: true,
-  notes: 'A calculator program in which colored moving squares bounce around'
+	label: 'Bouncing Squares',
+	category: Category.Python,
+	name: 'bouncing-squares',
+	hasPage: true,
+	notes: 'A calculator program in which colored moving squares bounce around'
 });
 export const DRAW_3D = addProject({
-  label: 'Draw 3D',
-  category: Category.Python,
-  name: 'draw-3d',
-  hasPage: true,
-  notes: 'A basic 3D renderer for my calculator'
+	label: 'Draw 3D',
+	category: Category.Python,
+	name: 'draw-3d',
+	hasPage: true,
+	notes: 'A basic 3D renderer for my calculator'
 });
 export const DRAW_2D = addProject({
-  label: 'Draw 2D',
-  category: Category.Python,
-  name: 'draw-2d',
-  hasPage: true,
-  notes: 'A basic 2D drawing tool for my calculator'
+	label: 'Draw 2D',
+	category: Category.Python,
+	name: 'draw-2d',
+	hasPage: true,
+	notes: 'A basic 2D drawing tool for my calculator'
 });
 export const FLAPPY_BIRD = addProject({
-  label: 'Flappy Bird',
-  category: Category.Python,
-  name: 'flappy-bird',
-  hasPage: true,
-  notes: 'A clone of Flappy Bird for my calculator'
+	label: 'Flappy Bird',
+	category: Category.Python,
+	name: 'flappy-bird',
+	hasPage: true,
+	notes: 'A clone of Flappy Bird for my calculator'
 });

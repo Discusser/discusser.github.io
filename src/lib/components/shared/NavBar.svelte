@@ -20,10 +20,10 @@
 	});
 </script>
 
-<div class="sticky top-0 z-50 w-full bg-background">
+<div class="bg-background sticky top-0 z-50 w-full">
 	{#if sidebarOpen}
 		<div
-			class="absolute left-0 top-0 z-100 h-screen w-screen space-y-4 bg-background p-4 opacity-95 lg:hidden"
+			class="bg-background absolute top-0 left-0 z-100 h-screen w-screen space-y-4 p-4 opacity-95 lg:hidden"
 		>
 			<Button variant="outline" size="icon" class="hover:cursor-pointer" onclick={toggleSidebar}>
 				<IconX />
@@ -33,7 +33,12 @@
 	{/if}
 	<div class="flex grow justify-center p-4">
 		<div class="flex w-full justify-start lg:w-1/2 lg:justify-center">
-			<Button variant="outline" size="icon" class="mr-4 lg:mr-0 lg:hidden hover:cursor-pointer" onclick={toggleSidebar}>
+			<Button
+				variant="outline"
+				size="icon"
+				class="mr-4 hover:cursor-pointer lg:mr-0 lg:hidden"
+				onclick={toggleSidebar}
+			>
 				<IconMenu2 />
 			</Button>
 			<div class="hidden sm:flex sm:grow sm:items-center sm:space-x-8">
@@ -43,12 +48,17 @@
 				<NavAnchor fuzzy href="/hobbies">Hobbies</NavAnchor>
 			</div>
 			<div>
-				<Button onclick={toggleMode} class="float-right hover:cursor-pointer" variant="outline" size="icon">
+				<Button
+					onclick={toggleMode}
+					class="float-right hover:cursor-pointer"
+					variant="outline"
+					size="icon"
+				>
 					<IconSun
-						class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+						class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
 					/>
 					<IconMoon
-						class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+						class="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
 					/>
 					<span class="sr-only">Toggle theme</span>
 				</Button>

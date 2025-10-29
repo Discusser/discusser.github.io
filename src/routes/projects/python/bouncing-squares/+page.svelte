@@ -6,7 +6,7 @@
 
 <Project project={BOUNCING_SQUARES}>
 	<div
-		class="flex flex-col items-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0"
+		class="flex flex-col items-center space-y-4 md:flex-row md:items-start md:space-y-0 md:space-x-4"
 	>
 		<p class="lg:flex-5">
 			This program isn't really anything impressive, I just decided to make it because I was feeling

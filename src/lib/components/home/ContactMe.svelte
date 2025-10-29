@@ -3,7 +3,7 @@
 </script>
 
 <div class="space-y-2">
-	<p class="text-2xl font-bold text-foreground">Contact</p>
+	<p class="text-foreground text-2xl font-bold">Contact</p>
 	<p>
 		You can contact me via <a
 			target="_blank"
@@ -16,7 +16,7 @@
 		<a
 			target="_blank"
 			href="mailto:discussercodes@gmail.com"
-			class="underline hover:text-foreground">discussercodes@gmail.com</a
+			class="hover:text-foreground underline">discussercodes@gmail.com</a
 		>
 		<span>GitHub</span>
 		<a target="_blank" href="https://github.com/Discusser" class="underline">Discusser</a>

@@ -20,7 +20,7 @@
 
 <div class={twMerge('flex flex-col space-y-4', className)} {...restProps}>
 	<div class="flex items-center space-x-4">
-		<p class=" text-2xl font-bold text-foreground">
+		<p class=" text-foreground text-2xl font-bold">
 			{project.label}
 		</p>
 		{#if project.hasGithub}

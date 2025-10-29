@@ -9,7 +9,7 @@
 		<Avatar.Fallback><Skeleton class="h-full w-full" /></Avatar.Fallback>
 	</Avatar.Root>
 	<div class="text-center">
-		<p class="text-2xl font-bold text-foreground">Discusser</p>
+		<p class="text-foreground text-2xl font-bold">Discusser</p>
 		<p>I like programming</p>
 	</div>
 </div>
