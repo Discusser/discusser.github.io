@@ -14,7 +14,8 @@
 			target="_blank"
 			href="https://www.numworks.com/"
 			class="text-blue-500">NumWorks</a
-		> calculator for school. My previous calculator was a very simple Casio calculator, with no capabilities
+		>
+		calculator for school. My previous calculator was a very simple Casio calculator, with no capabilities
 		other than calculating expressions. This new calculator had a lot of apps, and even had a Python
 		app, which I quickly started getting used to. It's important to note that this is still a calculator,
 		so it is very limited in terms of hardware. The model I own has 256 KB of static RAM and a 320x240

@@ -82,14 +82,14 @@
 
 .dark {
   --background: oklch(14.1% 0.004 286);
-  --foreground: oklch(98.5% 0 none);
+  --foreground: oklch(90.0% 0 none);
   --muted: oklch(27.4% 0.005 286);
-  --muted-foreground: oklch(71.2% 0.013 286);
+  --muted-foreground: oklch(72.2% 0.013 286);
   --popover: oklch(14.1% 0.004 286);
   --popover-foreground: oklch(98.5% 0 none);
-  --card: oklch(14.1% 0.004 286);
+  --card: oklch(19.1% 0.004 286);
   --card-foreground: oklch(98.5% 0 none);
-  --border: oklch(27.4% 0.005 286);
+  --border: oklch(34.4% 0.005 286);
   --input: oklch(27.4% 0.005 286);
   --primary: oklch(98.5% 0 none);
   --primary-foreground: oklch(21% 0.006 286);
@@ -176,6 +176,11 @@ code {
 pre {
   @apply bg-muted;
   @apply overflow-x-scroll;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 * {
